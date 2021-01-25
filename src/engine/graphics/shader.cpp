@@ -3,6 +3,7 @@
 #include <cassert>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "engine/base/compiler_support.h"
 
@@ -10,12 +11,14 @@ namespace tamarix
 {
 	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 	{
-		// TODO: implement
+		// TODO: lazy loading option might be a viable option other than 
+		// compiling and linking shaders inside the ctor
+		loadShaders(vertexShaderPath, fragmentShaderPath);
 	}
 
 	ShaderProgram::~ShaderProgram()
 	{
-		// TODO: implement
+		glDeleteProgram(mProgramHandle);
 	}
 
 	unsigned int ShaderProgram::compileVertexShader(const std::string& path) const
@@ -61,7 +64,19 @@ namespace tamarix
 		return handle;
 	}
 
-	bool ShaderProgram::link(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle)
+	std::string ShaderProgram::readShaderSource(const std::string& path) const
+	{
+		std::ifstream inputStream;
+		inputStream.open(path);
+
+		std::stringstream contents;
+		contents << inputStream.rdbuf();
+		inputStream.close();
+
+		return contents.str();
+	}
+
+	bool ShaderProgram::linkShaders(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle)
 	{
 		glAttachShader(mProgramHandle, vertexShaderHandle);
 		glAttachShader(mProgramHandle, fragmentShaderHandle);
@@ -175,40 +190,38 @@ namespace tamarix
 		glUseProgram(0);
 	}
 
-	/*
-	   void ShaderProgram::load(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
-	   {
-	   std::ifstream f(vertexShaderPath.c_str());
-	   bool vertFile = f.good();
-	   f.close();
+	void ShaderProgram::loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	{
+		auto vertexShaderSource = std::string("");
+		auto fragmentShaderSource = std::string("");
 
-	   f = std::ifstream(fragmentShaderPath.c_str());
-	   bool fragFile = f.good();
-	   f.close();
+		{
+			std::ifstream vertShaderInputStream(vertexShaderPath.c_str());
+			bool vertShaderFileExists = vertShaderInputStream.good();
+			vertShaderInputStream.close();
+		
+			if (vertShaderFileExists)
+				vertexShaderSource = readShaderSource(vertexShaderPath);
+		}
 
-	   std::string v_source = vertex;
+		{
+			std::ifstream fragShaderInputStream(fragmentShaderPath.c_str());
+			bool fragShaderFileExists = fragShaderInputStream.good();
+			fragShaderInputStream.close();
 
-	   if (vertFile) 
-	   {
-	   v_source = ReadFile(vertex);
-	   }
-	   std::string f_source = fragment;
+			if (fragShaderFileExists)
+				fragmentShaderSource = readShaderSource(fragmentShaderPath);
+		}
 
-	   if (fragFile) 
-	   {
-	   f_source = ReadFile(fragment);
-	   }
+		const auto vertShaderHandle = compileVertexShader(vertexShaderSource);
+		const auto fragShaderHandle = compileFragmentShader(fragmentShaderSource);
 
-	   unsigned int vert = CompileVertexShader(v_source);
-	   unsigned int f = CompileFragmentShader(f_source);
-
-	   if (LinkShaders(vert, frag)) 
-	   {
-	   PopulateAttributes();
-	   PopulateUniforms();
-	   }
-	   }
-	 */
+		if (linkShaders(vertShaderHandle, fragShaderHandle))
+		{
+			populateAttributes();
+			populateUniforms();
+		}
+	}
 
 	void ShaderProgram::bind() const
 	{
@@ -218,5 +231,29 @@ namespace tamarix
 	void ShaderProgram::unbind() const
 	{
 		glUseProgram(0);
+	}
+
+	unsigned int ShaderProgram::getAttrib(const std::string& attribName) const
+	{
+		const auto found = mAttributes.find(attribName);
+		if (found == mAttributes.cend())
+		{
+			std::cerr << "Bad attribute name\n";
+			return 0;
+		}
+
+		return found->second;
+	}
+
+	unsigned int ShaderProgram::getUniform(const std::string& uniformName) const
+	{
+		const auto iter = mUniforms.find(uniformName);
+		if (iter == mUniforms.cend())
+		{
+			std::cerr << "Bad uniform name\n";
+			return 0;
+		}
+
+		return iter->second;
 	}
 } // namespace tamarix
