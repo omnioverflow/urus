@@ -14,9 +14,9 @@ if [[ $OSTYPE == "darwin"* ]]; then
 	echo "[ ******** -- Generating Xcode project from cmake..."
     cmake -G Xcode ..
 	echo "  ******** --> OK ]"
-elif [[ $OSTYPE == "win64" ]]; then
+elif [[ $OSTYPE == "msys" ]]; then # for Git bash on Windows
     echo "[ ******** -- Generating Visual Studio solution from cmake..."
-	# not sure if it is a correct way to detect Windows x64
+	# TODO: create some support for Cygwin 
     cmake -G "Visual Studio 16 2019" ..
 	echo "  ******** --> OK ]"
 else 
