@@ -10,6 +10,9 @@
 
 #include "engine/base/compiler_support.h"
 
+// TODO: implement ivec2, ivec3, ivec4 (integer-valued vectors). 
+// Might need refactoring.
+
 namespace macaque 
 {
 /**
