@@ -21,10 +21,18 @@ target_sources (${PROJECT_NAME}
     src/engine/base/macros.h
     src/engine/base/singleton.h
     # engine/graphics
+    src/engine/graphics/attribute.h
+    src/engine/graphics/attribute.cpp
     src/engine/graphics/display_config.h
     src/engine/graphics/display_config.cpp
+    src/engine/graphics/draw.h
+    src/engine/graphics/draw.cpp
+    src/engine/graphics/indexbuffer.h
+    src/engine/graphics/indexbuffer.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
+    src/engine/graphics/uniform.h
+    src/engine/graphics/uniform.cpp
     # engine/graphics/viewtransform
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
