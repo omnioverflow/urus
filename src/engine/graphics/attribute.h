@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 namespace urus
 {
     template <typename T>
@@ -12,14 +14,15 @@ namespace urus
             Attribute(const Attribute& other) = delete;
             Attribute& operator= (const Attribute& other) = delete;
 
-            // FIXME: no need in the following method?
-            //void setAttributePointer(unsigned int slot);
+         
+            void setAttributePointer(unsigned int slot);
+
             /**
              * Upload an array of data to GPU. Each element in the array represents
              * the attribute for one vertex.
              */
-            void set(T* inputArray, unsigned int arrayLength); // FIXME: const ?
-            void set(std::vector<T>& input); // FIXME: const std::vector<T>& ?
+            void set(const T* attribs, unsigned int nbAttribs); 
+            void set(const std::vector<T>& attribs);
             void bindTo(unsigned int slot);
             void unbindFrom(unsigned int slot);
 
