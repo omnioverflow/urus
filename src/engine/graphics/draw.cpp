@@ -1,6 +1,10 @@
 #include "draw.h"
 
-// FIXME: include OpenGL header
+#include <cassert>
+#include <iostream>
+
+#include "engine/graphics/indexbuffer.h"
+#include "engine/base/compiler_support.h"
 
 namespace urus
 {
@@ -8,31 +12,31 @@ namespace urus
     {
         switch (input)
         {
-            case DrawMode::Points:
+            case DrawMode::Points: {
                 return GL_POINTS;
-
-            case DrawMode::LineStrip:
+            }
+            case DrawMode::LineStrip: {
                 return GL_LINE_STRIP;
-
-            case DrawMode::LineLoop:
+            }
+            case DrawMode::LineLoop: {
                 return GL_LINE_LOOP;
-
-            case DrawMode::Lines:
+            }
+            case DrawMode::Lines: {
                 return GL_LINES;
-
-            case DrawMode::Triangles:
+            }
+            case DrawMode::Triangles: {
                 return GL_TRIANGLES;
-
-            case DrawMode::TriangleStrip:
+            }
+            case DrawMode::TriangleStrip: {
                 return GL_TRIANGLE_STRIP;
-
-            case DrawMode::TriangleFan:
+            }
+            case DrawMode::TriangleFan: {
                 return GL_TRIANGLE_FAN;
-
-            // unreachable code hot
-            assert(false);
-
-            return 0;
+            }
+            default: {
+                std::cerr << "Unreachable code hit\n";
+                return 0;
+            }            
         }
     } 
 
@@ -43,7 +47,7 @@ namespace urus
 
     void drawInstanced(unsigned int vertexCount, DrawMode mode, unsigned int nbInstances)
     {
-        glDrawArraysInstanced(drawModeToGLEnum(mode), vertexCount, nbInstances);
+        glDrawArraysInstanced(drawModeToGLEnum(mode), 0, vertexCount, nbInstances);
     }
 
     void draw(IndexBuffer& inIndexBuffer, DrawMode mode)
@@ -51,7 +55,7 @@ namespace urus
         const auto handle = inIndexBuffer.getHandle();
         const auto nbIndices = inIndexBuffer.getCount();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
-        glDrawElements(drawModeToGLEnum(mode), mbIndices, GL_UNSIGNED_INT, 0);
+        glDrawElements(drawModeToGLEnum(mode), nbIndices, GL_UNSIGNED_INT, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 

@@ -13,6 +13,8 @@ namespace urus
         TriangleFan
     }; // enum DrawMode
 
+    class IndexBuffer;
+
     void draw(IndexBuffer& inIndexBuffer, DrawMode mode);
     void draw(unsigned int vertexCount, DrawMode mode);
     void drawInstanced(IndexBuffer& inIndexBuffer, DrawMode mode, unsigned int instanceCount);
