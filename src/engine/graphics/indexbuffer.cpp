@@ -1,6 +1,6 @@
 #include "indexbuffer.h"
 
-// FIXME: include OpenGL
+#include "engine/base/compiler_support.h"
 
 namespace urus
 {
@@ -15,20 +15,20 @@ namespace urus
         glDeleteBuffers(1, &mHandle);
     }
 
-    void IndexBuffer::set(unsigned int* array, unsigned int length)
+    void IndexBuffer::set(unsigned int* indices, unsigned int nbIndices)
     {
-        mCount = length;
-        const unsigned int size = sizeof(unsigned int);
+        mCount = nbIndices;
+        const auto size = sizeof(unsigned int);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mHandle);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * mCount, array, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(size) * mCount, indices, GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
-    void IndexBuffer::set(std::vector<unsigned int>& array)
+    void IndexBuffer::set(std::vector<unsigned int>& indices)
     {
-        const auto length = array.size();
+        const auto length = indices.size();
         if (length)
-            set(&array.data(), length);
+            set(indices.data(), length);
     }
 } // namespace urus

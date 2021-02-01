@@ -4,6 +4,11 @@
 
 namespace urus
 {
+    /**
+    * Wrapper around Index Buffer abstraction.
+    * Index buffer is an array of pointers into the vertex buffer, which 
+    * allows to reuse existing data for multiple vertices.
+    */
     class IndexBuffer
     {
         public:
@@ -13,8 +18,8 @@ namespace urus
             IndexBuffer& operator=(const IndexBuffer& other) = delete;
             ~IndexBuffer();
 
-            void set(unsigned int* rr, unsigned int len);
-            void set(std::vector<unsigned int>& input);
+            void set(unsigned int* indices, unsigned int nbIndices);
+            void set(std::vector<unsigned int>& indices);
 
             unsigned int getHandle() const { return mHandle; }
             unsigned int getCount() const { return mCount; }

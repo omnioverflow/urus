@@ -2,7 +2,6 @@
 
 #include "macaque/vec.h"
 #include "vec.h"
-// TODO: include OpenGL
 
 namespace urus
 {
@@ -28,10 +27,9 @@ namespace urus
     }
 
     template<>
-    void Attribute<int>::setAttributePointer(unsigned int slot)
+    void Attribute<int>::setAttributePointer(unsigned int index)
     {
-        // FIXME: missing implementation
-        static_assert(false);
+        glVertexAttribIPointer(index, 1, GL_INT, 0, nullptr);
     }
 
     template<typename T>
@@ -49,7 +47,7 @@ namespace urus
     {
         const auto nbAttribs = attribs.size();
         if (nbAttribs)
-            set(&attribs.data(), nbAttribs);
+            set(attribs.data(), nbAttribs);
     }
 
     template<typename T>
@@ -65,4 +63,3 @@ namespace urus
     }
 
 } // namespace urus
-

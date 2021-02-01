@@ -15,7 +15,7 @@ namespace urus
             Attribute& operator= (const Attribute& other) = delete;
 
          
-            void setAttributePointer(unsigned int slot);
+            void setAttributePointer(unsigned int index);
 
             /**
              * Upload an array of data to GPU. Each element in the array represents
@@ -23,8 +23,8 @@ namespace urus
              */
             void set(const T* attribs, unsigned int nbAttribs); 
             void set(const std::vector<T>& attribs);
-            void bindTo(unsigned int slot);
-            void unbindFrom(unsigned int slot);
+            void bindTo(unsigned int index);
+            void unbindFrom(unsigned int index);
 
             /**
              * Get number of attributes.
@@ -37,7 +37,7 @@ namespace urus
             
         private:
 
-            unsigned int handle;
+            unsigned int mHandle;
             unsigned int mCount;
     }; // class Attribute
 } // namespace urus
