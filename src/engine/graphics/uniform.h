@@ -4,6 +4,9 @@
 
 namespace urus
 {
+    /**
+    * Wrapper around GLSL uniforms.
+    */
     template <typename T>
     class Uniform
     {
@@ -12,9 +15,9 @@ namespace urus
             Uniform(const Uniform&) = delete;
             Uniform& operator=(const Uniform&) = delete;
 
-            static void set(unsigned int slot, const T& value);
-            static void set(unsigned int slot, T* arr, unsigned int len);
-            static void set(unsigned int slot, std::vector<T>& vec);
+            static void set(unsigned int index, const T& value);
+            static void set(unsigned int index, const T* arr, unsigned int len);
+            static void set(unsigned int index, std::vector<T>& vec);
 
         private:
             Uniform();
