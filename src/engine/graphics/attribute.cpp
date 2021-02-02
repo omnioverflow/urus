@@ -38,7 +38,7 @@ namespace urus
         mCount = nbAttribs;
         const auto size = sizeof(T);
         glBindBuffer(GL_ARRAY_BUFFER, mHandle);
-        glBindBuffer(GL_ARRAY_BUFFER, size * mCount, attribs, GL_STREAM_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, size * mCount, attribs, GL_STREAM_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
