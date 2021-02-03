@@ -19,7 +19,7 @@ namespace urus
 	{
 		public:
 			Window();
-			Window(const std::string& title);
+			explicit Window(const std::string& title);
 
 			virtual ~Window() {}
 			/**
