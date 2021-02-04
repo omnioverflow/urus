@@ -11,29 +11,32 @@ namespace urus
     // template Uniform<ivec2>;
     // template Uniform<ivec4>;
     template Uniform<float>;
-    template Uniform<macaque::vec2>;
-    template Uniform<macaque::vec3>;
-    template Uniform<macaque::vec4>;
+    // FIXME: plug back uniform implementations for vec2, vec3, vec4
+    // FIXME: template Uniform<macaque::vec2>;
+    // FIXME: template Uniform<macaque::vec3>;
+    // FIXME: template Uniform<macaque::vec4>;
+
+
     // template Uniform<quat>;
     //template Uniform<mat4>;
     
     template <typename T>
     void Uniform<T>::set(unsigned int index, const T& data)
     {
-        set(index, static_cast<const T*>(&value), 1);
+        set(index, static_cast<const T*>(&data), 1);
     }
 
     template <typename T>
     void Uniform<T>::set(unsigned int index, std::vector<T>& dataArray)
     {
-        const auto vecSize = vec.size();
-        if (vecSize)
-            set(index, vec.data(), vecSize);
+        const auto arrayLength = dataArray.size();
+        if (arrayLength)
+            set(index, dataArray.data(), arrayLength);
     }
 
 // A helper macro to reduce boilerplate code of setting uniforms of different types
 #define UNIFORM_IMPL(gl_func, T, Data) \
-    template<> \
+    template <> \
     void Uniform<T>::set(unsigned int index, const T* dataArray, unsigned int arrayLength) \
     { \
         if (arrayLength) \
@@ -46,9 +49,10 @@ namespace urus
     // UNIFORM_IMPL(glUniform4iv, ivec4, int)
 
     UNIFORM_IMPL(glUniform1fv, float, float)
-    UNIFORM_IMPL(glUniform2fv, macaque::vec2, float)
-    UNIFORM_IMPL(glUniform3fv, macaque::vec3, float)
-    UNIFORM_IMPL(glUniform4fv, macaque::vec4, float)
+    // FIXME: plug back uniform implementations for vec2, vec3, vec4
+    // UNIFORM_IMPL(glUniform2fv, macaque::vec2, float)
+    // UNIFORM_IMPL(glUniform3fv, macaque::vec3, float)
+    // UNIFORM_IMPL(glUniform4fv, macaque::vec4, float)
 
     // UNIFORM_IMPL(glUniform4fv, quat, float)
 
