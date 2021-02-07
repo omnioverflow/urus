@@ -55,6 +55,7 @@ target_sources (${PROJECT_NAME}
     src/macaque/mat.h
     src/macaque/vec.h
     src/macaque/vec2.h
+    src/macaque/vec3.h
     src/macaque/vec4.h
     )
 
