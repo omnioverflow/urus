@@ -53,6 +53,7 @@ target_sources (${PROJECT_NAME}
     # Macaque vector math lib
     # TODO: extract Macaque as a library into a dedicated repo
     src/macaque/mat.h
+    src/macaque/mat4.h
     src/macaque/vec.h
     src/macaque/vec2.h
     src/macaque/vec3.h
