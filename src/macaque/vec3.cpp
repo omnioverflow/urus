@@ -4,34 +4,34 @@
 
 namespace macaque
 {
-    vec3 vec3::operator+ (const vec3& lhs, const vec3& rhs) 
+    vec3 operator+ (const vec3& lhs, const vec3& rhs) 
     { 
         return vec3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); 
     }
 
-    vec3 vec3::operator- (const vec3& lhs, const vec3& rhs) 
+    vec3 operator- (const vec3& lhs, const vec3& rhs) 
     { 
         return vec3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); 
     }
 
-    vec3 vec3::operator* (const vec3& v, float f)
+    vec3 operator* (const vec3& v, float f)
     {
         return vec3(v.x * f, v.y * f, v.z * f);
     }
 
-    vec3 vec3::operator* (const vec3& lhs, const vec3& rhs) 
+    vec3 operator* (const vec3& lhs, const vec3& rhs) 
     {
         return vec3(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);
     }
 
-    vec3 vec3::operator== (const vec3& lhs, const vec3& rhs)
+    bool operator== (const vec3& lhs, const vec3& rhs)
     {
-        return lenSq(l - r) < VEC3_EPSILON;
+        return lengthSq(lhs - rhs) < vec3::VEC3_EPSILON;
     }
 
     bool operator!= (const vec3& lhs, const vec3& rhs)
     {
-        return !(l == r);
+        return !(lhs == rhs);
     }
 
     vec3 cross(const vec3& lhs, const vec3& rhs)
@@ -43,20 +43,20 @@ namespace macaque
 
     float length(const vec3& v)
     {
-        const float lengthSq = lenSq();
-        if (lengthSq < VEC3_EPSILON)
+        const float lenSq = lengthSq(v);
+        if (lenSq < vec3::VEC3_EPSILON)
             return 0.f;
 
-        return sqrtf(lengthSq);
+        return sqrtf(lenSq);
     }
 
     void normalize(vec3& v)
     {
-        const float lengthSq = lenSq();
-        if (lenSq < VEC3_EPSILON)
+        const float lenSq = lengthSq(v);
+        if (lenSq < vec3::VEC3_EPSILON)
             return;
 
-        const float invLen = 1.f / sqrtf(lengthSq);
+        const float invLen = 1.f / sqrtf(lenSq);
         v.x *= invLen;
         v.y *= invLen;
         v.z *= invLen;
@@ -64,11 +64,11 @@ namespace macaque
 
     vec3 normalized(const vec3& v)
     {
-        const float lengthSq = lenSq();
-        if (lenSq < VEC3_EPSILON)
+        const float lenSq = lengthSq(v);
+        if (lenSq < vec3::VEC3_EPSILON)
             return v;
 
-        const float invLen = 1.f / sqrtf(lengthSq);
+        const float invLen = 1.f / sqrtf(lenSq);
         return vec3(v.x * invLen, v.y * invLen, v.z * invLen);
     }
 
@@ -76,7 +76,7 @@ namespace macaque
     {
         const float lengthA = length(a);
         const float lengthB = length(b);
-        if (lengthA < VEC3_EPSILON || lengthB < VEC3_EPSILON)
+        if (lengthA < vec3::VEC3_EPSILON || lengthB < vec3::VEC3_EPSILON)
             return 0.f;
 
         return acosf(dot(a, b) / (lengthA + lengthB));
@@ -85,7 +85,7 @@ namespace macaque
     vec3 projection(const vec3& a, const vec3& b)
     {
         const float lengthB = length(b);
-        if (lengthB < VEC3_EPSILON)
+        if (lengthB < vec3::VEC3_EPSILON)
             return vec3();
 
         const auto scale = dot(a, b) / lengthB;
@@ -98,44 +98,44 @@ namespace macaque
         return a - projA;
     }
 
-    vec3 reflect(const vec3& a, const vec3& b)
+    vec3 reflect(const vec3& a, const vec3& n)
     {
-        const float lengthB = length(b);
-        if (lengthB < VEC3_EPSILON)
+        const float lengthB = length(n);
+        if (lengthB < vec3::VEC3_EPSILON)
             return vec3();
 
-        const float scale = dot(a, b) / lengthB;
-        vec3 proj2 = b * (scale * 2);
+        const float scale = dot(a, n) / lengthB;
+        vec3 proj2 = n * (scale * 2);
 
         return a - proj2;
     }
 
-    vec3 lerp(const vec3& u, const vec3& v, float s)
+    vec3 lerp(const vec3& v0, const vec3& v1, float t)
     {
         return vec3(
-                    u.x + (v.x - u.x) * s,
-                    u.y + (v.y - u.y) * s,
-                    u.z + (v.z - u.z) * s
+                    v0.x + (v1.x - v0.x) * t,
+                    v0.y + (v1.y - v0.y) * t,
+                    v0.z + (v1.z - v0.z) * t
                    );
     }
 
-    vec3 slerp(const vec3& u, const vec3& w, float s)
+    vec3 slerp(const vec3& v0, const vec3& v1, float t)
     {
-        if (s < 0.01f) // FIXME: declare in constants to avoid magic number stuff
-            return lerp(u, w, s);
+        if (t < 0.01f) // FIXME: declare in constants to avoid magic number stuff
+            return lerp(v0, v1, t);
 
-        const vec3 from = normalized(u);
-        const vec3 to = normalized(v);
+        const vec3 from = normalized(v0);
+        const vec3 to = normalized(v1);
         const float theta = angle(from, to);
-        const sinTheta = sinf(theta);
-        const float a = sinf((1.f - s) * theta) / sin_theta;
-        const float b = sinf(s * theta) / sin_theta;
+        const float sinTheta = sinf(theta);
+        const float a = sinf((1.f - t) * theta) / sinTheta;
+        const float b = sinf(t * theta) / sinTheta;
         return from * a + to * b;
     }
 
-    vec3 nlerp(const vec3& u, const vec3& v, float s)
+    vec3 nlerp(const vec3& v0, const vec3& v1, float t)
     {
-        return normalized(lerp(u, v, s));
+        return normalized(lerp(v0, v1, t));
     }
 
 } // namespace macaque
