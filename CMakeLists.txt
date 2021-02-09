@@ -127,7 +127,12 @@ source_group (glsl
 source_group (macaque
     FILES
     src/macaque/mat.h
+    src/macaque/mat4.h
     src/macaque/vec.h
+    src/macaque/vec2.h
+    src/macaque/vec3.h
+    src/macaque/vec3.cpp
+    src/macaque/vec4.h
     )
 
 source_group (main
