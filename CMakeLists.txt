@@ -32,6 +32,7 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
+    src/engine/graphics/texture.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
     # engine/graphics/viewtransform
@@ -93,6 +94,7 @@ source_group (engine/graphics
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
+    src/engine/graphics/texture.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
     )
