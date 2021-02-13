@@ -1,5 +1,6 @@
 #include "texture.h"
 
+#include "engine/base/compiler_support.h"
 // FIXME: missing OpenGL include
 
 namespace urus
@@ -25,10 +26,12 @@ namespace urus
 
     void Texture::load(const char* path)
     {
-		glBindTexture(GL_TEXTURE_2D, mHandle);
-		// FIXME: correct the image loading part
-		int width, height, channels;
+        glBindTexture(GL_TEXTURE_2D, mHandle);
+        // FIXME: correct the image loading part
+        int width, height, channels;
+        // FIXME: idem
 		// unsigned char* data = stbi_load(path, &width, &height, &channels, 4);
+        unsigned char* data = nullptr;
 		
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -47,7 +50,7 @@ namespace urus
 		mChannels = channels;
     }
 
-    void Texture::set(unsigned int unformIndex, unsigned int textureIndex)
+    void Texture::set(unsigned int uniformIndex, unsigned int textureIndex)
     {
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, mHandle);
