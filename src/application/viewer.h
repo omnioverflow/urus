@@ -4,8 +4,8 @@
 
 namespace urus
 {
-    class Viewer : public Application
-    {
+	class Viewer : public Application
+	{
 
-    }; // class 3DViewer
+	}; // class 3DViewer
 } // namespace urus

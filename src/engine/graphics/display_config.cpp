@@ -12,23 +12,23 @@ static_assert(false);
 #endif
 
 using namespace urus;
-    
+
 int DisplayConfig::getScreenWidth()
 {
-    //mWindowWidth = glutGet(GLUT_SCREEN_WIDTH);
+	//mWindowWidth = glutGet(GLUT_SCREEN_WIDTH);
 #ifdef _WIN64
-    return GetSystemMetrics(SM_CXSCREEN);
+	return GetSystemMetrics(SM_CXSCREEN);
 #else
-    return CGDisplayPixelsWide(CGMainDisplayID());
+	return CGDisplayPixelsWide(CGMainDisplayID());
 #endif
 }
 
 int DisplayConfig::getScreenHeight()
 {
-    //mWindowHeight = glutGet(GLUT_SCREEN_HEIGHT);
+	//mWindowHeight = glutGet(GLUT_SCREEN_HEIGHT);
 #ifdef _WIN64
-    return GetSystemMetrics(SM_CYSCREEN);
+	return GetSystemMetrics(SM_CYSCREEN);
 #else
-    return CGDisplayPixelsHigh(CGMainDisplayID());
+	return CGDisplayPixelsHigh(CGMainDisplayID());
 #endif
 }

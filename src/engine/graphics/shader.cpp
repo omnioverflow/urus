@@ -8,215 +8,215 @@
 
 namespace tamarix
 {
-    ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
-    {
-        // TODO: implement
-    }
+	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	{
+		// TODO: implement
+	}
 
-    ShaderProgram::~ShaderProgram()
-    {
-        // TODO: implement
-    }
+	ShaderProgram::~ShaderProgram()
+	{
+		// TODO: implement
+	}
 
-    unsigned int ShaderProgram::compileVertexShader(const std::string& path) const
-    {
-        return compileShader(path, GL_VERTEX_SHADER);
-    }
+	unsigned int ShaderProgram::compileVertexShader(const std::string& path) const
+	{
+		return compileShader(path, GL_VERTEX_SHADER);
+	}
 
-    unsigned int ShaderProgram::compileFragmentShader(const std::string& path) const
-    {
-        return compileShader(path, GL_FRAGMENT_SHADER);
-    }
+	unsigned int ShaderProgram::compileFragmentShader(const std::string& path) const
+	{
+		return compileShader(path, GL_FRAGMENT_SHADER);
+	}
 
-    unsigned int ShaderProgram::compileShader(const std::string& path, unsigned int shaderType) const
-    {
-        int success = 0; // init as no success
-        if (shaderType != GL_VERTEX_SHADER && shaderType != GL_FRAGMENT_SHADER)
-        {
-            assert(false);
-            return success;
-        }
+	unsigned int ShaderProgram::compileShader(const std::string& path, unsigned int shaderType) const
+	{
+		int success = 0; // init as no success
+		if (shaderType != GL_VERTEX_SHADER && shaderType != GL_FRAGMENT_SHADER)
+		{
+			assert(false);
+			return success;
+		}
 
-        unsigned int handle = glCreateShader(shaderType);
-        const char* source = path.c_str();
+		unsigned int handle = glCreateShader(shaderType);
+		const char* source = path.c_str();
 
-        glShaderSource(handle, 1, &source, NULL);
-        glCompileShader(handle);
+		glShaderSource(handle, 1, &source, NULL);
+		glCompileShader(handle);
 
-        
-        glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
-        if (!success) 
-        {
-            char infoLog[512];
-            glGetShaderInfoLog(handle, 512, NULL, infoLog);
 
-            std::cout << "Vertex compilation failed.\n";
-            std::cout << "\t" << infoLog << std::endl;
+		glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
+		if (!success) 
+		{
+			char infoLog[512];
+			glGetShaderInfoLog(handle, 512, NULL, infoLog);
 
-            glDeleteShader(handle);
+			std::cout << "Vertex compilation failed.\n";
+			std::cout << "\t" << infoLog << std::endl;
 
-            return success;
-        };
+			glDeleteShader(handle);
 
-        return handle;
-    }
+			return success;
+		};
 
-    bool ShaderProgram::link(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle)
-    {
-        glAttachShader(mProgramHandle, vertexShaderHandle);
-        glAttachShader(mProgramHandle, fragmentShaderHandle);
+		return handle;
+	}
 
-        glLinkProgram(mProgramHandle);
+	bool ShaderProgram::link(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle)
+	{
+		glAttachShader(mProgramHandle, vertexShaderHandle);
+		glAttachShader(mProgramHandle, fragmentShaderHandle);
 
-        int success = 0;
+		glLinkProgram(mProgramHandle);
 
-        glGetProgramiv(mProgramHandle, GL_LINK_STATUS, &success);
+		int success = 0;
 
-        if (!success) 
-        {
-            char infoLog[512];
+		glGetProgramiv(mProgramHandle, GL_LINK_STATUS, &success);
 
-            glGetProgramInfoLog(mProgramHandle, 512, NULL, infoLog);
+		if (!success) 
+		{
+			char infoLog[512];
 
-            std::cout << "ERROR: Shader linking failed.\n";
-            std::cout << "\t" << infoLog << "\n";
+			glGetProgramInfoLog(mProgramHandle, 512, NULL, infoLog);
 
-            glDeleteShader(vertexShaderHandle);
+			std::cout << "ERROR: Shader linking failed.\n";
+			std::cout << "\t" << infoLog << "\n";
 
-            glDeleteShader(fragmentShaderHandle);
+			glDeleteShader(vertexShaderHandle);
 
-            return false;
-        }
+			glDeleteShader(fragmentShaderHandle);
 
-        glDeleteShader(vertexShaderHandle);
-        glDeleteShader(fragmentShaderHandle);
+			return false;
+		}
 
-        return true;
-    }
+		glDeleteShader(vertexShaderHandle);
+		glDeleteShader(fragmentShaderHandle);
 
-    void ShaderProgram::populateAttributes()
-    {
-        int count = -1;
-        int length;
-        char name[128];
-        int size;
+		return true;
+	}
 
-        GLenum type;
+	void ShaderProgram::populateAttributes()
+	{
+		int count = -1;
+		int length;
+		char name[128];
+		int size;
 
-        glUseProgram(mProgramHandle);
-        glGetProgramiv(mProgramHandle, GL_ACTIVE_ATTRIBUTES, &count);
+		GLenum type;
 
-        for (int i = 0; i < count; ++i) 
-        {
-            memset(name, 0, sizeof(char) * 128);
-            glGetActiveAttrib(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
+		glUseProgram(mProgramHandle);
+		glGetProgramiv(mProgramHandle, GL_ACTIVE_ATTRIBUTES, &count);
 
-            int attrib = glGetAttribLocation(mProgramHandle, name);
+		for (int i = 0; i < count; ++i) 
+		{
+			memset(name, 0, sizeof(char) * 128);
+			glGetActiveAttrib(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
 
-            if (attrib >= 0) 
-            {
-                mAttributes[name] = attrib;
-            }
-        }
+			int attrib = glGetAttribLocation(mProgramHandle, name);
 
-        glUseProgram(0);
-    }
+			if (attrib >= 0) 
+			{
+				mAttributes[name] = attrib;
+			}
+		}
 
-    void ShaderProgram::populateUniforms()
-    {        
-        int count = -1;
-        int length;
-        char name[128];
-        int size;
-        GLenum type;
-        char testName[256];
+		glUseProgram(0);
+	}
 
-        glUseProgram(mProgramHandle);
-        glGetProgramiv(mProgramHandle, GL_ACTIVE_UNIFORMS, &count);
+	void ShaderProgram::populateUniforms()
+	{        
+		int count = -1;
+		int length;
+		char name[128];
+		int size;
+		GLenum type;
+		char testName[256];
 
-        for (int i = 0; i < count; ++i) 
-        {
-            memset(name, 0, sizeof(char) * 128);
-            glGetActiveUniform(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
+		glUseProgram(mProgramHandle);
+		glGetProgramiv(mProgramHandle, GL_ACTIVE_UNIFORMS, &count);
 
-            int uniform = glGetUniformLocation(mProgramHandle, name);
+		for (int i = 0; i < count; ++i) 
+		{
+			memset(name, 0, sizeof(char) * 128);
+			glGetActiveUniform(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
 
-            if (uniform >= 0)
-            { // Is uniform valid?
-                std::string uniformName = name;
-                // if name contains [, uniform is array
-                std::size_t found = uniformName.find('[');
+			int uniform = glGetUniformLocation(mProgramHandle, name);
 
-                if (found != std::string::npos) 
-                {
-                    uniformName.erase(uniformName.begin() + found, uniformName.end());
-                    unsigned int uniformIndex = 0;
+			if (uniform >= 0)
+			{ // Is uniform valid?
+				std::string uniformName = name;
+				// if name contains [, uniform is array
+				std::size_t found = uniformName.find('[');
 
-                    while (true) 
-                    {
-                        memset(testName,0,sizeof(char)*256);
+				if (found != std::string::npos) 
+				{
+					uniformName.erase(uniformName.begin() + found, uniformName.end());
+					unsigned int uniformIndex = 0;
 
-                        sprintf(testName, "%s[%d]",
-                                uniformName.c_str(),
-                                uniformIndex++);
+					while (true) 
+					{
+						memset(testName,0,sizeof(char)*256);
 
-                        int uniformLocation = glGetUniformLocation(mProgramHandle, testName);
+						sprintf(testName, "%s[%d]",
+								uniformName.c_str(),
+								uniformIndex++);
 
-                        if (uniformLocation < 0)                
-                            break;                   
+						int uniformLocation = glGetUniformLocation(mProgramHandle, testName);
 
-                        mUniforms[testName] = uniformLocation;
-                    }
-                }
-                mUniforms[uniformName] = uniform;
-            }
-        }
+						if (uniformLocation < 0)                
+							break;                   
 
-        glUseProgram(0);
-    }
+						mUniforms[testName] = uniformLocation;
+					}
+				}
+				mUniforms[uniformName] = uniform;
+			}
+		}
 
-    /*
-    void ShaderProgram::load(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
-    {
-        std::ifstream f(vertexShaderPath.c_str());
-        bool vertFile = f.good();
-        f.close();
+		glUseProgram(0);
+	}
 
-        f = std::ifstream(fragmentShaderPath.c_str());
-        bool fragFile = f.good();
-        f.close();
+	/*
+	   void ShaderProgram::load(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	   {
+	   std::ifstream f(vertexShaderPath.c_str());
+	   bool vertFile = f.good();
+	   f.close();
 
-        std::string v_source = vertex;
+	   f = std::ifstream(fragmentShaderPath.c_str());
+	   bool fragFile = f.good();
+	   f.close();
 
-        if (vertFile) 
-        {
-            v_source = ReadFile(vertex);
-        }
-        std::string f_source = fragment;
+	   std::string v_source = vertex;
 
-        if (fragFile) 
-        {
-            f_source = ReadFile(fragment);
-        }
+	   if (vertFile) 
+	   {
+	   v_source = ReadFile(vertex);
+	   }
+	   std::string f_source = fragment;
 
-        unsigned int vert = CompileVertexShader(v_source);
-        unsigned int f = CompileFragmentShader(f_source);
+	   if (fragFile) 
+	   {
+	   f_source = ReadFile(fragment);
+	   }
 
-        if (LinkShaders(vert, frag)) 
-        {
-            PopulateAttributes();
-            PopulateUniforms();
-        }
-    }
-    */
+	   unsigned int vert = CompileVertexShader(v_source);
+	   unsigned int f = CompileFragmentShader(f_source);
 
-    void ShaderProgram::bind() const
-    {
-        glUseProgram(mProgramHandle);
-    }
+	   if (LinkShaders(vert, frag)) 
+	   {
+	   PopulateAttributes();
+	   PopulateUniforms();
+	   }
+	   }
+	 */
 
-    void ShaderProgram::unbind() const
-    {
-        glUseProgram(0);
-    }
+	void ShaderProgram::bind() const
+	{
+		glUseProgram(mProgramHandle);
+	}
+
+	void ShaderProgram::unbind() const
+	{
+		glUseProgram(0);
+	}
 } // namespace tamarix

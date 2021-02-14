@@ -34,25 +34,25 @@ bool firstLoad = true;
 
 int main(int argc, char* argv[])
 {
-    std::cout << urus::DisplayConfig::getScreenWidth() << ", ";
-    std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
+	std::cout << urus::DisplayConfig::getScreenWidth() << ", ";
+	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
 
-    // FIXME: use appropriate subclasses for the specific applications
-    auto& app = urus::Application::sharedInstance();
-    auto window = std::make_shared<urus::Window>(std::string("Core OpenGL 4.3 Example"));
-    window->snapWindowPosition(urus::WindowPosition::TOP_RIGHT);
-    app.setWindow(window);
+	// FIXME: use appropriate subclasses for the specific applications
+	auto& app = urus::Application::sharedInstance();
+	auto window = std::make_shared<urus::Window>(std::string("Core OpenGL 4.3 Example"));
+	window->snapWindowPosition(urus::WindowPosition::TOP_RIGHT);
+	app.setWindow(window);
 #ifndef NDEBUG
-    auto console = std::make_shared<urus::Console>();
-    console->snapWindowPosition(urus::WindowPosition::BOTTOM_RIGHT);
-    app.setConsole(console);
+	auto console = std::make_shared<urus::Console>();
+	console->snapWindowPosition(urus::WindowPosition::BOTTOM_RIGHT);
+	app.setConsole(console);
 #endif
 
-    app.setup(argc, argv);
-    app.updateWindowPositionAndBounds();
+	app.setup(argc, argv);
+	app.updateWindowPositionAndBounds();
 
-    app.run();
-    app.shutdown();
+	app.run();
+	app.shutdown();
 }
 
 /*
@@ -129,7 +129,7 @@ glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 // Draw coordinate system
 {
-    drawCoordinateSystem(ShaderPrograms[1], 1);
+	drawCoordinateSystem(ShaderPrograms[1], 1);
 }
 
 // Note, an implicit glFlush is done by glutSwapBuffers before it returns
@@ -210,20 +210,20 @@ std::cout << " at " << x << ", " << y << ", state " << stateStr << std::endl;
 void mouseWheelCallback(int wheel, int direction, int x, int y) {
 std::cout << "Mouse wheel " << wheel;
 if (direction >= 0) {
-    std::cout << " UP ";
+	std::cout << " UP ";
 
-    const float scaleFactor = 0.9f;
-    scaleMatrix[0][0] *= scaleFactor;
-    scaleMatrix[1][1] = scaleMatrix[0][0];
-    scaleMatrix[2][2] = scaleMatrix[0][0];
+	const float scaleFactor = 0.9f;
+	scaleMatrix[0][0] *= scaleFactor;
+	scaleMatrix[1][1] = scaleMatrix[0][0];
+	scaleMatrix[2][2] = scaleMatrix[0][0];
 }
 else if (direction < 0) {
-    std::cout << " DOWN";
+	std::cout << " DOWN";
 
-    const float scaleFactor = 1.1f;
-    scaleMatrix[0][0] *= scaleFactor;
-    scaleMatrix[1][1] = scaleMatrix[0][0];
-    scaleMatrix[2][2] = scaleMatrix[0][0];
+	const float scaleFactor = 1.1f;
+	scaleMatrix[0][0] *= scaleFactor;
+	scaleMatrix[1][1] = scaleMatrix[0][0];
+	scaleMatrix[2][2] = scaleMatrix[0][0];
 }
 
 glutPostRedisplay();
@@ -235,41 +235,41 @@ std::cout << "Current scale " << scaleMatrix[0][0] << std::endl;
 //------------------------------------------------------------------------------
 //
 void keyboardCallback(unsigned char key, int x, int y) {
-    // TODO: implement
-    std::cout << "Key pressed " << key << " at " << x << ", " << y << std::endl;
+	// TODO: implement
+	std::cout << "Key pressed " << key << " at " << x << ", " << y << std::endl;
 
-    // const auto R = getRotation({0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 0.0f, 1.0f});
-    // print(R);
+	// const auto R = getRotation({0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 0.0f, 1.0f});
+	// print(R);
 
-    const float timeScale = 0.008f;
-    GLfloat timeValue = glutGet(GLUT_ELAPSED_TIME) * timeScale;
+	const float timeScale = 0.008f;
+	GLfloat timeValue = glutGet(GLUT_ELAPSED_TIME) * timeScale;
 
-    const float PI = 3.14f;
-    const auto theta = timeValue;
-    Mat4f Rx = {
-        Vec4f{1.0f, 0.0f      , 0.0f        , 0.0f},
-        Vec4f{0.0f, cos(theta), -sin(theta) , 0.0f},
-        Vec4f{0.0f, sin(theta), cos(theta)  , 0.0f},
-        Vec4f{0.0f, 0.0f      , 0.0f        , 1.0f}
-    };
-    Mat4f Rz = {
-        Vec4f{cos(theta) , sin(theta), 0.0f, 0.0f},
-        Vec4f{-sin(theta), cos(theta), 0.0f, 0.0f},
-        Vec4f{0.0f       , 0.0f      , 0.0f, 0.0f},
-        Vec4f{0.0f       , 0.0f      , 0.0f, 1.0f}
-    };
-    Mat4f Ry = {
-        Vec4f{cos(theta), 0.0f, sin(theta), 0.0f},
-        Vec4f{0.0f      , 1.0f, 0.0f      , 0.0f},
-        Vec4f{sin(theta), 0.0f, cos(theta), 0.0f},
-        Vec4f{0.0f      , 0.0f, 0.0f      , 1.0f}
-    };
-    auto R = mult(Rx, Rz);
-    R = mult(R, Ry);
-    print(R);
-    rotationMatrix = R;
+	const float PI = 3.14f;
+	const auto theta = timeValue;
+	Mat4f Rx = {
+		Vec4f{1.0f, 0.0f      , 0.0f        , 0.0f},
+		Vec4f{0.0f, cos(theta), -sin(theta) , 0.0f},
+		Vec4f{0.0f, sin(theta), cos(theta)  , 0.0f},
+		Vec4f{0.0f, 0.0f      , 0.0f        , 1.0f}
+	};
+	Mat4f Rz = {
+		Vec4f{cos(theta) , sin(theta), 0.0f, 0.0f},
+		Vec4f{-sin(theta), cos(theta), 0.0f, 0.0f},
+		Vec4f{0.0f       , 0.0f      , 0.0f, 0.0f},
+		Vec4f{0.0f       , 0.0f      , 0.0f, 1.0f}
+	};
+	Mat4f Ry = {
+		Vec4f{cos(theta), 0.0f, sin(theta), 0.0f},
+		Vec4f{0.0f      , 1.0f, 0.0f      , 0.0f},
+		Vec4f{sin(theta), 0.0f, cos(theta), 0.0f},
+		Vec4f{0.0f      , 0.0f, 0.0f      , 1.0f}
+	};
+	auto R = mult(Rx, Rz);
+	R = mult(R, Ry);
+	print(R);
+	rotationMatrix = R;
 
-    glutPostRedisplay();
+	glutPostRedisplay();
 }
 //
 //------------------------------------------------------------------------------
