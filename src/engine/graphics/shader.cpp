@@ -9,7 +9,9 @@
 
 namespace tamarix
 {
-	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath,
+								 const std::string& fragmentShaderPath)
+	: mProgramHandle(glCreateProgram())
 	{
 		// TODO: lazy loading option might be a viable option other than 
 		// compiling and linking shaders inside the ctor
