@@ -51,6 +51,8 @@ int main(int argc, char* argv[])
 	app.setup(argc, argv);
 	app.updateWindowPositionAndBounds();
 
+	tamarix::ShaderProgram shaderProgram("color.vert", "color.frag");
+
 	app.run();
 	app.shutdown();
 }
