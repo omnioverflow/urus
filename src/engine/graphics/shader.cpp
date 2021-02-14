@@ -94,7 +94,7 @@ namespace tamarix
 			glGetProgramInfoLog(mProgramHandle, 512, NULL, infoLog);
 
 			std::cout << "ERROR: Shader linking failed.\n";
-			std::cout << "\t" << infoLog << "\n";
+			std::cout << infoLog << "\n";
 
 			glDeleteShader(vertexShaderHandle);
 
