@@ -1,0 +1,30 @@
+https://stackoverflow.com/questions/18485381/opengl-how-many-vaos
+https://stackoverflow.com/questions/8923174/opengl-vao-best-practices
+
+initialization:
+    for each batch
+        generate, store, and bind a VAO
+        bind all the buffers needed for a draw call
+        unbind the VAO
+
+main loop/whenever you render:
+    for each batch
+        bind VAO
+        glDrawArrays(...); or glDrawElements(...); etc.
+    unbind VAO
+
+void Setup() {
+    glGenVertexArrays(..);
+    glBindVertexArray(..);
+    // now setup all your VertexAttribPointers that will be bound to this VAO
+   glBindBuffer(..);
+   glVertexAttribPointer(..);
+   glEnableVertexAttribArray(..);
+}
+
+void Render() {
+    glBindVertexArray(vao);
+    // that's it, now call one of glDraw... functions
+    // no need to set up vertex attrib pointers and buffers!
+    glDrawXYZ(..)
+}
