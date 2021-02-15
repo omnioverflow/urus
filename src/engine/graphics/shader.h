@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-namespace tamarix
+namespace urus
 {
 	/**
 	 * Wrapper around OpenGL boiler-plate code to compile, link and access shaders
@@ -77,4 +77,4 @@ namespace tamarix
 			std::map<std::string, unsigned int> mAttributes;
 			std::map<std::string, unsigned int> mUniforms;
 	}; // class Shader
-} // namespace tamarix
+} // namespace urus

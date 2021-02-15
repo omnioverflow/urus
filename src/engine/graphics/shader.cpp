@@ -7,7 +7,7 @@
 
 #include "engine/base/compiler_support.h"
 
-namespace tamarix
+namespace urus
 {
 	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath,
 								 const std::string& fragmentShaderPath)
@@ -258,4 +258,4 @@ namespace tamarix
 
 		return iter->second;
 	}
-} // namespace tamarix
+} // namespace urus
