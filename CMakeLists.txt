@@ -50,6 +50,8 @@ target_sources (${PROJECT_NAME}
     # engine/glsl
     src/glsl/color.vert
     src/glsl/color.frag
+    src/glsl/shader1.vert
+    src/glsl/shader1.frag
     src/glsl/coord_sys.vert
     src/glsl/coord_sys.frag
     # Macaque vector math lib
@@ -124,6 +126,8 @@ source_group (glsl
     FILES
     src/glsl/color.vert
     src/glsl/color.frag
+    src/glsl/shader1.vert
+    src/glsl/shader1.frag
     src/glsl/coord_sys.vert
     src/glsl/coord_sys.frag
     )
@@ -147,6 +151,8 @@ source_group (main
 # copy shaders to the output direcotry
 configure_file (src/glsl/color.vert ${CMAKE_CURRENT_BINARY_DIR}/color.vert)
 configure_file (src/glsl/color.frag ${CMAKE_CURRENT_BINARY_DIR}/color.frag)
+configure_file (src/glsl/color.vert ${CMAKE_CURRENT_BINARY_DIR}/shader1.vert)
+configure_file (src/glsl/color.frag ${CMAKE_CURRENT_BINARY_DIR}/shader1.frag)
 configure_file (src/glsl/coord_sys.vert ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.vert)
 configure_file (src/glsl/coord_sys.frag ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.frag)
 
