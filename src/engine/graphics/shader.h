@@ -17,7 +17,18 @@ namespace urus
 			ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 			ShaderProgram(const ShaderProgram&) = delete;
 			ShaderProgram& operator=(const ShaderProgram&) = delete;
-			virtual ~ShaderProgram();            
+			virtual ~ShaderProgram();  
+
+			/**
+			* Use the shader program in the current rendering state
+			*/
+			void bind() const;
+			/**
+			* Remove the shader program from the current rendering state
+			*/
+			void unbind() const;
+
+			inline unsigned int programHandle() const { return mProgramHandle;  }
 
 		private:
 			/**
@@ -44,15 +55,6 @@ namespace urus
 			* Load vertex and fragment shaders (i.e. compile and link)
 			*/
 			void loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
-
-			/**
-			* Use the shader program in the current rendering state
-			*/
-			void bind() const;
-			/**
-			* Remove the shader program from the current rendering state
-			*/
-			void unbind() const;
 
 			/**
 			* Get shader attribute by name
