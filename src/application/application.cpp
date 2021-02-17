@@ -21,6 +21,10 @@
 
 using namespace urus;
 
+unsigned int Application::VAO[NB_OBJECTS];
+unsigned int Application::VBO[NB_OBJECTS];
+unsigned int Application::shaderHandle[NB_OBJECTS];
+
 Application::~Application()
 {
 	try 
@@ -77,14 +81,62 @@ bool Application::setup(int argc, char* argv[])
 
 	glEnable(GL_DEPTH_TEST);
 
-	//loadShaders();
-	//loadBufferData();
+	// FIXME: load shaders and buffer data
+	// for each object
+	{
+		urus::ShaderProgram shaderProgram("color.vert", "color.frag");
+		shaderHandle[0] = shaderProgram.programHandle();
+		glUseProgram(shaderHandle[0]);
+
+		float vertices[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f,  0.5f, 0.0f
+		};
+
+		glGenBuffers(1, &VBO[0]);
+
+		glGenVertexArrays(1, &VAO[0]);
+		// 1. bind Vertex Array Object
+		glBindVertexArray(VAO[0]);
+		// 2. copy our vertices array in a buffer for OpenGL to use
+		glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		// 3. then set our vertex attributes pointers
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);		
+	}
+
+	{
+		urus::ShaderProgram shaderProgram("shader1.vert", "shader1.frag");
+		shaderHandle[1] = shaderProgram.programHandle();
+		glUseProgram(shaderHandle[1]);
+
+		float vertices[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -1.5f, 0.0f,
+			0.0f,  -0.5f, 0.0f
+		};
+
+		glGenBuffers(1, &VBO[1]);
+
+		glGenVertexArrays(1, &VAO[1]);
+		// 1. bind Vertex Array Object
+		glBindVertexArray(VAO[1]);
+		// 2. copy our vertices array in a buffer for OpenGL to use
+		glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		// 3. then set our vertex attributes pointers
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+	}
 
 	return true;
 }
 
 void Application::shutdown()
 {
+	int x;
 	// TODO: release resources
 }
 
@@ -107,11 +159,27 @@ void Application::updateWindowPositionAndBounds() const
 
 void Application::render()
 {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//while (true)
+	{
+		static unsigned long c = 0;
+		std::cout << "Render " << c++ << "\n";
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Note, an implicit glFlush is done by glutSwapBuffers before it returns
-	glutSwapBuffers();
+		
+		glBindVertexArray(VAO[0]);
+		glUseProgram(shaderHandle[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glBindVertexArray(VAO[1]);
+		glUseProgram(shaderHandle[1]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		// Note, an implicit glFlush is done by glutSwapBuffers before it returns
+		glutSwapBuffers();
+
+		//glUseProgram(0);
+	}
 }
 
 void Application::keyboardCallback(unsigned char key, int x, int y)
