@@ -159,27 +159,25 @@ void Application::updateWindowPositionAndBounds() const
 
 void Application::render()
 {
-	//while (true)
-	{
-		static unsigned long c = 0;
-		std::cout << "Render " << c++ << "\n";
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// FIXME: remove render count (debug info)
+	static unsigned long renderCount = 0;
+	std::cout << "Render count: " << renderCount++ << "\n";
+	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
-		glBindVertexArray(VAO[0]);
-		glUseProgram(shaderHandle[0]);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(VAO[0]);
+	glUseProgram(shaderHandle[0]);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glBindVertexArray(VAO[1]);
-		glUseProgram(shaderHandle[1]);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(VAO[1]);
+	glUseProgram(shaderHandle[1]);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		// Note, an implicit glFlush is done by glutSwapBuffers before it returns
-		glutSwapBuffers();
+	// Note, an implicit glFlush is done by glutSwapBuffers before it returns
+	glutSwapBuffers();
 
-		//glUseProgram(0);
-	}
+	//glUseProgram(0);
 }
 
 void Application::keyboardCallback(unsigned char key, int x, int y)
