@@ -12,6 +12,7 @@
 #include "application/application.h"
 #include "application/viewer.h"
 #include "engine/graphics/display_config.h"
+#include "engine/graphics/attribute.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
 
@@ -19,25 +20,12 @@
 #include "engine/window/console.h"
 #endif
 
-// FIXME: avoid mixing with glabal namespace
-//using namespace util; // FIXME: no need?
-
-// ----------------------------------------------------------------------------
-//
-// FIXME: refactor to get rid of GLOB vars
-bool firstLoad = true;
-//Mat4f scaleMatrix;
-//Mat4f rotationMatrix;
-//Vec4f centerOfRotation{0.0f, 0.0f, 0.0f};
-//
-// ----------------------------------------------------------------------------
 
 int main(int argc, char* argv[])
 {
 	std::cout << urus::DisplayConfig::getScreenWidth() << ", ";
 	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
 
-	// FIXME: use appropriate subclasses for the specific applications
 	auto& app = urus::Application::sharedInstance();
 	auto window = std::make_shared<urus::Window>(std::string("Core OpenGL 4.3 Example"));
 	window->snapWindowPosition(urus::WindowPosition::TOP_RIGHT);
@@ -51,8 +39,7 @@ int main(int argc, char* argv[])
 	app.setup(argc, argv);
 	app.updateWindowPositionAndBounds();
 
-	urus::ShaderProgram shaderProgram("color.vert", "color.frag");
-
+	// Enter infinite loop
 	app.run();
 	app.shutdown();
 }
