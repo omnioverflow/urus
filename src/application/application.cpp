@@ -59,6 +59,7 @@ bool Application::setup(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow(mWindow->title().c_str());
 
+	glutIdleFunc(idle);
 	glutDisplayFunc(render);
 	/*
 	   glutReshapeFunc(reshape);
@@ -155,6 +156,12 @@ void Application::updateWindowPositionAndBounds() const
 	if (mConsole)
 		mConsole->updateWindowPositionAndBounds();
 #endif
+}
+
+void Application::idle()
+{
+	// Mark the window for redisplay the next iteration through glutMainLoop 
+	glutPostRedisplay();
 }
 
 void Application::render()

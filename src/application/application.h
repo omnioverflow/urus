@@ -32,6 +32,7 @@ namespace urus
 			// Walkaround for OpenGL (c api) to accept callbacks to c++:
 			// must use static methods, otherwise this pointer will screw up
 			// the compilation, since the signatures will not match
+			static void idle();
 			static void render();
 			static void keyboardCallback(unsigned char key, int x, int y);
 			static void mouseCallback(int button, int state, int x, int y);
