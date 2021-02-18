@@ -61,12 +61,12 @@ bool Application::setup(int argc, char* argv[])
 
 	glutIdleFunc(idle);
 	glutDisplayFunc(render);
+	glutVisibilityFunc(visible);
 	/*
 	   glutReshapeFunc(reshape);
 	   glutKeyboardFunc(keyboardCallback);
 	   glutMouseFunc(mouseCallback);
-	   glutMouseWheelFunc(mouseWheelCallback);
-	   glutVisibilityFunc(visible);
+	   glutMouseWheelFunc(mouseWheelCallback);	   
 	   glutIdleFunc(animate);
 	 */
 
@@ -219,7 +219,11 @@ void Application::reshape(int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void Application::visible(int vis)
+void Application::visible(int isVisible)
 {
-	// FIXME: implement
+	// Disable the call to idle func, when the window is not visible
+	if (isVisible == GLUT_VISIBLE)
+		glutIdleFunc(idle);
+	else
+		glutIdleFunc(0);
 }

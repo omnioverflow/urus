@@ -39,7 +39,7 @@ namespace urus
 			static void mouseWheelCallback(int wheel, int direction, int x, int y);
 			static void animate();
 			static void reshape(int width, int height);
-			static void visible(int vis);
+			static void visible(int isVisible);
 
 		protected:
 			static constexpr unsigned int NB_OBJECTS = 2;
