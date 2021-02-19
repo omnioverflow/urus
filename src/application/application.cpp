@@ -88,7 +88,7 @@ bool Application::setup(int argc, char* argv[])
 
 	// FIXME: load shaders and buffer data for each object
 	{
-		shaders[0] = std::make_unique<ShaderProgram>("color.vert", "color.frag");
+		shaders[0] = std::make_unique<ShaderProgram>("shader0.vert", "shader0.frag");
 		shaders[0]->useProgram();
 
 		float vertices[] = {

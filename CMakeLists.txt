@@ -48,8 +48,8 @@ target_sources (${PROJECT_NAME}
     src/engine/window/window.h
     src/engine/window/window.cpp
     # engine/glsl
-    src/glsl/color.vert
-    src/glsl/color.frag
+    src/glsl/shader0.vert
+    src/glsl/shader0.frag
     src/glsl/shader1.vert
     src/glsl/shader1.frag
     src/glsl/coord_sys.vert
@@ -124,8 +124,8 @@ source_group (engine/window
 
 source_group (glsl
     FILES
-    src/glsl/color.vert
-    src/glsl/color.frag
+    src/glsl/shader0.vert
+    src/glsl/shader0.frag
     src/glsl/shader1.vert
     src/glsl/shader1.frag
     src/glsl/coord_sys.vert
@@ -149,10 +149,10 @@ source_group (main
     )
 
 # copy shaders to the output direcotry
-configure_file (src/glsl/color.vert ${CMAKE_CURRENT_BINARY_DIR}/color.vert)
-configure_file (src/glsl/color.frag ${CMAKE_CURRENT_BINARY_DIR}/color.frag)
-configure_file (src/glsl/color.vert ${CMAKE_CURRENT_BINARY_DIR}/shader1.vert)
-configure_file (src/glsl/color.frag ${CMAKE_CURRENT_BINARY_DIR}/shader1.frag)
+configure_file (src/glsl/shader0.vert ${CMAKE_CURRENT_BINARY_DIR}/shader0.vert)
+configure_file (src/glsl/shader0.frag ${CMAKE_CURRENT_BINARY_DIR}/shader0.frag)
+configure_file (src/glsl/shader1.vert ${CMAKE_CURRENT_BINARY_DIR}/shader1.vert)
+configure_file (src/glsl/shader1.frag ${CMAKE_CURRENT_BINARY_DIR}/shader1.frag)
 configure_file (src/glsl/coord_sys.vert ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.vert)
 configure_file (src/glsl/coord_sys.frag ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.frag)
 
