@@ -10,3 +10,6 @@
 ## Comments
 Source code of the original OpenGL 4.3 example code
 https://github.com/mortennobel/OpenGL_4.3_VS_2010_freegluvt/
+
+## Useful info
+https://stackoverflow.com/questions/39923583/use-different-shader-programs-in-opengl
