@@ -7,6 +7,8 @@
 
 namespace urus 
 {
+	class ShaderProgram;
+
 #ifndef NDEBUG
 	class Console;
 #endif
@@ -45,7 +47,7 @@ namespace urus
 			static constexpr unsigned int NB_OBJECTS = 2;
 			static unsigned int VBO[NB_OBJECTS];
 			static unsigned int VAO[NB_OBJECTS];
-			static unsigned int shaderHandle[NB_OBJECTS];
+			static std::unique_ptr<ShaderProgram> shaders[NB_OBJECTS];
 			std::shared_ptr<Window> mWindow; // main window
 
 #ifndef NDEBUG

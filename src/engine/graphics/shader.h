@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 
+#include "engine/base/compiler_support.h"
+
 namespace urus
 {
 	/**
@@ -29,6 +31,8 @@ namespace urus
 			void unbind() const;
 
 			inline unsigned int programHandle() const { return mProgramHandle;  }
+
+			inline void useProgram() { glUseProgram(mProgramHandle); }
 
 		private:
 			/**

@@ -23,7 +23,7 @@ using namespace urus;
 
 unsigned int Application::VAO[NB_OBJECTS];
 unsigned int Application::VBO[NB_OBJECTS];
-unsigned int Application::shaderHandle[NB_OBJECTS];
+std::unique_ptr<ShaderProgram> Application::shaders[NB_OBJECTS];
 
 Application::~Application()
 {
@@ -80,14 +80,16 @@ bool Application::setup(int argc, char* argv[])
 	std::cout << "OpenGL initialized: OpenGL version: " << glGetString(GL_VERSION) 
 		<< " GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST); // what the heck?
 
-	// FIXME: load shaders and buffer data
-	// for each object
+	// Generate all VBOs and VAOs
+	glGenBuffers(NB_OBJECTS, &VBO[0]);
+	glGenVertexArrays(NB_OBJECTS, &VAO[0]);
+
+	// FIXME: load shaders and buffer data for each object
 	{
-		urus::ShaderProgram shaderProgram("color.vert", "color.frag");
-		shaderHandle[0] = shaderProgram.programHandle();
-		glUseProgram(shaderHandle[0]);
+		shaders[0] = std::make_unique<ShaderProgram>("color.vert", "color.frag");
+		shaders[0]->useProgram();
 
 		float vertices[] = {
 			-0.5f, -0.5f, 0.0f,
@@ -95,9 +97,6 @@ bool Application::setup(int argc, char* argv[])
 			0.0f,  0.5f, 0.0f
 		};
 
-		glGenBuffers(1, &VBO[0]);
-
-		glGenVertexArrays(1, &VAO[0]);
 		// 1. bind Vertex Array Object
 		glBindVertexArray(VAO[0]);
 		// 2. copy our vertices array in a buffer for OpenGL to use
@@ -106,22 +105,20 @@ bool Application::setup(int argc, char* argv[])
 		// 3. then set our vertex attributes pointers
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);		
+
+		glUseProgram(0);
 	}
 
 	{
-		urus::ShaderProgram shaderProgram("shader1.vert", "shader1.frag");
-		shaderHandle[1] = shaderProgram.programHandle();
-		glUseProgram(shaderHandle[1]);
+		shaders[1] = std::make_unique<ShaderProgram>("shader1.vert", "shader1.frag");
+		shaders[1]->useProgram();
 
 		float vertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -1.5f, 0.0f,
-			0.0f,  -0.5f, 0.0f
+			0.0f,  0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			1.0f,  0.5f, 0.0f
 		};
 
-		glGenBuffers(1, &VBO[1]);
-
-		glGenVertexArrays(1, &VAO[1]);
 		// 1. bind Vertex Array Object
 		glBindVertexArray(VAO[1]);
 		// 2. copy our vertices array in a buffer for OpenGL to use
@@ -130,15 +127,36 @@ bool Application::setup(int argc, char* argv[])
 		// 3. then set our vertex attributes pointers
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
+
+		glUseProgram(0);
 	}
 
 	return true;
 }
 
+void Application::render()
+{
+	// FIXME: remove render count (debug info)
+	static unsigned long renderCount = 0;
+	std::cout << "Render count: " << renderCount++ << "\n";
+	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	shaders[1]->useProgram();
+	glBindVertexArray(VAO[0]);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	shaders[0]->useProgram();
+	glBindVertexArray(VAO[1]);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	// Note, an implicit glFlush is done by glutSwapBuffers before it returns
+	glutSwapBuffers();
+}
+
 void Application::shutdown()
 {
-	int x;
-	// TODO: release resources
+	// TODO: release all resources
 }
 
 
@@ -162,29 +180,6 @@ void Application::idle()
 {
 	// Mark the window for redisplay the next iteration through glutMainLoop 
 	glutPostRedisplay();
-}
-
-void Application::render()
-{
-	// FIXME: remove render count (debug info)
-	static unsigned long renderCount = 0;
-	std::cout << "Render count: " << renderCount++ << "\n";
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		
-	glBindVertexArray(VAO[0]);
-	glUseProgram(shaderHandle[0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	glBindVertexArray(VAO[1]);
-	glUseProgram(shaderHandle[1]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	// Note, an implicit glFlush is done by glutSwapBuffers before it returns
-	glutSwapBuffers();
-
-	//glUseProgram(0);
 }
 
 void Application::keyboardCallback(unsigned char key, int x, int y)
