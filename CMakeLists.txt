@@ -4,6 +4,8 @@ project (${PROJECT_NAME})
 
 set (CMAKE_CXX_STANDARD 14)
 
+find_package (OpenGL)
+
 add_executable (${PROJECT_NAME}
     main.cpp
     )
