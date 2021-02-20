@@ -3,6 +3,8 @@
 #include "macaque/vec.h"
 #include "vec.h"
 
+#include "engine/base/opengl_support.h"
+
 namespace urus
 {
     template Attribute<int>;

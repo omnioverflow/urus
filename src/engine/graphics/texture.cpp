@@ -1,6 +1,6 @@
 #include "texture.h"
 
-#include "engine/base/compiler_support.h"
+#include "engine/base/opengl_support.h"
 // FIXME: missing OpenGL include
 
 namespace urus

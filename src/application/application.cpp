@@ -8,10 +8,7 @@
 #include <string>
 #include <vector>
 
-#include <GL/glew.h>
-#include <GL/freeglut.h>
-#include <windows.h>
-
+#include "engine/base/opengl_support.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
 

@@ -16,7 +16,7 @@ target_sources (${PROJECT_NAME}
     src/application/application.h
     src/application/application.cpp
     # engine/base
-    src/engine/base/compiler_support.h
+    src/engine/base/opengl_support.h
     src/engine/base/core.h
     src/engine/base/macros.h
     src/engine/base/singleton.h
@@ -77,7 +77,7 @@ source_group (application
 
 source_group (engine/base
     FILES
-    src/engine/base/compiler_support.h
+    src/engine/base/opengl_support.h
     src/engine/base/core.h
     src/engine/base/macros.h
     src/engine/base/singleton.h
@@ -166,6 +166,7 @@ target_include_directories (${PROJECT_NAME}
 target_link_libraries (${PROJECT_NAME} 
     ${CMAKE_SOURCE_DIR}/lib/x64/freeglut_staticd.lib
     ${CMAKE_SOURCE_DIR}/lib/x64/glew64_staticd.lib
+	"-framework CoreFoundation"
     )
 
 # FIXME: Add FREEGLUT_STATIC and GLEW_STATIC preprocessor directives

@@ -1,6 +1,6 @@
 #include "indexbuffer.h"
 
-#include "engine/base/compiler_support.h"
+#include "engine/base/opengl_support.h"
 
 namespace urus
 {
