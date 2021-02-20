@@ -41,4 +41,3 @@ namespace urus
             unsigned int mCount;
     }; // class Attribute
 } // namespace urus
-
