@@ -31,7 +31,12 @@ namespace urus
     template<>
     void Attribute<int>::setAttributePointer(unsigned int index)
     {
+#ifdef __APPLE__
+        // glVertexAttribIPointer is unavailabe on Mac?
+        glVertexAttribIPointerEXT(index, 1, GL_INT, 0, nullptr);
+#else
         glVertexAttribIPointer(index, 1, GL_INT, 0, nullptr);
+#endif
     }
 
     template<typename T>

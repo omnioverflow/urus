@@ -47,7 +47,12 @@ namespace urus
 
     void drawInstanced(unsigned int vertexCount, DrawMode mode, unsigned int nbInstances)
     {
+#ifdef __APPLE__
+        // glDrawArraysInstanced is unavailable on Mac?
+        glDrawArraysInstancedARB(drawModeToGLEnum(mode), 0, vertexCount, nbInstances);
+#else
         glDrawArraysInstanced(drawModeToGLEnum(mode), 0, vertexCount, nbInstances);
+#endif
     }
 
     void draw(IndexBuffer& inIndexBuffer, DrawMode mode)
@@ -64,7 +69,11 @@ namespace urus
         const auto handle = inIndexBuffer.getHandle();
         const auto nbIndices = inIndexBuffer.getCount();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle);
+#ifdef __APPLE__
+        glDrawElementsInstancedARB(drawModeToGLEnum(mode), nbIndices, GL_UNSIGNED_INT, 0, instanceCount);
+#else
         glDrawElementsInstanced(drawModeToGLEnum(mode), nbIndices, GL_UNSIGNED_INT, 0, instanceCount);
+#endif
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
  } // namespace urus

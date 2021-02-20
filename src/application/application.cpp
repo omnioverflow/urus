@@ -43,15 +43,20 @@ bool Application::setup(int argc, char* argv[])
 		assert(false);
 	}
 	glutInit(&argc, argv);
-	glutInitContextVersion(4, 3);
+#ifdef __APPLE__
+    // FIXME: GLUT was deprecated on mac os :(
+#elif _WIN64
+    glutInitContextVersion(4, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	int contextFlags = GLUT_FORWARD_COMPATIBLE;
-#ifndef NDEBUG
-	contextFlags |= GLUT_DEBUG;
+#ifdef NDEBUG
+//	contextFlags |= GLUT_DEBUG;
 #endif
 
 	glutInitContextFlags(contextFlags);
+    
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+#endif
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow(mWindow->title().c_str());
@@ -67,13 +72,15 @@ bool Application::setup(int argc, char* argv[])
 	   glutIdleFunc(animate);
 	 */
 
+#ifdef _WIN64
 	glewExperimental = true;
 	GLint GlewInitResult = glewInit();
 	if (GlewInitResult != GLEW_OK) 
 	{
 		std::cerr << "ERROR: %s\n" << glewGetErrorString(GlewInitResult);
 	}
-
+#endif
+    
 	std::cout << "OpenGL initialized: OpenGL version: " << glGetString(GL_VERSION) 
 		<< " GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
