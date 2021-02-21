@@ -31,6 +31,8 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/draw.cpp
     src/engine/graphics/indexbuffer.h
     src/engine/graphics/indexbuffer.cpp
+    src/engine/graphics/graphics_object.h
+    src/engine/graphics/graphics_object.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
@@ -95,6 +97,8 @@ source_group (engine/graphics
     src/engine/graphics/draw.cpp
     src/engine/graphics/indexbuffer.h
     src/engine/graphics/indexbuffer.cpp
+    src/engine/graphics/graphics_object.h
+    src/engine/graphics/graphics_object.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
