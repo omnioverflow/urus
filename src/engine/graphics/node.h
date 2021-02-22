@@ -7,15 +7,15 @@ namespace urus
 {
     class ShaderProgram;
     
-    class graphics_object
+    class Node
     {
         public:
 
-            explicit graphics_object(const std::vector<float>& vertices,
-                                     std::shared_ptr<ShaderProgram> shaderProgram);
+            explicit Node(const std::vector<float>& vertices,
+                          std::shared_ptr<ShaderProgram> shaderProgram);
         private:
 
             std::vector<float> mVertices;
             std::shared_ptr<ShaderProgram> mShaderProgram;
-    }; // class graphics_object
+    }; // class node
 } // namespace urus
