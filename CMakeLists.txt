@@ -33,6 +33,8 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/indexbuffer.cpp
     src/engine/graphics/node.h
     src/engine/graphics/node.cpp
+    src/engine/graphics/scene.h
+    src/engine/graphics/scene.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
@@ -99,6 +101,8 @@ source_group (engine/graphics
     src/engine/graphics/indexbuffer.cpp
     src/engine/graphics/node.h
     src/engine/graphics/node.cpp
+    src/engine/graphics/scene.h
+    src/engine/graphics/scene.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
