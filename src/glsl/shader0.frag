@@ -2,7 +2,9 @@
 
 layout(location = 0) out vec4 fragColor;
 
+in vec4 vertexColor; // the input var matching the output var from the vertex shader
+
 void main(void)
 {
-  fragColor = vec4(gl_FragCoord.x / 2000, 0.0, 0.0, 1.0);
+  fragColor = vertexColor;
 }
