@@ -84,6 +84,10 @@ bool Application::setup(int argc, char* argv[])
 	std::cout << "OpenGL initialized: OpenGL version: " << glGetString(GL_VERSION) 
 		<< " GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
+	int maxNbAttribs;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxNbAttribs);
+	std::cout << "Max number of attribs supported on the current hardware: " << maxNbAttribs << "\n";
+
 	glEnable(GL_DEPTH_TEST); // what the heck?
 
 	// Generate all VBOs and VAOs
