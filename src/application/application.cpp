@@ -11,10 +11,10 @@
 #include "engine/base/opengl_support.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
-
 #ifndef NDEBUG
 #include "engine/window/console.h"
 #endif
+#include "stb_image/stb_image.h"
 
 using namespace urus;
 
@@ -137,6 +137,33 @@ bool Application::setup(int argc, char* argv[])
 		glEnableVertexAttribArray(0);
 
 		glUseProgram(0);
+	}
+
+	// setup textures
+	{
+		unsigned int texture;
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		// configure texture wrapping/filtering options
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		// load and generate the texture
+		int texWidth = 0, texHeight = 0, texNbChannels = 0;
+		const auto filename = "assets/container.jpg";
+		unsigned char* texData = stbi_load(filename, &texWidth,
+										   &texHeight, &texNbChannels, 0);
+
+		if (texData)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight,
+				0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+			std::cout << "Texture loading from " << filename << " failed.\n";
 	}
 
 	return true;
