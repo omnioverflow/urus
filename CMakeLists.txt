@@ -71,6 +71,12 @@ target_sources (${PROJECT_NAME}
     src/macaque/vec4.h
     )
 
+# third-party sources
+target_sources (${PROJECT_NAME}
+    PRIVATE
+    lib/include/stb_image/stb_image.h
+    )
+
 # configure souorce groups
 
 source_group (application
@@ -151,6 +157,11 @@ source_group (macaque
     src/macaque/vec3.h
     src/macaque/vec3.cpp
     src/macaque/vec4.h
+    )
+
+source_group (third_party
+    FILES
+    lib/include/stb_image/stb_image.h
     )
 
 source_group (main
