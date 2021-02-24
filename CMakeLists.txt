@@ -3,6 +3,20 @@ set (PROJECT_NAME "Urus")
 project (${PROJECT_NAME})
 
 set (CMAKE_CXX_STANDARD 14)
+# get rid of configuration/generation of ZERO_CHECK target
+set (CMAKE_SUPPRESS_REGENERATION true)
+# Note that there is no way to suppress the ALL_BUILD target.
+# It must exist for commands like cmake --build. 
+# To be able to build the "all" target by default.
+# see https://gitlab.kitware.com/cmake/cmake/-/issues/16979
+# However, there are other solutions around the issue,
+# as discussed for example here: https://stackoverflow.com/questions/49069493
+
+# Group predefined targets INSTALL, RUN_TESTS etc. in global PREDEFINED_TARGETS_FOLDER 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# set VS startup project
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
 find_package (OpenGL)
 
