@@ -75,6 +75,7 @@ target_sources (${PROJECT_NAME}
 target_sources (${PROJECT_NAME}
     PRIVATE
     lib/include/stb_image/stb_image.h
+    lib/impl/stb_image/stb_image.cpp
     )
 
 # configure souorce groups
@@ -162,6 +163,7 @@ source_group (macaque
 source_group (third_party
     FILES
     lib/include/stb_image/stb_image.h
+    lib/impl/stb_image/stb_image.cpp
     )
 
 source_group (main
