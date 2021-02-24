@@ -17,7 +17,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "msys" ]]; then # for Git bash on Windows
     echo "[ ******** -- Generating Visual Studio solution from cmake..."
 	# TODO: create some support for Cygwin 
-    cmake -G "Visual Studio 16 2019" ..
+    cmake -G "Visual Studio 16 2019" --target Urus ..
 	echo "  ******** --> OK ]"
 else 
     echo "[ ******** /!\ Only Mac OSX and Windows x64 are supported\n"
