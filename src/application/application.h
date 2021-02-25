@@ -44,10 +44,11 @@ namespace urus
 			static void visible(int isVisible);
 
 		protected:
-			static constexpr unsigned int NB_OBJECTS = 2;
-			static unsigned int VBO[NB_OBJECTS];
-			static unsigned int VAO[NB_OBJECTS];
-			static std::unique_ptr<ShaderProgram> shaders[NB_OBJECTS];
+
+			static constexpr unsigned int NB_SHADERS = 2;
+			static unsigned int VBO;
+			static unsigned int VAO;
+			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			std::shared_ptr<Window> mWindow; // main window
 
 #ifndef NDEBUG

@@ -18,9 +18,9 @@
 
 using namespace urus;
 
-unsigned int Application::VAO[NB_OBJECTS];
-unsigned int Application::VBO[NB_OBJECTS];
-std::unique_ptr<ShaderProgram> Application::shaders[NB_OBJECTS];
+unsigned int Application::VAO;
+unsigned int Application::VBO;
+std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
 Application::~Application()
 {
@@ -90,55 +90,43 @@ bool Application::setup(int argc, char* argv[])
 
 	glEnable(GL_DEPTH_TEST); // what the heck?
 
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f, // left bottom
+		0.5f, -0.5f, 0.0f, // right bottom
+		0.0f,  0.5f, 0.0f, // left top
+		1.0f,  0.5f, 0.0f // right top
+	};
+
+	// indices for index drawing
+	GLuint indices[] = {
+		0, 1, 2,
+		2, 1, 3
+	};
+
 	// Generate all VBOs and VAOs
-	glGenBuffers(NB_OBJECTS, &VBO[0]);
-	glGenVertexArrays(NB_OBJECTS, &VAO[0]);
+	glGenBuffers(1, &VBO);
+	glGenVertexArrays(1, &VAO);
 
-	// FIXME: load shaders and buffer data for each object
-	{
-		shaders[0] = std::make_unique<ShaderProgram>("shader0.vert", "shader0.frag");
-		shaders[0]->useProgram();
+	unsigned int EBO; // Element Buffer Object
+	glGenBuffers(1, &EBO);
 
-		float vertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f,  0.5f, 0.0f
-		};
+	glBindVertexArray(VAO);
 
-		// 1. bind Vertex Array Object
-		glBindVertexArray(VAO[0]);
-		// 2. copy our vertices array in a buffer for OpenGL to use
-		glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		// 3. then set our vertex attributes pointers
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);		
+	// init and populate the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	// vertex attribute consists of only vertex coordinates i.e. 3 float values (representatioin of vec3)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	// populate the EBO
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-		glUseProgram(0);
-	}
+	glEnableVertexAttribArray(0);
 
-	{
-		shaders[1] = std::make_unique<ShaderProgram>("shader1.vert", "shader1.frag");
-		shaders[1]->useProgram();
-
-		float vertices[] = {
-			0.0f,  0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			1.0f,  0.5f, 0.0f
-		};
-
-		// 1. bind Vertex Array Object
-		glBindVertexArray(VAO[1]);
-		// 2. copy our vertices array in a buffer for OpenGL to use
-		glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		// 3. then set our vertex attributes pointers
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-
-		glUseProgram(0);
-	}
-
+	// load shaders
+	shaders[0] = std::make_unique<ShaderProgram>("shader0.vert", "shader0.frag");
+	shaders[1] = std::make_unique<ShaderProgram>("shader1.vert", "shader1.frag");
+	
 	// setup textures
 	{
 		unsigned int texture;
@@ -177,13 +165,13 @@ void Application::render()
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	shaders[1]->useProgram();
-	glBindVertexArray(VAO[0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(VAO);
 
 	shaders[0]->useProgram();
-	glBindVertexArray(VAO[1]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)0 /* offset */);
+
+	shaders[1]->useProgram();
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)(3 * sizeof(GLuint)) /* offset*/);
 
 	// Note, an implicit glFlush is done by glutSwapBuffers before it returns
 	glutSwapBuffers();
