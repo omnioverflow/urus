@@ -16,6 +16,7 @@ namespace macaque
             float data[3];
         };
 
+        float& operator[] (int);
         friend vec3 operator+ (const vec3& lrs, const vec3& rhs);
         friend vec3 operator- (const vec3& lrs, const vec3& rhs);
         friend vec3 operator* (const vec3& v, float f);
