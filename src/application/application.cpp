@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-#include "engine/base/opengl_support.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
 #ifndef NDEBUG
@@ -18,8 +17,8 @@
 
 using namespace urus;
 
-unsigned int Application::VAO;
-unsigned int Application::VBO;
+GLuint Application::VAO;
+GLuint Application::VBO;
 std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
 Application::~Application()
@@ -107,7 +106,7 @@ bool Application::setup(int argc, char* argv[])
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
 
-	unsigned int EBO; // Element Buffer Object
+	GLuint EBO; // Element Buffer Object
 	glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);
@@ -129,7 +128,7 @@ bool Application::setup(int argc, char* argv[])
 	
 	// setup textures
 	{
-		unsigned int texture;
+		GLuint texture;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		// configure texture wrapping/filtering options
@@ -160,7 +159,7 @@ bool Application::setup(int argc, char* argv[])
 void Application::render()
 {
 	// FIXME: remove render count (debug info)
-	static unsigned long renderCount = 0;
+	static GLuint renderCount = 0;
 	std::cout << "Render count: " << renderCount++ << "\n";
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

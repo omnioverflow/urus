@@ -3,6 +3,7 @@
 #include <memory>
 #include <stdint.h>
 
+#include "engine/base/opengl_support.h"
 #include "engine/base/singleton.h"
 
 namespace urus 
@@ -45,9 +46,9 @@ namespace urus
 
 		protected:
 
-			static constexpr unsigned int NB_SHADERS = 2;
-			static unsigned int VBO;
-			static unsigned int VAO;
+			static constexpr GLuint NB_SHADERS = 2;
+			static GLuint VBO;
+			static GLuint VAO;
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			std::shared_ptr<Window> mWindow; // main window
 
