@@ -1,7 +1,7 @@
 #include "uniform.h"
-#include "vec.h"
 
-// FIXME: include OpenGL headers
+#include "vec.h"
+#include "engine/base/opengl_support.h"
 
 namespace urus
 {
