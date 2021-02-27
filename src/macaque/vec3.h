@@ -2,6 +2,7 @@
 
 /*
 * FIXME:
+    - replace MACAQUE_EPSILON with MQ_EPSILON
     - define function isZero(T val) which internaly will compare to zero wrt EPSILON
     - usage of global functions might be a bad practice here
     - explicit vs implicit inlining?
@@ -20,8 +21,6 @@
 
 namespace macaque
 {
-    static constexpr float MACAQUE_EPSILON = 1.0e-7;
-
     template <typename T>
     struct vec3_t
     {
