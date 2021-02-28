@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 if [ ! -d build ]
 then
 	echo "[ ******** -- Creating build directory..."
