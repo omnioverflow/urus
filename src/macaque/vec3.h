@@ -1,8 +1,10 @@
 #pragma once
 
+#include <cmath>
+#include "macaque/mq_math.h"
+
 /*
 * FIXME:
-    - replace MACAQUE_EPSILON with MQ_EPSILON
     - define function isZero(T val) which internaly will compare to zero wrt EPSILON
     - usage of global functions might be a bad practice here
     - explicit vs implicit inlining?
@@ -63,7 +65,7 @@ namespace macaque
 
         friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
         {
-            return lengthSq(lhs - rhs) < MACAQUE_EPSILON;
+            return lengthSq(lhs - rhs) < macaque::MQ_EPSILON;
         }
 
         friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
@@ -115,7 +117,7 @@ namespace macaque
     float length(const vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < MACAQUE_EPSILON)
+        if (lenSq < macaque::MQ_EPSILON)
             return 0.f;
 
         return sqrtf(lenSq);
@@ -128,7 +130,7 @@ namespace macaque
     void normalize(vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < MACAQUE_EPSILON)
+        if (lenSq < macaque::MQ_EPSILON)
             return;
 
         const float invLen = 1.f / sqrtf(lenSq);
@@ -144,7 +146,7 @@ namespace macaque
     vec3_t<T> normalized(const vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < MACAQUE_EPSILON)
+        if (lenSq < macaque::MQ_EPSILON)
             return v;
 
         const float invLen = 1.f / sqrtf(lenSq);
@@ -159,7 +161,7 @@ namespace macaque
     {
         const float lengthA = length(a);
         const float lengthB = length(b);
-        if (lengthA < MACAQUE_EPSILON || lengthB < MACAQUE_EPSILON)
+        if (lengthA < macaque::MQ_EPSILON || lengthB < macaque::MQ_EPSILON)
             return 0.f;
 
         return acosf(dot(a, b) / (lengthA + lengthB));
@@ -171,7 +173,7 @@ namespace macaque
     vec3_t<T> projection(const vec3_t<T>& a, const vec3_t<T>& b)
     {
         const float lengthB = length(b);
-        if (lengthB < MACAQUE_EPSILON)
+        if (lengthB < macaque::MQ_EPSILON)
             return vec3();
 
         const auto scale = dot(a, b) / lengthB;
@@ -198,7 +200,7 @@ namespace macaque
     vec3_t<T> reflect(const vec3_t<T>& a, const vec3_t<T>& n)
     {
         const float lengthB = length(n);
-        if (lengthB < MACAQUE_EPSILON)
+        if (lengthB < macaque::MQ_EPSILON)
             return vec3();
 
         const float scale = dot(a, n) / lengthB;
@@ -224,7 +226,7 @@ namespace macaque
     template <typename T>
     vec3_t<T> slerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t)
     {
-        f(t < 0.01f) // FIXME: declare in constants to avoid magic number stuff
+        if(t < 0.01f) // FIXME: declare in constants to avoid magic number stuff
             return lerp(v0, v1, t);
 
         const vec3 from = normalized(v0);
