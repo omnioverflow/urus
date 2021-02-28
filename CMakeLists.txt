@@ -195,7 +195,6 @@ configure_file (src/glsl/shader1.frag ${CMAKE_CURRENT_BINARY_DIR}/shader1.frag)
 configure_file (src/glsl/coord_sys.vert ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.vert)
 configure_file (src/glsl/coord_sys.frag ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.frag)
 
-configure_file (assets/container.jpg ${CMAKE_CURRENT_BINARY_DIR}/container.jpg)
 file (COPY assets/container.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
 
 target_include_directories (${PROJECT_NAME}
