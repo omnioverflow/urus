@@ -207,9 +207,23 @@ target_include_directories (${PROJECT_NAME}
 target_link_libraries (${PROJECT_NAME} 
     ${CMAKE_SOURCE_DIR}/lib/x64/freeglut_staticd.lib
     ${CMAKE_SOURCE_DIR}/lib/x64/glew64_staticd.lib
-	"-framework CoreFoundation"
     )
 
+if (APPLE)
+	message ("  APPLE platform detected. Additionally linking frameworks:\n"
+			 "  - CoreFoundation\n"
+			 "  - CoreGraphics")
+	target_link_libraries (${PROJECT_NAME}
+		${CMAKE_SOURCE_DIR}/lib/x64/freeglut_staticd.lib
+		${CMAKE_SOURCE_DIR}/lib/x64/glew64_staticd.lib
+		"-framework CoreFoundation"
+ 		"-framework CoreGraphics")
+elseif (WIN32)
+    target_link_libraries (${PROJECT_NAME}
+        ${CMAKE_SOURCE_DIR}/lib/x64/freeglut_staticd.lib
+        ${CMAKE_SOURCE_DIR}/lib/x64/glew64_staticd.lib)
+endif ()
+			
 # FIXME: Add FREEGLUT_STATIC and GLEW_STATIC preprocessor directives
 add_definitions (-DFREEGLUT_STATIC -DGLEW_STATIC)
 # set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DFREEGLUT_STATIC")
