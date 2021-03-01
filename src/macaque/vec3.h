@@ -66,7 +66,7 @@ namespace macaque
 
         friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
         {
-            return lengthSq(lhs - rhs) < macaque::MQ_EPSILON;
+            return isZero(lengthSq(lhs - rhs));
         }
 
         friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
@@ -118,7 +118,7 @@ namespace macaque
     float length(const vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < macaque::MQ_EPSILON)
+        if (isZero(lenSq))
             return 0.f;
 
         return sqrtf(lenSq);
@@ -131,7 +131,7 @@ namespace macaque
     void normalize(vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < macaque::MQ_EPSILON)
+        if (isZero(lenSq))
             return;
 
         const float invLen = 1.f / sqrtf(lenSq);
@@ -147,7 +147,7 @@ namespace macaque
     vec3_t<T> normalized(const vec3_t<T>& v)
     {
         const float lenSq = lengthSq(v);
-        if (lenSq < macaque::MQ_EPSILON)
+        if (isZero(lenSq))
             return v;
 
         const float invLen = 1.f / sqrtf(lenSq);
@@ -162,7 +162,7 @@ namespace macaque
     {
         const float lengthA = length(a);
         const float lengthB = length(b);
-        if (lengthA < macaque::MQ_EPSILON || lengthB < macaque::MQ_EPSILON)
+        if (isZero(lengthA) || isZero(lengthB))
             return 0.f;
 
         return acosf(dot(a, b) / (lengthA + lengthB));
@@ -174,7 +174,7 @@ namespace macaque
     vec3_t<T> projection(const vec3_t<T>& a, const vec3_t<T>& b)
     {
         const float lengthB = length(b);
-        if (lengthB < macaque::MQ_EPSILON)
+        if (isZero(lengthB))
             return vec3();
 
         const auto scale = dot(a, b) / lengthB;
@@ -201,7 +201,7 @@ namespace macaque
     vec3_t<T> reflect(const vec3_t<T>& a, const vec3_t<T>& n)
     {
         const float lengthB = length(n);
-        if (lengthB < macaque::MQ_EPSILON)
+        if (isZero(lengthB))
             return vec3();
 
         const float scale = dot(a, n) / lengthB;
