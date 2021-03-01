@@ -1,10 +1,11 @@
 #pragma once
 
 #include <cmath>
+
 #include "macaque/mq_math.h"
 
 /*
-* FIXME:
+  FIXME:
     - define function isZero(T val) which internaly will compare to zero wrt EPSILON
     - usage of global functions might be a bad practice here
     - explicit vs implicit inlining?
