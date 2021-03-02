@@ -13,8 +13,6 @@ namespace urus
 	 */
 	class ShaderProgram
 	{
-		friend class ShaderFactory;
-
 		public:
 			ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 			ShaderProgram(const ShaderProgram&) = delete;
