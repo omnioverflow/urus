@@ -5,21 +5,21 @@
 namespace urus
 {
     template <typename T>
-    class Attribute
+    class VertexAttribute
     {
         public:
 
-            Attribute();
-            ~Attribute();
-            Attribute(const Attribute& other) = delete;
-            Attribute& operator= (const Attribute& other) = delete;
+            VertexAttribute();
+            ~VertexAttribute();
+            VertexAttribute(const VertexAttribute& other) = delete;
+            VertexAttribute& operator= (const VertexAttribute& other) = delete;
 
          
-            void setAttributePointer(unsigned int index);
+            void setVertexAttributePointer(unsigned int index);
 
             /**
              * Upload an array of data to GPU. Each element in the array represents
-             * the attribute for one vertex.
+             * one vertex attribute.
              */
             void set(const T* attribs, unsigned int nbAttribs); 
             void set(const std::vector<T>& attribs);
@@ -27,11 +27,11 @@ namespace urus
             void unbindFrom(unsigned int index);
 
             /**
-             * Get number of attributes.
+             * Get number of vertex attributes.
              */
             unsigned int getCount() const;
             /**
-             * Get the hamdle to the GPU resource associated with the attribute data.
+             * Get the handle to the GPU resource associated with the vertex attribute data.
              */
             unsigned int getHandle() const;
             
@@ -39,5 +39,5 @@ namespace urus
 
             unsigned int mHandle;
             unsigned int mCount;
-    }; // class Attribute
+    }; // class VertexAttribute
 } // namespace urus

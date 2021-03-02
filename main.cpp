@@ -12,7 +12,6 @@
 #include "application/application.h"
 #include "application/viewer.h"
 #include "engine/graphics/display_config.h"
-#include "engine/graphics/attribute.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
 

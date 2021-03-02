@@ -37,8 +37,8 @@ target_sources (${PROJECT_NAME}
     src/engine/base/macros.h
     src/engine/base/singleton.h
     # engine/graphics
-    src/engine/graphics/attribute.h
-    src/engine/graphics/attribute.cpp
+    src/engine/graphics/vertex_attribute.h
+    src/engine/graphics/vertex_attribute.cpp
     src/engine/graphics/display_config.h
     src/engine/graphics/display_config.cpp
     src/engine/graphics/draw.h
@@ -113,8 +113,8 @@ source_group (engine/base
 
 source_group (engine/graphics 
     FILES 
-    src/engine/graphics/attribute.h
-    src/engine/graphics/attribute.cpp
+    src/engine/graphics/vertex_attribute.h
+    src/engine/graphics/vertex_attribute.cpp
     src/engine/graphics/display_config.h
     src/engine/graphics/display_config.cpp
     src/engine/graphics/draw.h

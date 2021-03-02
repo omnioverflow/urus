@@ -1,4 +1,4 @@
-#include "attribute.h"
+#include "vertex_attribute.h"
 
 #include "macaque/vec.h"
 #include "vec.h"
@@ -7,14 +7,14 @@
 
 namespace urus
 {
-    template Attribute<int>;
-    template Attribute<float>;
-    template Attribute<macaque::vec2>;
-    template Attribute<macaque::vec3>;
-    template Attribute<macaque::vec4>;
+    template VertexAttribute<int>;
+    template VertexAttribute<float>;
+    template VertexAttribute<macaque::vec2>;
+    template VertexAttribute<macaque::vec3>;
+    template VertexAttribute<macaque::vec4>;
 
     template<typename T>
-    Attribute<T>::Attribute()
+    VertexAttribute<T>::VertexAttribute()
     {
         // Generate OpenGL buffer and init handle with it
         glGenBuffers(1, &mHandle);
@@ -22,14 +22,14 @@ namespace urus
     }
 
     template<typename T>
-    Attribute<T>::~Attribute()
+    VertexAttribute<T>::~VertexAttribute()
     {
         // Delete OpenGL buffer associated with the handle
         glDeleteBuffers(1, &mHandle);
     }
 
     template<>
-    void Attribute<int>::setAttributePointer(unsigned int index)
+    void VertexAttribute<int>::setVertexAttributePointer(unsigned int index)
     {
 #ifdef __APPLE__
         // glVertexAttribIPointer is unavailabe on Mac?
@@ -40,7 +40,7 @@ namespace urus
     }
 
     template<typename T>
-    void Attribute<T>::set(const T* attribs, unsigned int nbAttribs)
+    void VertexAttribute<T>::set(const T* attribs, unsigned int nbAttribs)
     {
         mCount = nbAttribs;
         const auto size = sizeof(T);
@@ -50,7 +50,7 @@ namespace urus
     }
 
     template<typename T>
-    void Attribute<T>::set(const std::vector<T>& attribs)
+    void VertexAttribute<T>::set(const std::vector<T>& attribs)
     {
         const auto nbAttribs = attribs.size();
         if (nbAttribs)
@@ -58,13 +58,13 @@ namespace urus
     }
 
     template<typename T>
-    unsigned int Attribute<T>::getCount() const
+    unsigned int VertexAttribute<T>::getCount() const
     {
         return mCount;
     }
 
     template<typename T>
-    unsigned int Attribute<T>::getHandle() const
+    unsigned int VertexAttribute<T>::getHandle() const
     {
         return mHandle;
     }
