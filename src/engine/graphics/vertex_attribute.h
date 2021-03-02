@@ -29,11 +29,11 @@ namespace urus
             /**
              * Get number of vertex attributes.
              */
-            unsigned int getCount() const;
+            inline unsigned int getCount() const;
             /**
              * Get the handle to the GPU resource associated with the vertex attribute data.
              */
-            unsigned int getHandle() const;
+            inline unsigned int getHandle() const;
             
         private:
 
