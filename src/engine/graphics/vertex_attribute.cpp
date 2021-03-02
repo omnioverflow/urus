@@ -30,7 +30,7 @@ namespace urus
     }
 
     template <>
-    void VertexAttribute<int>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<int>::setVertexAttribPointer(GLuint index)
     {
 #ifdef __APPLE__
         // glVertexAttribIPointer is unavailabe on Mac?
@@ -41,39 +41,39 @@ namespace urus
     }
 
     template <>
-    void VertexAttribute<float>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<float>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 1, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::vec2>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<macaque::vec2>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::vec3>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<macaque::vec3>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::vec4>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<macaque::vec4>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::ivec4>::setVertexAttribPointer(unsigned int index)
+    void VertexAttribute<macaque::ivec4>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribIPointer(index, 4, GL_INT, 0, (void*)0);
     }
 
     template <typename T>
-    void VertexAttribute<T>::set(const T* attribs, unsigned int nbAttribs)
+    void VertexAttribute<T>::set(const T* attribs, size_t attribCount)
     {
-        mCount = nbAttribs;
+        mCount = attribCount;
         const auto size = sizeof(T);
         glBindBuffer(GL_ARRAY_BUFFER, mHandle);
         glBufferData(GL_ARRAY_BUFFER, size * mCount, attribs, GL_STREAM_DRAW);
@@ -81,7 +81,7 @@ namespace urus
     }
 
     template <typename T>
-    void VertexAttribute<T>::bindTo(unsigned int index)
+    void VertexAttribute<T>::bindTo(GLuint index)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mHandle);
         glEnableVertexAttribArray(index);
@@ -90,7 +90,7 @@ namespace urus
     }
 
     template <typename T>
-    void VertexAttribute<T>::unbindFrom(unsigned int index)
+    void VertexAttribute<T>::unbindFrom(GLuint index)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mHandle);
         glDisableVertexAttribArray(index);        
@@ -106,13 +106,13 @@ namespace urus
     }
 
     template <typename T>
-    unsigned int VertexAttribute<T>::getCount() const
+    size_t VertexAttribute<T>::getCount() const
     {
         return mCount;
     }
 
     template <typename T>
-    unsigned int VertexAttribute<T>::getHandle() const
+    GLuint VertexAttribute<T>::getHandle() const
     {
         return mHandle;
     }

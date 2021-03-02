@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "engine/base/opengl_support.h"
+
 namespace urus
 {
     template <typename T>
@@ -14,29 +16,29 @@ namespace urus
             VertexAttribute(const VertexAttribute& other) = delete;
             VertexAttribute& operator= (const VertexAttribute& other) = delete;
 
-            void setVertexAttribPointer(unsigned int index);
+            void setVertexAttribPointer(GLuint index);
 
             /**
              * Upload an array of data to GPU. Each element in the array represents
              * one vertex attribute.
              */
-            void set(const T* attribs, unsigned int nbAttribs); 
+            void set(const T* attribs, size_t attribCount); 
             void set(const std::vector<T>& attribs);
-            void bindTo(unsigned int index);
-            void unbindFrom(unsigned int index);
+            void bindTo(GLuint index);
+            void unbindFrom(GLuint index);
 
             /**
              * Get number of vertex attributes.
              */
-            inline unsigned int getCount() const;
+            inline size_t getCount() const;
             /**
              * Get the handle to the GPU resource associated with the vertex attribute data.
              */
-            inline unsigned int getHandle() const;
+            inline GLuint getHandle() const;
             
         private:
 
-            unsigned int mHandle;
-            unsigned int mCount;
+            GLuint mHandle;
+            size_t mCount;
     }; // class VertexAttribute
 } // namespace urus
