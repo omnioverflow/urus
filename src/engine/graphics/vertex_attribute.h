@@ -14,8 +14,7 @@ namespace urus
             VertexAttribute(const VertexAttribute& other) = delete;
             VertexAttribute& operator= (const VertexAttribute& other) = delete;
 
-         
-            void setVertexAttributePointer(unsigned int index);
+            void setVertexAttribPointer(unsigned int index);
 
             /**
              * Upload an array of data to GPU. Each element in the array represents

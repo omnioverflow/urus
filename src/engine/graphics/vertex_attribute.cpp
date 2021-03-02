@@ -12,6 +12,7 @@ namespace urus
     template VertexAttribute<macaque::vec2>;
     template VertexAttribute<macaque::vec3>;
     template VertexAttribute<macaque::vec4>;
+    template VertexAttribute<macaque::ivec4>;
 
     template <typename T>
     VertexAttribute<T>::VertexAttribute()
@@ -39,6 +40,36 @@ namespace urus
 #endif
     }
 
+    template <>
+    void VertexAttribute<float>::setVertexAttribPointer(unsigned int index)
+    {
+        glVertexAttribPointer(index, 1, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+
+    template <>
+    void VertexAttribute<macaque::vec2>::setVertexAttribPointer(unsigned int index)
+    {
+        glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+
+    template <>
+    void VertexAttribute<macaque::vec3>::setVertexAttribPointer(unsigned int index)
+    {
+        glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+
+    template <>
+    void VertexAttribute<macaque::vec4>::setVertexAttribPointer(unsigned int index)
+    {
+        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+
+    template <>
+    void VertexAttribute<macaque::ivec4>::setVertexAttribPointer(unsigned int index)
+    {
+        glVertexAttribIPointer(index, 4, GL_INT, 0, (void*)0);
+    }
+
     template <typename T>
     void VertexAttribute<T>::set(const T* attribs, unsigned int nbAttribs)
     {
@@ -46,6 +77,23 @@ namespace urus
         const auto size = sizeof(T);
         glBindBuffer(GL_ARRAY_BUFFER, mHandle);
         glBufferData(GL_ARRAY_BUFFER, size * mCount, attribs, GL_STREAM_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    template <typename T>
+    void VertexAttribute<T>::bindTo(unsigned int index)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, mHandle);
+        glEnableVertexAttribArray(index);
+        setVertexAttribPointer(index);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    template <typename T>
+    void VertexAttribute<T>::unbindFrom(unsigned int index)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, mHandle);
+        glDisableVertexAttribArray(index);        
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
