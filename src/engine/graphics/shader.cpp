@@ -9,11 +9,19 @@
 
 namespace urus
 {
+	namespace
+	{
+		// consts with internal linkage
+		constexpr size_t info_log_size = 512;
+		constexpr GLsizei buf_size = 128;
+		constexpr GLsizei double_buf_size = 256;
+	} // unnamed namespace 
+
 	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath,
 								 const std::string& fragmentShaderPath)
 	: mProgramHandle(glCreateProgram())
 	{
-		// TODO: lazy loading option might be a viable option other than 
+		// TODO: lazy loading, on-demand might be a viable option other than 
 		// compiling and linking shaders inside the ctor
 		loadShaders(vertexShaderPath, fragmentShaderPath);
 	}
@@ -23,37 +31,36 @@ namespace urus
 		glDeleteProgram(mProgramHandle);
 	}
 
-	unsigned int ShaderProgram::compileVertexShader(const std::string& path) const
+	GLuint ShaderProgram::compileVertexShader(const std::string& path) const
 	{
 		return compileShader(path, GL_VERTEX_SHADER);
 	}
 
-	unsigned int ShaderProgram::compileFragmentShader(const std::string& path) const
+	GLuint ShaderProgram::compileFragmentShader(const std::string& path) const
 	{
 		return compileShader(path, GL_FRAGMENT_SHADER);
 	}
 
-	unsigned int ShaderProgram::compileShader(const std::string& path, unsigned int shaderType) const
+	GLuint ShaderProgram::compileShader(const std::string& path, GLenum shaderType) const
 	{
-		int success = 0; // init as no success
+		GLint success = 0; // init as no success
 		if (shaderType != GL_VERTEX_SHADER && shaderType != GL_FRAGMENT_SHADER)
 		{
 			assert(false);
 			return success;
 		}
 
-		unsigned int handle = glCreateShader(shaderType);
-		const char* source = path.c_str();
+		GLuint handle = glCreateShader(shaderType);
+		const auto* source = path.c_str();
 
 		glShaderSource(handle, 1, &source, NULL);
 		glCompileShader(handle);
 
-
 		glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
 		if (!success) 
 		{
-			char infoLog[512];
-			glGetShaderInfoLog(handle, 512, NULL, infoLog);
+			GLchar infoLog[info_log_size];
+			glGetShaderInfoLog(handle, info_log_size, NULL, infoLog);
 
 			std::cout << "Vertex compilation failed.\n";
 			std::cout << "\t" << infoLog << std::endl;
@@ -78,22 +85,22 @@ namespace urus
 		return contents.str();
 	}
 
-	bool ShaderProgram::linkShaders(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle)
+	bool ShaderProgram::linkShaders(GLuint vertexShaderHandle, GLuint fragmentShaderHandle)
 	{
 		glAttachShader(mProgramHandle, vertexShaderHandle);
 		glAttachShader(mProgramHandle, fragmentShaderHandle);
 
 		glLinkProgram(mProgramHandle);
 
-		int success = 0;
+		GLint success = 0;
 
 		glGetProgramiv(mProgramHandle, GL_LINK_STATUS, &success);
 
 		if (!success) 
 		{
-			char infoLog[512];
+			GLchar infoLog[info_log_size];
 
-			glGetProgramInfoLog(mProgramHandle, 512, NULL, infoLog);
+			glGetProgramInfoLog(mProgramHandle, info_log_size, NULL, infoLog);
 
 			std::cout << "ERROR: Shader linking failed.\n";
 			std::cout << infoLog << "\n";
@@ -113,26 +120,26 @@ namespace urus
 
 	void ShaderProgram::populateAttributes()
 	{
-		int count = -1;
-		int length;
-		char name[128];
-		int size;
-
-		GLenum type;
+		GLint attribCount = -1;
+		GLsizei nameLength = -1;
+		GLint attribSize = -1;
+		GLenum type = 0;
+		GLchar name[buf_size] = { 0 }; // compiler gonna fill unwritten entries with 0s
 
 		glUseProgram(mProgramHandle);
-		glGetProgramiv(mProgramHandle, GL_ACTIVE_ATTRIBUTES, &count);
+		glGetProgramiv(mProgramHandle, GL_ACTIVE_ATTRIBUTES, &attribCount);
 
-		for (int i = 0; i < count; ++i) 
+		for (int i = 0; i < attribCount; ++i) 
 		{
-			memset(name, 0, sizeof(char) * 128);
-			glGetActiveAttrib(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
+			memset(name, 0, sizeof(char) * buf_size);
+			glGetActiveAttrib(mProgramHandle, (GLuint)i, buf_size, &nameLength, &attribSize, &type, name);
 
-			int attrib = glGetAttribLocation(mProgramHandle, name);
+			// get the attribName location
+			const GLint attribLocation = glGetAttribLocation(mProgramHandle, name);
 
-			if (attrib >= 0) 
+			if (attribLocation >= 0) 
 			{
-				mAttributes[name] = attrib;
+				mAttributes[name] = attribLocation;
 			}
 		}
 
@@ -140,44 +147,44 @@ namespace urus
 	}
 
 	void ShaderProgram::populateUniforms()
-	{        
-		int count = -1;
-		int length;
-		char name[128];
-		int size;
+	{       
+		GLint uniformCount = -1;
+		GLsizei nameLength;
+		GLchar name[buf_size] = { 0 };
+		GLint uniformSize;
 		GLenum type;
-		char testName[256];
+		GLchar testName[double_buf_size];
 
 		glUseProgram(mProgramHandle);
-		glGetProgramiv(mProgramHandle, GL_ACTIVE_UNIFORMS, &count);
+		glGetProgramiv(mProgramHandle, GL_ACTIVE_UNIFORMS, &uniformCount);
 
-		for (int i = 0; i < count; ++i) 
+		for (int i = 0; i < uniformCount; ++i) 
 		{
-			memset(name, 0, sizeof(char) * 128);
-			glGetActiveUniform(mProgramHandle, (GLuint)i, 128, &length, &size, &type, name);
+			memset(name, 0, sizeof(char) * buf_size);
+			glGetActiveUniform(mProgramHandle, (GLuint)i, buf_size, &nameLength, &uniformSize, &type, name);
 
-			int uniform = glGetUniformLocation(mProgramHandle, name);
+			GLint uniform = glGetUniformLocation(mProgramHandle, name);
 
 			if (uniform >= 0)
 			{ // Is uniform valid?
 				std::string uniformName = name;
-				// if name contains [, uniform is array
+				// if name contains [, uniform is an array
 				std::size_t found = uniformName.find('[');
 
 				if (found != std::string::npos) 
 				{
+					// If that uniform was an array, remove the [0] part of the name
 					uniformName.erase(uniformName.begin() + found, uniformName.end());
-					unsigned int uniformIndex = 0;
+					GLuint uniformIndex = 0;
 
+					// FIXME: test on an array and rename testName var,
+					// and rewrite code to make it readable (or add comments)
 					while (true) 
 					{
-						memset(testName,0,sizeof(char)*256);
+						memset(testName, 0, sizeof(char) * double_buf_size);
+						sprintf(testName, "%s[%d]", uniformName.c_str(), uniformIndex++);
 
-						sprintf(testName, "%s[%d]",
-								uniformName.c_str(),
-								uniformIndex++);
-
-						int uniformLocation = glGetUniformLocation(mProgramHandle, testName);
+						GLint uniformLocation = glGetUniformLocation(mProgramHandle, testName);
 
 						if (uniformLocation < 0)                
 							break;                   
@@ -235,7 +242,7 @@ namespace urus
 		glUseProgram(0);
 	}
 
-	unsigned int ShaderProgram::getAttrib(const std::string& attribName) const
+	GLint ShaderProgram::getAttrib(const std::string& attribName) const
 	{
 		const auto found = mAttributes.find(attribName);
 		if (found == mAttributes.cend())
@@ -247,7 +254,7 @@ namespace urus
 		return found->second;
 	}
 
-	unsigned int ShaderProgram::getUniform(const std::string& uniformName) const
+	GLint ShaderProgram::getUniform(const std::string& uniformName) const
 	{
 		const auto iter = mUniforms.find(uniformName);
 		if (iter == mUniforms.cend())

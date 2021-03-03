@@ -28,23 +28,22 @@ namespace urus
 			*/
 			void unbind() const;
 
-			inline unsigned int programHandle() const { return mProgramHandle;  }
-
+			inline GLuint programHandle() const { return mProgramHandle;  }
 			inline void useProgram() { glUseProgram(mProgramHandle); }
 
 		private:
 			/**
 			* Compile vertes shader at path
 			*/
-			unsigned int compileVertexShader(const std::string& path) const;
+			GLuint compileVertexShader(const std::string& path) const;
 			/**
 			* Compile fragment shader at path
 			*/
-			unsigned int compileFragmentShader(const std::string& path) const;
+			GLuint compileFragmentShader(const std::string& path) const;
 			/**
 			* Link vertex and fragment shaders, identified by handle to GPU resource
 			*/
-			bool linkShaders(unsigned int vertexShaderHandle, unsigned int fragmentShaderHandle);
+			bool linkShaders(GLuint vertexShaderHandle, GLuint fragmentShaderHandle);
 			/**
 			* Populate shader attributes mapping from the attributes stored inside the shader program
 			*/
@@ -61,24 +60,24 @@ namespace urus
 			/**
 			* Get shader attribute by name
 			*/
-			unsigned int getAttrib(const std::string& name) const;
+			GLint getAttrib(const std::string& name) const;
 			/**
 			* Get shader uniform by name
 			*/
-			unsigned int getUniform(const std::string& name) const;
+			GLint getUniform(const std::string& name) const;
 
 			/**
 			* Compile the shader
 			*/
-			unsigned int compileShader(const std::string& path, unsigned int shaderType) const;
+			GLuint compileShader(const std::string& path, GLenum shaderType) const;
 			/**
 			* Read the shader source from file path 
 			*/
 			std::string readShaderSource(const std::string& path) const;
 
 		private:
-			unsigned int mProgramHandle;
-			std::map<std::string, unsigned int> mAttributes;
-			std::map<std::string, unsigned int> mUniforms;
+			GLuint mProgramHandle;
+			std::map<std::string, GLint> mAttributes;
+			std::map<std::string, GLint> mUniforms;
 	}; // class Shader
 } // namespace urus
