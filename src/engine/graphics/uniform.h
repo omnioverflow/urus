@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "engine/base/opengl_support.h"
+
 namespace urus
 {
     /**
@@ -16,8 +18,8 @@ namespace urus
             Uniform(const Uniform&) = delete;
             Uniform& operator=(const Uniform&) = delete;
 
-            static void set(unsigned int index, const T& data);
-            static void set(unsigned int index, const T* dataArray, unsigned int arrayLength);
-            static void set(unsigned int index, std::vector<T>& dataArray);
+            static void set(GLint index, const T& data);
+            static void set(GLint index, const T* dataArray, GLsizei arrayLength);
+            static void set(GLint index, std::vector<T>& dataArray);
     }; // class Uniform
 } // namespace urus
