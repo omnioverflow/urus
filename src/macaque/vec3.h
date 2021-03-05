@@ -38,10 +38,8 @@ namespace macaque
             T data[3];
         }; // anonymous union
         
-        T& operator[] (int index) 
-        { 
-            return data[index]; 
-        }
+        T& operator[] (int index);
+        const T& operator[] (int index) const;
 
         friend vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
         {
@@ -80,6 +78,18 @@ namespace macaque
 
     typedef vec3_t<float> vec3;
     typedef vec3_t<int> ivec3;
+
+    template <typename T>
+    inline T& vec3_t<T>::operator[] (int index)
+    {
+        return data[index];
+    }
+
+    template <typename T>
+    inline const T& vec3_t<T>::operator[] (int index) const
+    {
+        return data[index];
+    }
 
     /**
     * Cross product between the input vectors.
