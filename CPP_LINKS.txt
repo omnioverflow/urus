@@ -1,0 +1,8 @@
+Linux kernel coding style
+https://www.kernel.org/doc/html/v4.10/process/coding-style.html
+
+IsoCPP FAQs
+https://isocpp.org/wiki/faq
+https://isocpp.org/wiki/faq/operator-overloading
+
+
