@@ -13,8 +13,8 @@ namespace macaque
                 T y;
             };
 
-            T v[2];
-        }; // union
+            T data[2];
+        }; // anonymous union
 
         inline vec2_t() : x(T(0)), y(T(0)) {}
         inline vec2_t(T xval, T yval) : x(xval), y(yval) {}
