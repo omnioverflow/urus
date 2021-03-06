@@ -21,26 +21,26 @@ namespace urus
     //template Uniform<mat4>;
     
     template <typename T>
-    void Uniform<T>::set(unsigned int index, const T& data)
+    void Uniform<T>::set(GLint index, const T& data)
     {
         set(index, static_cast<const T*>(&data), 1);
     }
 
     template <typename T>
-    void Uniform<T>::set(unsigned int index, std::vector<T>& dataArray)
+    void Uniform<T>::set(GLint index, std::vector<T>& data)
     {
-        const auto arrayLength = dataArray.size();
-        if (arrayLength)
-            set(index, dataArray.data(), arrayLength);
+        const auto dataLength = data.size();
+        if (dataLength)
+            set(index, data.data(), dataLength);
     }
 
 // A helper macro to reduce boilerplate code of setting uniforms of different types
-#define UNIFORM_IMPL(gl_func, T, Data) \
+#define UNIFORM_IMPL(gl_func, T, DataType) \
     template <> \
-    void Uniform<T>::set(unsigned int index, const T* dataArray, unsigned int arrayLength) \
+    void Uniform<T>::set(GLint index, const T* data, GLsizei dataLength) \
     { \
-        if (arrayLength) \
-            gl_func(index, (GLsizei)arrayLength, static_cast<const Data*>(&dataArray[0])); \
+        if (dataLength) \
+            gl_func(index, (GLsizei)dataLength, &data[0]); \
     }
 
     UNIFORM_IMPL(glUniform1iv, int, int)

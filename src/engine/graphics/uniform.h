@@ -19,7 +19,7 @@ namespace urus
             Uniform& operator=(const Uniform&) = delete;
 
             static void set(GLint index, const T& data);
-            static void set(GLint index, const T* dataArray, GLsizei arrayLength);
-            static void set(GLint index, std::vector<T>& dataArray);
+            static void set(GLint index, const T* data, GLsizei dataLength);
+            static void set(GLint index, std::vector<T>& data);
     }; // class Uniform
 } // namespace urus
