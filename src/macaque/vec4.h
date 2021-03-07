@@ -15,7 +15,7 @@ namespace macaque
                     T w;
                 };
 
-                T v[4];
+                T data[4];
             };
 
             inline vec4_t<T>() : x((T)0), y((T)0), w((T)0) {}
