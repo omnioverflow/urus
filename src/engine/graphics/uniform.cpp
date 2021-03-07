@@ -1,6 +1,7 @@
 /**
 * FIXMEs:
 *   - Do not use glUniform* calls, use Uniform Buffers instead.
+*   - read https://gamedev.stackexchange.com/questions/133615/how-do-you-store-uniform-data
 */
 #include "uniform.h"
 
