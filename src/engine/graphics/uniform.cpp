@@ -1,3 +1,7 @@
+/**
+* FIXMEs:
+*   - Do not use glUniform* calls, use Uniform Buffers instead.
+*/
 #include "uniform.h"
 
 #include "vec.h"
