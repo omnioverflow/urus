@@ -15,8 +15,8 @@ namespace urus
             ~Texture();
 
             void load(const char* path);
-            void set(GLuint uniform, GLuint texIndex);
-            void unset(GLuint textureIndex);
+            void set(GLint uniformIndex, GLint textureIndex);
+            void unset(GLint textureIndex);
 
             inline unsigned int getHandle() const { return mHandle; }
 

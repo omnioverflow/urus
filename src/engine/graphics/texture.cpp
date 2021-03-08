@@ -47,14 +47,15 @@ namespace urus
 		mChannels = channels;
     }
 
-    void Texture::set(GLuint uniformIndex, GLuint textureIndex)
+    void Texture::set(GLint uniformIndex, GLint textureIndex)
     {
+        GLenum lol;
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, mHandle);
         glUniform1i(uniformIndex, textureIndex);
     }
 
-    void Texture::unset(GLuint textureIndex)
+    void Texture::unset(GLint textureIndex)
     {
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, 0);
