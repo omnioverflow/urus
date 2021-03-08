@@ -60,7 +60,6 @@ namespace urus
 
     void Texture::set(GLint uniformIndex, GLint textureIndex)
     {
-        GLenum lol;
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, mHandle);
         glUniform1i(uniformIndex, textureIndex);
