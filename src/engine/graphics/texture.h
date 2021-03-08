@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "engine/base/opengl_support.h"
 
 namespace urus
@@ -12,9 +14,11 @@ namespace urus
             Texture(const Texture& other) = delete;
             Texture& operator= (const Texture& other) = delete;
             explicit Texture(const char* path);
+            explicit Texture(const std::string& path);
             ~Texture();
 
             void load(const char* path);
+            void load(const std::string& path);
             void set(GLint uniformIndex, GLint textureIndex);
             void unset(GLint textureIndex);
 

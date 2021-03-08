@@ -16,6 +16,12 @@ namespace urus
         load(path);
     }
 
+    Texture::Texture(const std::string& path)
+    : Texture(path.c_str())
+    {
+
+    }
+
     Texture::~Texture()
     {
         glDeleteTextures(1, &mHandle);
@@ -45,6 +51,11 @@ namespace urus
 		mWidth = width;
 		mHeight = height;
 		mChannels = channels;
+    }
+
+    void Texture::load(const std::string& path)
+    {
+        load(path.c_str());
     }
 
     void Texture::set(GLint uniformIndex, GLint textureIndex)
