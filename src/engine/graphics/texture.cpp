@@ -1,8 +1,5 @@
 #include "texture.h"
 
-#include "engine/base/opengl_support.h"
-// FIXME: missing OpenGL include
-
 namespace urus
 {
     Texture::Texture()
@@ -50,14 +47,14 @@ namespace urus
 		mChannels = channels;
     }
 
-    void Texture::set(unsigned int uniformIndex, unsigned int textureIndex)
+    void Texture::set(GLuint uniformIndex, GLuint textureIndex)
     {
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, mHandle);
         glUniform1i(uniformIndex, textureIndex);
     }
 
-    void Texture::unset(unsigned int textureIndex)
+    void Texture::unset(GLuint textureIndex)
     {
         glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, 0);

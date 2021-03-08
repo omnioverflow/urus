@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine/base/opengl_support.h"
+
 namespace urus
 {
     class Texture
@@ -13,16 +15,16 @@ namespace urus
             ~Texture();
 
             void load(const char* path);
-            void set(unsigned int uniform, unsigned int texIndex);
-            void unset(unsigned int textureIndex);
+            void set(GLuint uniform, GLuint texIndex);
+            void unset(GLuint textureIndex);
 
             inline unsigned int getHandle() const { return mHandle; }
 
         private:
 
-            unsigned int mWidth;
-            unsigned int mHeight;
-            unsigned int mChannels;
-            unsigned int mHandle;
+            GLuint mWidth;
+            GLuint mHeight;
+            GLuint mChannels;
+            GLuint mHandle;
     }; // class Texture
 } // namespace urus
