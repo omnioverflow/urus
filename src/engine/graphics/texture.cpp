@@ -36,7 +36,16 @@ namespace urus
 		// unsigned char* data = stbi_load(path, &width, &height, &channels, 4);
         unsigned char* data = nullptr;
 		
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(
+            GL_TEXTURE_2D, 
+            0,                // mipmap level
+            GL_RGBA,          // texture format
+            width, height,
+            0,                // border, must always be 0
+            GL_RGBA,          // source image format
+            GL_UNSIGNED_BYTE, // source image data type (i.e. array of those)
+            data              //source image data
+        );
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		// FIXME: free the image data
