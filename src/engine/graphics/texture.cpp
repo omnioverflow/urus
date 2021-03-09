@@ -2,15 +2,10 @@
 
 namespace urus
 {
-    Texture::Texture()
+    Texture::Texture(const char* path)
     : mWidth(0)
     , mHeight(0)
     , mChannels(0)
-    {
-        glGenTextures(1, &mHandle);
-    }
-
-    Texture::Texture(const char* path)
     {
         glGenTextures(1, &mHandle);
         load(path);

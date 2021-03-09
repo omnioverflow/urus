@@ -10,7 +10,7 @@ namespace urus
     {
         public:
 
-            Texture();
+            Texture() = delete; // No source image path, no texture?
             Texture(const Texture& other) = delete;
             Texture& operator= (const Texture& other) = delete;
             explicit Texture(const char* path);
