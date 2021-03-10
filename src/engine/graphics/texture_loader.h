@@ -25,8 +25,23 @@ namespace urus
              */
             ~TextureLoader();
 
-            GLuint texWidth() const noexcept;
-            GLuint texHeight() const noexcept;
-            GLuint texChannels() const noexcept;
+            inline GLuint texWidth() const noexcept;
+            inline GLuint texHeight() const noexcept;
+            inline GLuint texChannels() const noexcept;
+
+            /**
+             * Texture might not be loaded due to issue on reading
+             * source file from the file system.
+             *
+             * @return wheather the texture is loaded.
+             */
+            inline bool texLoaded() const noexcept;
+
+        private:
+
+            GLuint   mTexWidth;
+            GLuint   mTexHeight;
+            GLuint   mTexChannels;
+            GLubyte* mData;
     };
 } // namespace urus
