@@ -57,7 +57,16 @@ bool Application::setup(int argc, char* argv[])
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
 
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    auto displayMode = GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH;
+#ifdef __APPLE__
+    /*
+     To activate core profile 3.2+,
+     instead of glutInitContextVersion(), add the GLUT_3_2_CORE_PROFILE to  glutInitDisplayMode()
+     */
+    displayMode |= GLUT_3_2_CORE_PROFILE;
+#endif
+    
+	glutInitDisplayMode(displayMode);
 	glutCreateWindow(mWindow->title().c_str());
 
 	glutIdleFunc(idle);
