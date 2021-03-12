@@ -1,0 +1,7 @@
+FIXME:
+
+* When on OS X, after build.sh and start.sh in Xcode you need to select target properties "Build Phases";
+  And in Link Binary With Libraries add OpenGL.framework and GLUT.framework.
+  First, we can automate this process. Second, OpenGL and GLUT shipped with OS X might not be a proper libs
+  to use (core profile support, api and extensions) therefore we need to consider using freeglut.
+  Third, keep in mind migation to Metal on OS X instead of OpenGL.
