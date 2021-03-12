@@ -39,24 +39,4 @@ namespace urus
         if (mData)
             stbi_image_free(mData);
     }
-
-    GLint TextureLoader::texWidth() const noexcept
-    { 
-        return mTexWidth;
-    }
-
-    GLint TextureLoader::texHeight() const noexcept
-    { 
-        return mTexHeight;
-    }
-
-    GLint TextureLoader::texChannels() const noexcept
-    { 
-        return mTexChannels;
-    }
-
-    bool TextureLoader::texLoaded() const noexcept
-    {
-        return mData != nullptr;
-    }
 } // namespace urus

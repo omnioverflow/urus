@@ -31,6 +31,7 @@ namespace urus
             inline GLint texWidth() const noexcept;
             inline GLint texHeight() const noexcept;
             inline GLint texChannels() const noexcept;
+            inline const GLubyte* texData() const noexcept;
 
             /**
              * Texture might not be loaded due to issue on reading
@@ -38,7 +39,7 @@ namespace urus
              *
              * @return wheather the texture is loaded.
              */
-            inline bool texLoaded() const noexcept;
+            inline bool isTexLoaded() const noexcept;
 
         private:
 
@@ -46,5 +47,30 @@ namespace urus
             GLint    mTexHeight;
             GLint    mTexChannels;
             GLubyte* mData;
-    };
+    }; // class TextureLoader
+
+    inline GLint TextureLoader::texWidth() const noexcept
+    {
+        return mTexWidth;
+    }
+
+    inline GLint TextureLoader::texHeight() const noexcept
+    {
+        return mTexHeight;
+    }
+
+    inline GLint TextureLoader::texChannels() const noexcept
+    {
+        return mTexChannels;
+    }
+
+    inline const GLubyte* TextureLoader::texData() const noexcept
+    {
+        return mData;
+    }
+
+    inline bool TextureLoader::isTexLoaded() const noexcept
+    {
+        return mData != nullptr;
+    }
 } // namespace urus
