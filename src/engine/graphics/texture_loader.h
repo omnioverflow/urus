@@ -39,9 +39,9 @@ namespace urus
 
         private:
 
-            GLuint   mTexWidth;
-            GLuint   mTexHeight;
-            GLuint   mTexChannels;
+            GLint    mTexWidth;
+            GLint    mTexHeight;
+            GLint    mTexChannels;
             GLubyte* mData;
     };
 } // namespace urus
