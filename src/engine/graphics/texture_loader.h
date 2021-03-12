@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "engine/base/opengl_support.h"
 
 namespace urus
@@ -16,6 +18,7 @@ namespace urus
              * and its lifecycle is managed by TextureLoader instance.
              */
             explicit TextureLoader(const std::string& path) noexcept;
+            explicit TextureLoader(const char* path) noexcept;
 
             TextureLoader(const TextureLoader& other) = delete;
             TextureLoader& operator= (const TextureLoader& other) = delete;
@@ -25,9 +28,9 @@ namespace urus
              */
             ~TextureLoader();
 
-            inline GLuint texWidth() const noexcept;
-            inline GLuint texHeight() const noexcept;
-            inline GLuint texChannels() const noexcept;
+            inline GLint texWidth() const noexcept;
+            inline GLint texHeight() const noexcept;
+            inline GLint texChannels() const noexcept;
 
             /**
              * Texture might not be loaded due to issue on reading

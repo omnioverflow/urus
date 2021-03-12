@@ -1,27 +1,27 @@
-#include "engine/graphics/texture_raw_image.h"
+#include "engine/graphics/texture_loader.h"
 
 #include <cassert>
 
 // FIXME: correct include paths in cmake
-#include "stb_image.h"
+#include "stb_image/stb_image.h"
 
 namespace urus
 {
-    TextureLoader::TextureLoader(const char* path)
-    : mWidth(0)
-    , mHeight(0)
-    , mChannels(0)
+    TextureLoader::TextureLoader(const char* path) noexcept
+    : mTexWidth(0)
+    , mTexHeight(0)
+    , mTexChannels(0)
     , mData(nullptr)
     {
-        static int numComponentsPerPixel = 4;
+        static const int num_components_per_pixel = 4;
         try
         {
-            mData = stbi_load(
+            auto lol = stbi_load(
                               path,
-                              &mWidth,
-                              &mHeight,
-                              &mChannels,
-                              numComponentsPerPixel
+                              &mTexWidth,
+                              &mTexHeight,
+                              &mTexChannels,
+                              num_components_per_pixel
                              );
         }
         catch (...)
@@ -30,7 +30,7 @@ namespace urus
         }
     }
 
-    TextureLoader::TextureLoader(const std::string& path)
+    TextureLoader::TextureLoader(const std::string& path) noexcept
     : TextureLoader(path.c_str())
     {}
 
@@ -40,22 +40,22 @@ namespace urus
             stbi_image_free(mData);
     }
 
-    GLuint TextureLoader::texWidth() const 
+    GLint TextureLoader::texWidth() const noexcept
     { 
-        return mWidth;
+        return mTexWidth;
     }
 
-    Gluint TextureLoader::texHeight() const 
+    GLint TextureLoader::texHeight() const noexcept
     { 
-        return mHeight;
+        return mTexHeight;
     }
 
-    Gluint TextureLoader::texChannels() const
+    GLint TextureLoader::texChannels() const noexcept
     { 
-        return mChannels;
+        return mTexChannels;
     }
 
-    bool TextureLoader::texLoaded() const 
+    bool TextureLoader::texLoaded() const noexcept
     {
         return mData != nullptr;
     }
