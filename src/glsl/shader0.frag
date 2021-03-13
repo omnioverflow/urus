@@ -1,10 +1,10 @@
 #version 430 core
 
-layout(location = 0) out vec4 fragColor;
+layout (location = 0) out vec4 fragColor;
 
-in vec4 vertexColor; // the input var matching the output var from the vertex shader
+in vec3 vertexColor;
 
 void main(void)
 {
-  fragColor = vertexColor;
+  fragColor = vec4(vertexColor, 1.0f);
 }
