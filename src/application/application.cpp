@@ -19,6 +19,7 @@ using namespace urus;
 
 GLuint Application::VAO;
 GLuint Application::VBO;
+GLuint Application::texture;
 std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
 Application::~Application()
@@ -143,7 +144,6 @@ bool Application::setup(int argc, char* argv[])
 	{
         TextureLoader texLoader("assets/container.jpg");
         
-		GLuint texture;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
         
@@ -171,6 +171,7 @@ void Application::render()
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glBindVertexArray(VAO);
 
 	shaders[0]->useProgram();

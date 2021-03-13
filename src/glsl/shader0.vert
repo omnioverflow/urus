@@ -11,4 +11,5 @@ void main (void)
 {
     gl_Position = vec4(inPos, 1.0f);
     vertexColor = inColor;
+    texCoord = inTexCoord;
 }

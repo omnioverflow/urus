@@ -49,6 +49,7 @@ namespace urus
 			static constexpr GLuint NB_SHADERS = 2;
 			static GLuint VBO;
 			static GLuint VAO;
+			static GLuint texture;
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			std::shared_ptr<Window> mWindow; // main window
 
