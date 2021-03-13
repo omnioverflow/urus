@@ -200,6 +200,7 @@ configure_file (src/glsl/coord_sys.vert ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.ve
 configure_file (src/glsl/coord_sys.frag ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.frag)
 
 file (COPY assets/container.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
+file (COPY assets/grass.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
 
 target_include_directories (${PROJECT_NAME}
     PRIVATE
