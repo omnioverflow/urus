@@ -1,6 +1,7 @@
 #include "engine/graphics/texture_loader.h"
 
 #include <cassert>
+#include <iostream>
 
 // FIXME: correct include paths in cmake
 #include "stb_image/stb_image.h"
@@ -23,6 +24,8 @@ namespace urus
                               &mTexChannels,
                               num_components_per_pixel
                              );
+            if (!mData)
+                std::cerr << stbi_failure_reason() << std::endl;
         }
         catch (...)
         {
