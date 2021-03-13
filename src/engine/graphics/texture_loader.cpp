@@ -16,7 +16,7 @@ namespace urus
         static const int num_components_per_pixel = 4;
         try
         {
-            auto lol = stbi_load(
+            mData = stbi_load(
                               path,
                               &mTexWidth,
                               &mTexHeight,
