@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "engine/graphics/shader.h"
-#include "engine/graphics/texture_loader.h"
+#include "engine/graphics/texture.h"
 #include "engine/window/window.h"
 #ifndef NDEBUG
 #include "engine/window/console.h"
@@ -19,12 +19,11 @@ using namespace urus;
 
 GLuint Application::VAO;
 GLuint Application::VBO;
-GLuint Application::texture;
+Texture* Application::sTexture;
 std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
 Application::Application()
-: mTexLoader(nullptr)
-, mWindow(nullptr)
+: mWindow(nullptr)
 {
 }
 
@@ -147,24 +146,7 @@ bool Application::setup(int argc, char* argv[])
 	shaders[1] = std::make_unique<ShaderProgram>("shader1.vert", "shader1.frag");
 	
 	// setup textures
-	{
-        mTexLoader = std::make_shared<TextureLoader>("assets/container.jpg");
-        
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
-        
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		if (mTexLoader->isTexLoaded())
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, mTexLoader->texWidth(), mTexLoader->texHeight(),
-				0, GL_RGB, GL_UNSIGNED_BYTE, mTexLoader->texData());
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-	}
+	sTexture = new Texture("assets/container.jpg", GL_RGB, GL_RGB);
 
 	return true;
 }
@@ -177,7 +159,8 @@ void Application::render()
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glBindTexture(GL_TEXTURE_2D, texture);
+	sTexture->use();
+
 	glBindVertexArray(VAO);
 
 	shaders[0]->useProgram();

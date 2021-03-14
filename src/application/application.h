@@ -13,7 +13,7 @@ namespace urus
 #ifndef NDEBUG
 	class Console;
 #endif
-	class TextureLoader;
+	class Texture;
 	class Window;
 
 	class Application : public Singleton<Application>
@@ -50,10 +50,9 @@ namespace urus
 			static constexpr GLuint NB_SHADERS = 2;
 			static GLuint VBO;
 			static GLuint VAO;
-			static GLuint texture;
+			static Texture* sTexture; // don't care if it is a raw pointer, since it is static anyway
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
-
-			std::shared_ptr<TextureLoader> mTexLoader;
+			
 			std::shared_ptr<Window> mWindow; // main window
 
 #ifndef NDEBUG
