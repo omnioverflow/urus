@@ -10,25 +10,28 @@ namespace urus
     {
         public:
 
-            Texture() = delete; // No source image path, no texture?
-            Texture(const Texture& other) = delete;
-            Texture& operator= (const Texture& other) = delete;
-            explicit Texture(const char* path);
-            explicit Texture(const std::string& path);
+            explicit Texture(const char* path) noexcept;
+            explicit Texture(const std::string& path) noexcept;
             ~Texture();
 
-            void load(const char* path);
-            void load(const std::string& path);
-            void set(GLint uniformIndex, GLint textureIndex);
-            void unset(GLint textureIndex);
+            Texture() = delete; // No source image path, no texture
+            Texture(const Texture& other) = delete;
+            Texture& operator= (const Texture& other) = delete;
 
-            inline unsigned int getHandle() const { return mHandle; }
+            void use() const;
+            void unbind() const;
+
+            void set(GLint uniform, GLint texture);
+            void unset(GLint texture);
+
+            inline GLuint getHandle() const noexcept { return mHandle; }
 
         private:
 
-            GLuint mWidth;
-            GLuint mHeight;
-            GLuint mChannels;
-            GLuint mHandle;
+            void load(const char* path);
+            void load(const std::string& path);
+            void release();
+            
+            GLuint   mHandle;
     }; // class Texture
 } // namespace urus

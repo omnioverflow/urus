@@ -1,60 +1,89 @@
 #include "texture.h"
 
+#include <cassert>
+#include <iostream>
+
+#include "engine/graphics/texture_loader.h"
+#include "stb_image/stb_image.h"
+
 namespace urus
 {
-    Texture::Texture(const char* path)
-    : mWidth(0)
-    , mHeight(0)
-    , mChannels(0)
+    Texture::Texture(const char* path) noexcept
+    : mHandle(0)
     {
         glGenTextures(1, &mHandle);
-        load(path);
+
+        try
+        {
+            load(path);
+        }
+        catch (const std::exception& exp)
+        {
+            std::cerr << exp.what() << std::endl;
+        }
     }
 
-    Texture::Texture(const std::string& path)
+    Texture::Texture(const std::string& path) noexcept
     : Texture(path.c_str())
     {
-
     }
 
     Texture::~Texture()
+    {
+        release();
+    }
+
+    void Texture::release()
     {
         glDeleteTextures(1, &mHandle);
     }
 
     void Texture::load(const char* path)
     {
+        TextureLoader texLoader(path);
+    
+        if (!texLoader.isTexLoaded())
+        {
+            assert(false);
+            return;
+        }
+
         glBindTexture(GL_TEXTURE_2D, mHandle);
-        // FIXME: correct the image loading part
-        int width, height, channels;
-        // FIXME: idem
-		// unsigned char* data = stbi_load(path, &width, &height, &channels, 4);
-        unsigned char* data = nullptr;
-		
-		glTexImage2D(
-            GL_TEXTURE_2D, 
-            0,                // mipmap level
-            GL_RGBA,          // texture format
-            width, height,
-            0,                // border, must always be 0
-            GL_RGBA,          // source image format
-            GL_UNSIGNED_BYTE, // source image data type (i.e. array of those)
-            data              //source image data
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GL_RGB,
+            texLoader.texWidth(),
+            texLoader.texHeight(),
+            0, 
+            GL_RGB, 
+            GL_UNSIGNED_BYTE, 
+            texLoader.texData()
         );
-		glGenerateMipmap(GL_TEXTURE_2D);
+        /*
+        glBindTexture(GL_TEXTURE_2D, mHandle);
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,                      // mipmap level
+            GL_RGBA,                // texture format
+            texLoader.texWidth(),
+            texLoader.texHeight(),
+            0,                      // border, must always be 0
+            GL_RGBA,                // source image format
+            GL_UNSIGNED_BYTE,       // source image data type (i.e. array of those)
+            texLoader.texData()     //source image data
+        );
+        */
 
-		// FIXME: free the image data
-		// stbi_image_free(data);
+        glGenerateMipmap(GL_TEXTURE_2D);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		
 		glBindTexture(GL_TEXTURE_2D, 0);
-		mWidth = width;
-		mHeight = height;
-		mChannels = channels;
     }
 
     void Texture::load(const std::string& path)
@@ -62,16 +91,26 @@ namespace urus
         load(path.c_str());
     }
 
-    void Texture::set(GLint uniformIndex, GLint textureIndex)
+    void Texture::use() const
     {
-        glActiveTexture(GL_TEXTURE0 + textureIndex);
         glBindTexture(GL_TEXTURE_2D, mHandle);
-        glUniform1i(uniformIndex, textureIndex);
     }
 
-    void Texture::unset(GLint textureIndex)
+    void Texture::unbind() const
     {
-        glActiveTexture(GL_TEXTURE0 + textureIndex);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    void Texture::set(GLint uniform, GLint texture)
+    {
+        glActiveTexture(GL_TEXTURE0 + texture);
+        glBindTexture(GL_TEXTURE_2D, mHandle);
+        glUniform1i(uniform, texture);
+    }
+
+    void Texture::unset(GLint texture)
+    {
+        glActiveTexture(GL_TEXTURE0 + texture);
         glBindTexture(GL_TEXTURE_2D, 0);
         glActiveTexture(GL_TEXTURE0);
     }
