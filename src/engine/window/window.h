@@ -45,6 +45,7 @@ namespace urus
 			inline std::string title() const { return mTitle;  }
 
 		protected:
+
 			std::string mTitle;
 			int mX, mY, mWidth, mHeight;
 			WindowPosition mPosition;
