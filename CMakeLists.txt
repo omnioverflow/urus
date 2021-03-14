@@ -202,6 +202,7 @@ configure_file (src/glsl/coord_sys.frag ${CMAKE_CURRENT_BINARY_DIR}/coord_sys.fr
 file (COPY assets/container.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
 file (COPY assets/grass.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
 file (COPY assets/red_sand.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
+file (COPY assets/smoking_monkey.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets)
 
 target_include_directories (${PROJECT_NAME}
     PRIVATE
