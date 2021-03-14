@@ -1,3 +1,7 @@
+/*
+    TODO:
+        * re-activate (uncomment) set/unset methods
+*/
 #pragma once
 
 #include <string>
@@ -25,8 +29,10 @@ namespace urus
             void use() const;
             void unbind() const;
 
+            /*
             void set(GLint uniform, GLint texture);
             void unset(GLint texture);
+            */
 
             inline GLuint getHandle() const noexcept { return mHandle; }
 

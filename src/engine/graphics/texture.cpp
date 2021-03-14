@@ -89,6 +89,7 @@ namespace urus
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
+    /*
     void Texture::set(GLint uniform, GLint texture)
     {
         glActiveTexture(GL_TEXTURE0 + texture);
@@ -102,4 +103,5 @@ namespace urus
         glBindTexture(GL_TEXTURE_2D, 0);
         glActiveTexture(GL_TEXTURE0);
     }
+    */
 } // namespace urus
