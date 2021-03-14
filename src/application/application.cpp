@@ -22,6 +22,12 @@ GLuint Application::VBO;
 GLuint Application::texture;
 std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
+Application::Application()
+: mTexLoader(nullptr)
+, mWindow(nullptr)
+{
+}
+
 Application::~Application()
 {
 	try 
@@ -142,7 +148,7 @@ bool Application::setup(int argc, char* argv[])
 	
 	// setup textures
 	{
-        TextureLoader texLoader("assets/container.jpg");
+        mTexLoader = std::make_shared<TextureLoader>("assets/container.jpg");
         
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
@@ -152,10 +158,10 @@ bool Application::setup(int argc, char* argv[])
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		if (texLoader.isTexLoaded())
+		if (mTexLoader->isTexLoaded())
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texLoader.texWidth(), texLoader.texHeight(),
-				0, GL_RGB, GL_UNSIGNED_BYTE, texLoader.texData());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, mTexLoader->texWidth(), mTexLoader->texHeight(),
+				0, GL_RGB, GL_UNSIGNED_BYTE, mTexLoader->texData());
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 	}

@@ -13,6 +13,7 @@ namespace urus
 #ifndef NDEBUG
 	class Console;
 #endif
+	class TextureLoader;
 	class Window;
 
 	class Application : public Singleton<Application>
@@ -29,7 +30,7 @@ namespace urus
 			void updateWindowPositionAndBounds() const;
 
 		protected:
-			Application() = default;
+			Application();
 			friend class Singleton<Application>;
 
 			// Walkaround for OpenGL (c api) to accept callbacks to c++:
@@ -51,6 +52,8 @@ namespace urus
 			static GLuint VAO;
 			static GLuint texture;
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
+
+			std::shared_ptr<TextureLoader> mTexLoader;
 			std::shared_ptr<Window> mWindow; // main window
 
 #ifndef NDEBUG
