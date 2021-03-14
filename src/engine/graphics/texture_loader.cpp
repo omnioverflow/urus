@@ -14,7 +14,7 @@ namespace urus
     , mTexChannels(0)
     , mData(nullptr)
     {
-        static const int num_components_per_pixel = 4;
+        static const int num_components_per_pixel = 0;
         try
         {
             mData = stbi_load(
