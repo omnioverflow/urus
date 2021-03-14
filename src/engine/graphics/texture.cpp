@@ -8,8 +8,10 @@
 
 namespace urus
 {
-    Texture::Texture(const char* path) noexcept
+    Texture::Texture(const char* path, GLint texFormat, GLint srcImgFormat) noexcept
     : mHandle(0)
+    , mTexFormat(texFormat)
+    , mSrcImgFormat(srcImgFormat)
     {
         glGenTextures(1, &mHandle);
 
@@ -23,8 +25,8 @@ namespace urus
         }
     }
 
-    Texture::Texture(const std::string& path) noexcept
-    : Texture(path.c_str())
+    Texture::Texture(const std::string& path, GLint texFormat, GLint srcImgFormat) noexcept
+    : Texture(path.c_str(), texFormat, srcImgFormat)
     {
     }
 
@@ -57,29 +59,15 @@ namespace urus
 
         glTexImage2D(
             GL_TEXTURE_2D,
-            0,
-            GL_RGB,
-            texLoader.texWidth(),
-            texLoader.texHeight(),
-            0, 
-            GL_RGB, 
-            GL_UNSIGNED_BYTE, 
-            texLoader.texData()
-        );
-        /*
-        glBindTexture(GL_TEXTURE_2D, mHandle);
-        glTexImage2D(
-            GL_TEXTURE_2D,
             0,                      // mipmap level
-            GL_RGBA,                // texture format
+            mTexFormat,             // texture format
             texLoader.texWidth(),
             texLoader.texHeight(),
             0,                      // border, must always be 0
-            GL_RGBA,                // source image format
+            mSrcImgFormat,          // source image format
             GL_UNSIGNED_BYTE,       // source image data type (i.e. array of those)
             texLoader.texData()     //source image data
-        );
-        */
+        );        
 
         glGenerateMipmap(GL_TEXTURE_2D);
 

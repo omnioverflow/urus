@@ -10,8 +10,12 @@ namespace urus
     {
         public:
 
-            explicit Texture(const char* path) noexcept;
-            explicit Texture(const std::string& path) noexcept;
+            explicit Texture(const char* path,
+                             GLint texFormat = GL_RGB,
+                             GLint srcImgFormat = GL_RGBA) noexcept;
+            explicit Texture(const std::string& path, 
+                             GLint texFormat = GL_RGB,
+                             GLint srcImgFormat = GL_RGBA) noexcept;
             ~Texture();
 
             Texture() = delete; // No source image path, no texture
@@ -32,6 +36,8 @@ namespace urus
             void load(const std::string& path);
             void release();
             
-            GLuint   mHandle;
+            GLuint mHandle;
+            GLint  mTexFormat;
+            GLint  mSrcImgFormat;
     }; // class Texture
 } // namespace urus
