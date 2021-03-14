@@ -1,3 +1,9 @@
+/*
+* TODO:
+*   RAII style implementation of wrappers around OpenGL objects turned out to be
+*   not that good idea (see https://www.khronos.org/opengl/wiki/Common_Mistakes#RAII_and_hidden_destructor_calls)
+*   RAII idion should be followed with extra care when applying to OpenGL resources.
+*/
 #pragma once
 
 #include <string>
