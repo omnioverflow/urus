@@ -26,16 +26,16 @@ add_executable (${PROJECT_NAME}
 
 target_sources (${PROJECT_NAME}
     PRIVATE
-    # application
-    src/application/viewer.h
-    src/application/viewer.cpp
-    src/application/application.h
-    src/application/application.cpp
     # engine/base
     src/engine/base/opengl_support.h
     src/engine/base/core.h
     src/engine/base/macros.h
     src/engine/base/singleton.h
+    # game
+    src/game/point_cloud_viewer.h
+    src/game/point_cloud_viewer.cpp
+    src/game/game.h
+    src/game/game.cpp
     # engine/graphics
     src/engine/graphics/vertex_attribute.h
     src/engine/graphics/vertex_attribute.cpp
@@ -97,12 +97,12 @@ target_sources (${PROJECT_NAME}
 
 # configure souorce groups
 
-source_group (application
+source_group (game
     FILES
-    src/application/viewer.h
-    src/application/viewer.cpp
-    src/application/application.h
-    src/application/application.cpp
+    src/game/point_cloud_viewer.h
+    src/game/point_cloud_viewer.cpp
+    src/game/game.h
+    src/game/game.cpp
     )
 
 source_group (engine/base

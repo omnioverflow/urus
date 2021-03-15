@@ -9,8 +9,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-#include "application/application.h"
-#include "application/viewer.h"
+#include "game/game.h"
+#include "game/point_cloud_viewer.h"
 #include "engine/graphics/display_config.h"
 #include "engine/graphics/shader.h"
 #include "engine/window/window.h"
