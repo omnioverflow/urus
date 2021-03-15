@@ -10,10 +10,7 @@
 
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
-#include "engine/window/window.h"
-#ifndef NDEBUG
-#include "engine/window/console.h"
-#endif
+#include "game/view/views.h"
 
 using namespace urus;
 

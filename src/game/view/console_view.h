@@ -1,7 +1,7 @@
 #pragma once 
 
 #ifndef NDEBUG
-#include "window.h"
+#include "game_view.h"
 
 namespace urus
 {

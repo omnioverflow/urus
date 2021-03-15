@@ -4,7 +4,7 @@
 #include <windows.h>
 #endif
 
-#include "console.h"
+#include "console_view.h"
 
 using namespace urus;
 

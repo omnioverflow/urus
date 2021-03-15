@@ -1,4 +1,4 @@
-#include "window.h"
+#include "game_view.h"
 
 #include <cassert>
 

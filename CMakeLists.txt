@@ -36,6 +36,12 @@ target_sources (${PROJECT_NAME}
     src/game/point_cloud_viewer.cpp
     src/game/game.h
     src/game/game.cpp
+    # game/view
+    src/game/view/console_view.h
+    src/game/view/console_view.cpp
+    src/game/view/game_view.h
+    src/game/view/game_view.cpp
+    src/game/view/views.h
     # engine/graphics
     src/engine/graphics/vertex_attribute.h
     src/engine/graphics/vertex_attribute.cpp
@@ -64,11 +70,6 @@ target_sources (${PROJECT_NAME}
     src/engine/input/input_processor.h
     src/engine/input/input_processor.cpp
     src/engine/input/trackball.h
-    # engine/window
-    src/engine/window/console.h
-    src/engine/window/console.cpp
-    src/engine/window/window.h
-    src/engine/window/window.cpp
     # engine/glsl
     src/glsl/shader0.vert
     src/glsl/shader0.frag
@@ -95,7 +96,7 @@ target_sources (${PROJECT_NAME}
     lib/impl/stb_image/stb_image.cpp
     )
 
-# configure souorce groups
+# configure source groups
 
 source_group (game
     FILES
@@ -103,6 +104,15 @@ source_group (game
     src/game/point_cloud_viewer.cpp
     src/game/game.h
     src/game/game.cpp
+    )
+
+source_group (game\\view
+    FILES
+      src/game/view/console_view.h
+      src/game/view/console_view.cpp
+      src/game/view/game_view.h
+      src/game/view/game_view.cpp
+      src/game/view/views.h
     )
 
 source_group (engine/base
@@ -148,14 +158,6 @@ source_group (engine/input
     src/engine/input/input_processor.h
     src/engine/input/input_processor.cpp
     src/engine/input/trackball.h
-    )
-
-source_group (engine/window
-    FILES
-    src/engine/window/console.h
-    src/engine/window/console.cpp
-    src/engine/window/window.h
-    src/engine/window/window.cpp
     )
 
 source_group (glsl

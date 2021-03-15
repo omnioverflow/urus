@@ -9,16 +9,9 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-#include "game/game.h"
-#include "game/point_cloud_viewer.h"
 #include "engine/graphics/display_config.h"
-#include "engine/graphics/shader.h"
-#include "engine/window/window.h"
-
-#ifndef NDEBUG
-#include "engine/window/console.h"
-#endif
-
+#include "game/game.h"
+#include "game/view/views.h"
 
 int main(int argc, char* argv[])
 {
