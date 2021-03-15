@@ -5,10 +5,10 @@
 
 namespace urus
 {
-	class Console final : public Window
+	class ConsoleView final : public GameView
 	{
 		public:
-			void updateWindowPositionAndBounds() const override;
-	}; // class Console
+			void updateViewPositionAndBounds() const override;
+	}; // class ConsoleView
 } // namespace urus
 #endif

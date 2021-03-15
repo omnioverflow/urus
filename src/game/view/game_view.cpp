@@ -7,32 +7,32 @@
 
 using namespace urus;
 
-Window::Window()
-: Window(std::string(""))
+GameView::GameView()
+: GameView(std::string(""))
 {
 }
 
-Window::Window(const std::string& title)
+GameView::GameView(const std::string& title)
 : mTitle(title)
 , mX(0)
 , mY(0)
 , mWidth(DisplayConfig::getScreenWidth())
 , mHeight(DisplayConfig::getScreenHeight())
-, mPosition(WindowPosition::FULLSCREEN)
+, mStyle(GameViewStyle::FULLSCREEN)
 {
 }
 
-void Window::makeFullscreen() 
+void GameView::makeFullscreen() 
 {
 	std::lock_guard<std::mutex> lock(mObjectStateMutex);
 
 	mX = 0, mY = 0;
 	mWidth = DisplayConfig::getScreenWidth();
 	mHeight = DisplayConfig::getScreenHeight();
-	mPosition = WindowPosition::FULLSCREEN;
+	mStyle = GameViewStyle::FULLSCREEN;
 }
 
-void Window::snapWindowPosition(WindowPosition position)
+void GameView::snapView(GameViewStyle style)
 {
 	const auto screenWidth = DisplayConfig::getScreenWidth();
 	const auto screenHeight = DisplayConfig::getScreenHeight();
@@ -42,27 +42,27 @@ void Window::snapWindowPosition(WindowPosition position)
 	{
 		std::lock_guard<std::mutex> lock(mObjectStateMutex);
 
-		switch (position)
+		switch (style)
 		{
-			case WindowPosition::BOTTOM_LEFT:
+			case GameViewStyle::BOTTOM_LEFT:
 				mX = 0;
 				mY = 1 + heightToApply;
 				mWidth = screenWidth / 2;
 				mHeight = screenHeight - mY;           
 				break;
-			case WindowPosition::BOTTOM_RIGHT:
+			case GameViewStyle::BOTTOM_RIGHT:
 				mX = 1 + widthToApply;
 				mY  = 1 + heightToApply;
 				mWidth = screenWidth - mX;
 				mHeight = screenHeight - mY;
 				break;
-			case WindowPosition::TOP_LEFT:
+			case GameViewStyle::TOP_LEFT:
 				mX = 0;
 				mY = 0;
 				mWidth = widthToApply;
 				mHeight = heightToApply;
 				break;
-			case WindowPosition::TOP_RIGHT:
+			case GameViewStyle::TOP_RIGHT:
 				mX = 1 + widthToApply;
 				mY = 0;
 				mWidth = screenWidth - mX;
@@ -73,11 +73,11 @@ void Window::snapWindowPosition(WindowPosition position)
 				break;
 		}
 
-		mPosition = position;
+		mStyle = style;
 	}
 }
 
-void Window::setWindowBounds(int width, int height)
+void GameView::setViewBounds(int width, int height)
 {
 	if (width < 0 || height < 0)
 		assert(false);
@@ -87,11 +87,11 @@ void Window::setWindowBounds(int width, int height)
 
 		mWidth = width;
 		mHeight = height;
-		mPosition = WindowPosition::ANY;
+		mStyle = GameViewStyle::ANY;
 	}
 }
 
-void Window::updateWindowPositionAndBounds() const
+void GameView::updateViewPositionAndBounds() const
 {
 	std::lock_guard<std::mutex> lock(mObjectStateMutex);
 

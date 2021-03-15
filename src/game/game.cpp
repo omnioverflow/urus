@@ -20,7 +20,7 @@ Texture* Application::sTexture;
 std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
 
 Application::Application()
-: mWindow(nullptr)
+: mGameView(nullptr)
 {
 }
 
@@ -39,7 +39,7 @@ Application::~Application()
 
 bool Application::setup(int argc, char* argv[])
 {
-	if (!mWindow)
+	if (!mGameView)
 	{
 		std::cerr << "[error] No window has been set" << std::endl;
 		assert(false);
@@ -70,7 +70,7 @@ bool Application::setup(int argc, char* argv[])
 #endif
     
 	glutInitDisplayMode(displayMode);
-	glutCreateWindow(mWindow->title().c_str());
+	glutCreateWindow(mGameView->title().c_str());
 
 	glutIdleFunc(idle);
 	glutDisplayFunc(render);
@@ -178,14 +178,14 @@ void Application::run()
 	glutMainLoop();
 }
 
-void Application::updateWindowPositionAndBounds() const
+void Application::updateViewPositionAndBounds() const
 {
-	if (mWindow)
-		mWindow->updateWindowPositionAndBounds();
+	if (mGameView)
+		mGameView->updateViewPositionAndBounds();
 
 #ifndef NDEBUG
-	if (mConsole)
-		mConsole->updateWindowPositionAndBounds();
+	if (mConsoleView)
+		mConsoleView->updateViewPositionAndBounds();
 #endif
 }
 
@@ -217,10 +217,11 @@ void Application::animate()
 
 void Application::reshape(int width, int height)
 {
+	// FIXME: remove early exit
 	return;
-	auto window = sharedInstance().window();
-	if (window)
-		window->setWindowBounds(width, height);
+	auto gameView = sharedInstance().gameView();
+	if (gameView)
+		gameView->setViewBounds(width, height);
 
 	// Update transformation from NDC (Normalised Device Coordinates)
 	// to WC (Window Coordinates)

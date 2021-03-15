@@ -5,7 +5,7 @@
 
 namespace urus
 {
-	enum class WindowPosition : int 
+	enum class GameViewStyle : int 
 	{
 		BOTTOM_LEFT = 0,
 		BOTTOM_RIGHT,
@@ -13,34 +13,39 @@ namespace urus
 		TOP_RIGHT,
 		FULLSCREEN,
 		ANY
-	}; // enum WindowPosition
+	}; // enum GameViewStyle
 
-	class Window
+	class GameView
 	{
 		public:
-			Window();
-			explicit Window(const std::string& title);
+			GameView();
+			explicit GameView(const std::string& title);
 
-			virtual ~Window() {}
+			virtual ~GameView() {}
+
 			/**
 			 * Set window to fullscreen
 			 */
 			void makeFullscreen();
+
 			/**
 			 * Corner snap positioning 
 			 * (similar to window snap on Windows OS, e.g. Win + arrow)
 			 */
-			void snapWindowPosition(WindowPosition position);
+			void snapView(GameViewStyle style);
+
 			/**
 			 * Set custom window width and height            
 			 */
-			void setWindowBounds(int width, int height);
+			void setViewBounds(int width, int height);
+
 			/**
-			 * Update window position and bounds
+			 * Update view's position and bounds
 			 */
-			virtual void updateWindowPositionAndBounds() const;
+			virtual void updateViewPositionAndBounds() const;
+
 			/**
-			 * Retrieve window's title
+			 * Retrieve view's title
 			 */
 			inline std::string title() const { return mTitle;  }
 
@@ -48,7 +53,7 @@ namespace urus
 
 			std::string mTitle;
 			int mX, mY, mWidth, mHeight;
-			WindowPosition mPosition;
+			GameViewStyle mStyle;
 			mutable std::mutex mObjectStateMutex;
-	}; // class Window
+	}; // class GameView
 } // namespace urus

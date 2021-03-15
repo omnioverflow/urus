@@ -19,17 +19,17 @@ int main(int argc, char* argv[])
 	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
 
 	auto& app = urus::Application::sharedInstance();
-	auto window = std::make_shared<urus::Window>(std::string("Core OpenGL 4.3 Example"));
-	window->snapWindowPosition(urus::WindowPosition::TOP_RIGHT);
-	app.setWindow(window);
+	auto gameView = std::make_shared<urus::GameView>(std::string("Core OpenGL 4.3 Example"));
+	gameView->snapView(urus::GameViewStyle::TOP_RIGHT);
+	app.setGameView(gameView);
 #ifndef NDEBUG
-	auto console = std::make_shared<urus::Console>();
-	console->snapWindowPosition(urus::WindowPosition::BOTTOM_RIGHT);
-	app.setConsole(console);
+	auto consoleView = std::make_shared<urus::ConsoleView>();
+	consoleView->snapView(urus::GameViewStyle::BOTTOM_RIGHT);
+	app.setConsoleView(consoleView);
 #endif
 
 	app.setup(argc, argv);
-	app.updateWindowPositionAndBounds();
+	app.updateViewPositionAndBounds();
 
 	// Enter game infinite loop
 	app.run();

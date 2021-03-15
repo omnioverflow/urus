@@ -11,10 +11,10 @@ namespace urus
 	class ShaderProgram;
 
 #ifndef NDEBUG
-	class Console;
+	class ConsoleView;
 #endif
 	class Texture;
-	class Window;
+	class GameView;
 
 	class Application : public Singleton<Application>
 	{
@@ -25,9 +25,9 @@ namespace urus
 			virtual void shutdown();
 			virtual void run(); // FIXME: needs to be public?
 
-			std::shared_ptr<Window> window() const { return mWindow;  }
-			void setWindow(std::shared_ptr<Window> window) { mWindow = window;  }
-			void updateWindowPositionAndBounds() const;
+			inline std::shared_ptr<GameView> gameView() const { return mGameView;  }
+			inline void setGameView(std::shared_ptr<GameView> gameView) { mGameView = gameView;  }
+			void updateViewPositionAndBounds() const;
 
 		protected:
 			Application();
@@ -53,13 +53,13 @@ namespace urus
 			static Texture* sTexture; // don't care if it is a raw pointer, since it is static anyway
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			
-			std::shared_ptr<Window> mWindow; // main window
+			std::shared_ptr<GameView> mGameView;
 
 #ifndef NDEBUG
 		public:
-			void setConsole(std::shared_ptr<Console> console) { mConsole = console;  }
+			inline void setConsoleView(std::shared_ptr<ConsoleView> consoleView) { mConsoleView = consoleView; }
 		protected:
-			std::shared_ptr<Console> mConsole;
+			std::shared_ptr<ConsoleView> mConsoleView;
 #endif
 	}; // class Application
 } // namespace urus

@@ -8,7 +8,7 @@
 
 using namespace urus;
 
-void Console::updateWindowPositionAndBounds() const
+void ConsoleView::updateViewPositionAndBounds() const
 {
 #ifdef _WIN64
     HWND handleWnd = GetConsoleWindow();
