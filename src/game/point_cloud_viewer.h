@@ -4,7 +4,7 @@
 
 namespace urus
 {
-	class PointCloudViewer : public Application
+	class PointCloudViewer : public Game
 	{
 
 	}; // class PointCloudViewer

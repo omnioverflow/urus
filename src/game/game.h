@@ -16,10 +16,10 @@ namespace urus
 	class Texture;
 	class GameView;
 
-	class Application : public Singleton<Application>
+	class Game : public Singleton<Game>
 	{
 		public:           
-			virtual ~Application();            
+			virtual ~Game();            
 
 			virtual bool setup(int argc, char* argv[]);
 			virtual void shutdown();
@@ -30,8 +30,8 @@ namespace urus
 			void updateViewPositionAndBounds() const;
 
 		protected:
-			Application();
-			friend class Singleton<Application>;
+			Game();
+			friend class Singleton<Game>;
 
 			// Walkaround for OpenGL (c api) to accept callbacks to c++:
 			// must use static methods, otherwise this pointer will screw up
@@ -61,5 +61,5 @@ namespace urus
 		protected:
 			std::shared_ptr<ConsoleView> mConsoleView;
 #endif
-	}; // class Application
+	}; // class Game
 } // namespace urus

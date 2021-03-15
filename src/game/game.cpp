@@ -14,17 +14,17 @@
 
 using namespace urus;
 
-GLuint Application::VAO;
-GLuint Application::VBO;
-Texture* Application::sTexture;
-std::unique_ptr<ShaderProgram> Application::shaders[NB_SHADERS];
+GLuint Game::VAO;
+GLuint Game::VBO;
+Texture* Game::sTexture;
+std::unique_ptr<ShaderProgram> Game::shaders[NB_SHADERS];
 
-Application::Application()
+Game::Game()
 : mGameView(nullptr)
 {
 }
 
-Application::~Application()
+Game::~Game()
 {
 	try 
 	{
@@ -37,7 +37,7 @@ Application::~Application()
 	}  
 }
 
-bool Application::setup(int argc, char* argv[])
+bool Game::setup(int argc, char* argv[])
 {
 	if (!mGameView)
 	{
@@ -148,7 +148,7 @@ bool Application::setup(int argc, char* argv[])
 	return true;
 }
 
-void Application::render()
+void Game::render()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -167,18 +167,18 @@ void Application::render()
 	glutSwapBuffers();
 }
 
-void Application::shutdown()
+void Game::shutdown()
 {
 	// TODO: release all resources
 }
 
 
-void Application::run()
+void Game::run()
 {
 	glutMainLoop();
 }
 
-void Application::updateViewPositionAndBounds() const
+void Game::updateViewPositionAndBounds() const
 {
 	if (mGameView)
 		mGameView->updateViewPositionAndBounds();
@@ -189,33 +189,33 @@ void Application::updateViewPositionAndBounds() const
 #endif
 }
 
-void Application::idle()
+void Game::idle()
 {
 	// Mark the window for redisplay the next iteration through glutMainLoop 
 	glutPostRedisplay();
 }
 
-void Application::keyboardCallback(unsigned char key, int x, int y)
+void Game::keyboardCallback(unsigned char key, int x, int y)
 {
 	// FIXME: implement
 }
 
-void Application::mouseCallback(int button, int state, int x, int y)
+void Game::mouseCallback(int button, int state, int x, int y)
 {
 	// FIXME: implement
 }
 
-void Application::mouseWheelCallback(int wheel, int direction, int x, int y)
+void Game::mouseWheelCallback(int wheel, int direction, int x, int y)
 {
 	// FIXME: implement
 }
 
-void Application::animate()
+void Game::animate()
 {
 	// FIXME: implement
 }
 
-void Application::reshape(int width, int height)
+void Game::reshape(int width, int height)
 {
 	// FIXME: remove early exit
 	return;
@@ -228,7 +228,7 @@ void Application::reshape(int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void Application::visible(int isVisible)
+void Game::visible(int isVisible)
 {
 	// Disable the call to idle func, when the window is not visible
 	if (isVisible == GLUT_VISIBLE)
