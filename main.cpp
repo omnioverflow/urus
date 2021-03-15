@@ -16,9 +16,6 @@
 
 int main(int argc, char* argv[])
 {
-	std::cout << urus::DisplayConfig::getScreenWidth() << ", ";
-	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
-
 	auto& game = urus::Game::sharedInstance();
 
 	game.setGameView(
@@ -33,6 +30,7 @@ int main(int argc, char* argv[])
 
 	game.setup(argc, argv);
 	game.updateViewPositionAndBounds();
+	game.logScreenInfo();
 
 	// Enter game infinite loop
 	game.run();

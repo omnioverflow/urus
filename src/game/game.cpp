@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "engine/graphics/display_config.h"
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
 #include "game/view/views.h"
@@ -187,6 +188,15 @@ void Game::updateViewPositionAndBounds() const
 	if (mConsoleView)
 		mConsoleView->updateViewPositionAndBounds();
 #endif // NDEBUG
+}
+
+void Game::logScreenInfo() const
+{
+	const auto units = "px";
+	std::cout << "Screen width:  " << urus::DisplayConfig::getScreenWidth();
+	std::cout << " "<< units << ",\n";
+	std::cout << "Screen height: " << urus::DisplayConfig::getScreenHeight();
+	std::cout << " " << units << std::endl;
 }
 
 void Game::idle()

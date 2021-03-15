@@ -28,6 +28,7 @@ namespace urus
 			inline std::shared_ptr<GameView> gameView() const { return mGameView;  }
 			inline void setGameView(std::shared_ptr<GameView> gameView) { mGameView = gameView;  }
 			void updateViewPositionAndBounds() const;
+			void logScreenInfo() const;
 
 		protected:
 			Game();
