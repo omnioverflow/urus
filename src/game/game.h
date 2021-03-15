@@ -10,9 +10,9 @@ namespace urus
 {
 	class ShaderProgram;
 
-#ifndef NDEBUG
+#if !defined(NDEBUG)
 	class ConsoleView;
-#endif
+#endif // NDEBUG
 	class Texture;
 	class GameView;
 
@@ -55,11 +55,11 @@ namespace urus
 			
 			std::shared_ptr<GameView> mGameView;
 
-#ifndef NDEBUG
+#if !defined(NDEBUG)
 		public:
 			inline void setConsoleView(std::shared_ptr<ConsoleView> consoleView) { mConsoleView = consoleView; }
 		protected:
 			std::shared_ptr<ConsoleView> mConsoleView;
-#endif
+#endif // NDEBUG
 	}; // class Game
 } // namespace urus

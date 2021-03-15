@@ -25,11 +25,11 @@ int main(int argc, char* argv[])
 	gameView->snapView(urus::ViewStyle::TOP_RIGHT);
 	game.setGameView(gameView);
 	
-#ifndef NDEBUG
+#if !defined(NDEBUG)
 	auto consoleView = std::make_shared<urus::ConsoleView>();
 	consoleView->snapView(urus::ViewStyle::BOTTOM_RIGHT);
 	game.setConsoleView(consoleView);
-#endif
+#endif // NDEBUG
 
 	game.setup(argc, argv);
 	game.updateViewPositionAndBounds();

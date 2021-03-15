@@ -51,9 +51,9 @@ bool Game::setup(int argc, char* argv[])
     glutInitContextVersion(4, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	int contextFlags = GLUT_FORWARD_COMPATIBLE;
-#ifdef NDEBUG
+#if !defined(NDEBUG)
 //	contextFlags |= GLUT_DEBUG;
-#endif
+#endif // NDEBUG
 
 	glutInitContextFlags(contextFlags);
     
@@ -183,10 +183,10 @@ void Game::updateViewPositionAndBounds() const
 	if (mGameView)
 		mGameView->updateViewPositionAndBounds();
 
-#ifndef NDEBUG
+#if !defined(NDEBUG)
 	if (mConsoleView)
 		mConsoleView->updateViewPositionAndBounds();
-#endif
+#endif // NDEBUG
 }
 
 void Game::idle()
