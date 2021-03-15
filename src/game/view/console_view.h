@@ -5,9 +5,11 @@
 
 namespace urus
 {
-	class ConsoleView final : public GameView
+	class ConsoleView final : public AnyView
 	{
 		public:
+
+			ConsoleView() : AnyView("ConsoleView") {}
 			void updateViewPositionAndBounds() const override;
 	}; // class ConsoleView
 } // namespace urus

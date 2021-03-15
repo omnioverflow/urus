@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -19,12 +20,14 @@ int main(int argc, char* argv[])
 	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
 
 	auto& game = urus::Game::sharedInstance();
-	auto gameView = std::make_shared<urus::GameView>(std::string("Core OpenGL 4.3 Example"));
-	gameView->snapView(urus::GameViewStyle::TOP_RIGHT);
+	
+	auto gameView = std::make_shared<urus::GameView>("Core OpenGL 4.3 Example");
+	gameView->snapView(urus::ViewStyle::TOP_RIGHT);
 	game.setGameView(gameView);
+	
 #ifndef NDEBUG
 	auto consoleView = std::make_shared<urus::ConsoleView>();
-	consoleView->snapView(urus::GameViewStyle::BOTTOM_RIGHT);
+	consoleView->snapView(urus::ViewStyle::BOTTOM_RIGHT);
 	game.setConsoleView(consoleView);
 #endif
 
