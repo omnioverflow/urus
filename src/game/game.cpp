@@ -150,9 +150,6 @@ bool Application::setup(int argc, char* argv[])
 
 void Application::render()
 {
-	// FIXME: remove render count (debug info)
-	static GLuint renderCount = 0;
-	std::cout << "Render count: " << renderCount++ << "\n";
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
