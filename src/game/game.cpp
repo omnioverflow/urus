@@ -52,7 +52,7 @@ bool Game::setup(int argc, char* argv[])
 	glutInitContextProfile(GLUT_CORE_PROFILE);
 	int contextFlags = GLUT_FORWARD_COMPATIBLE;
 #if !defined(NDEBUG)
-//	contextFlags |= GLUT_DEBUG;
+	contextFlags |= GLUT_DEBUG;
 #endif // NDEBUG
 
 	glutInitContextFlags(contextFlags);
