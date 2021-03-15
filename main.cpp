@@ -1,16 +1,5 @@
-#include <array>
-#include <cassert>
-#include <cmath>
-#include <iostream>
-#include <map>
 #include <memory>
-#include <string>
-#include <vector>
 
-#include <GL/glew.h>
-#include <GL/freeglut.h>
-
-#include "engine/graphics/display_config.h"
 #include "game/game.h"
 #include "game/view/views.h"
 
