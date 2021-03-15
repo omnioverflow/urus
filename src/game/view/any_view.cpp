@@ -15,6 +15,12 @@ namespace urus
     , mHeight(DisplayConfig::getScreenHeight())
     , mStyle(ViewStyle::FULLSCREEN) {}
 
+    AnyView::AnyView(const std::string& title, ViewStyle style)
+    : AnyView(title)
+    {
+        snapView(style);
+    }
+
     void AnyView::setFullscreen() 
     {
         std::lock_guard<std::mutex> lock(mObjectStateMutex);

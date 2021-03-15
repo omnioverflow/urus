@@ -20,15 +20,15 @@ int main(int argc, char* argv[])
 	std::cout << urus::DisplayConfig::getScreenHeight() << std::endl;
 
 	auto& game = urus::Game::sharedInstance();
-	
-	auto gameView = std::make_shared<urus::GameView>("Core OpenGL 4.3 Example");
-	gameView->snapView(urus::ViewStyle::TOP_RIGHT);
-	game.setGameView(gameView);
+
+	game.setGameView(
+		std::make_shared<urus::GameView>("Urus", urus::ViewStyle::TOP_RIGHT)
+	);
 	
 #if !defined(NDEBUG)
-	auto consoleView = std::make_shared<urus::ConsoleView>();
-	consoleView->snapView(urus::ViewStyle::BOTTOM_RIGHT);
-	game.setConsoleView(consoleView);
+	game.setConsoleView(
+		std::make_shared<urus::ConsoleView>(urus::ViewStyle::BOTTOM_RIGHT)
+	);
 #endif // NDEBUG
 
 	game.setup(argc, argv);
