@@ -11,6 +11,7 @@
 #include "engine/graphics/display_config.h"
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
+#include "game/glut_dispatch.h"
 #include "game/view/views.h"
 
 using namespace urus;
@@ -75,7 +76,8 @@ bool Game::setup(int argc, char* argv[])
 
 	glutIdleFunc(idle);
 	glutDisplayFunc(render);
-	glutVisibilityFunc(visible);
+	glutVisibilityFunc(dispatchVisible);
+	glutIdleFunc(dispatchAnimate);
 	/*
 	   glutReshapeFunc(reshape);
 	   glutKeyboardFunc(keyboardCallback);

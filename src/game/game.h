@@ -30,6 +30,10 @@ namespace urus
 			void updateViewPositionAndBounds() const;
 			void logScreenInfo() const;
 
+			// FIXME: shouldn't the glut callbacks be ideally private?
+			void animate();
+			void visible(int isVisible);
+
 		protected:
 			Game();
 			friend class Singleton<Game>;
@@ -41,11 +45,9 @@ namespace urus
 			static void render();
 			static void keyboardCallback(unsigned char key, int x, int y);
 			static void mouseCallback(int button, int state, int x, int y);
-			static void mouseWheelCallback(int wheel, int direction, int x, int y);
-			static void animate();
+			static void mouseWheelCallback(int wheel, int direction, int x, int y);			
 			static void reshape(int width, int height);
-			static void visible(int isVisible);
-
+			
 		protected:
 
 			static constexpr GLuint NB_SHADERS = 2;
