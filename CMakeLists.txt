@@ -37,6 +37,8 @@ target_sources (${PROJECT_NAME}
     src/game/game.h
     src/game/game.cpp
     # game/view
+    src/game/view/any_view.h
+    src/game/view/any_view.cpp
     src/game/view/console_view.h
     src/game/view/console_view.cpp
     src/game/view/game_view.h
@@ -108,11 +110,13 @@ source_group (game
 
 source_group (game\\view
     FILES
-      src/game/view/console_view.h
-      src/game/view/console_view.cpp
-      src/game/view/game_view.h
-      src/game/view/game_view.cpp
-      src/game/view/views.h
+    src/game/view/any_view.h
+    src/game/view/any_view.cpp
+    src/game/view/console_view.h
+    src/game/view/console_view.cpp
+    src/game/view/game_view.h
+    src/game/view/game_view.cpp
+    src/game/view/views.h
     )
 
 source_group (engine/base
