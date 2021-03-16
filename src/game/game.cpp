@@ -12,6 +12,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
 #include "game/glut_dispatch.h"
+#include "game/model/game_world.h"
 #include "game/view/views.h"
 
 using namespace urus;
@@ -37,6 +38,17 @@ Game::~Game()
 		// swallow 
 		std::cerr << "shutdown failed " << ex.what() << std::endl;
 	}  
+}
+
+
+GameWorld& Game::gameWorld() const
+{
+	return *mGameWorld;
+}
+
+void Game::setGameWorld(std::unique_ptr<GameWorld> gameWorld)
+{
+	mGameWorld = std::move(gameWorld);
 }
 
 bool Game::setup(int argc, char* argv[])

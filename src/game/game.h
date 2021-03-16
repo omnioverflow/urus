@@ -13,8 +13,9 @@ namespace urus
 #if !defined(NDEBUG)
 	class ConsoleView;
 #endif // NDEBUG
-	class Texture;
 	class GameView;
+	class GameWorld;
+	class Texture;
 
 	class Game : public Singleton<Game>
 	{
@@ -25,8 +26,11 @@ namespace urus
 			virtual void shutdown();
 			virtual int run(); // FIXME: needs to be public?
 
-			inline std::shared_ptr<GameView> gameView() const { return mGameView;  }
-			inline void setGameView(std::shared_ptr<GameView> gameView) { mGameView = gameView;  }
+			inline std::shared_ptr<GameView> gameView() const;
+			inline void setGameView(std::shared_ptr<GameView> gameView);
+			GameWorld& gameWorld() const;
+			void setGameWorld(std::unique_ptr<GameWorld> gameWorld);
+
 			void updateViewPositionAndBounds() const;
 			void logScreenInfo() const;
 
@@ -57,12 +61,30 @@ namespace urus
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			
 			std::shared_ptr<GameView> mGameView;
+			std::unique_ptr<GameWorld> mGameWorld;
 
 #if !defined(NDEBUG)
 		public:
-			inline void setConsoleView(std::shared_ptr<ConsoleView> consoleView) { mConsoleView = consoleView; }
+			inline void setConsoleView(std::shared_ptr<ConsoleView> consoleView);
 		protected:
 			std::shared_ptr<ConsoleView> mConsoleView;
 #endif // NDEBUG
 	}; // class Game
+
+	std::shared_ptr<GameView> Game::gameView() const 
+	{ 
+		return mGameView;
+	}
+
+	void Game::setGameView(std::shared_ptr<GameView> gameView) 
+	{ 
+		mGameView = gameView; 
+	}
+
+#if !defined(NDEBUG)
+	void Game::setConsoleView(std::shared_ptr<ConsoleView> consoleView) 
+	{ 
+		mConsoleView = consoleView; 
+	}
+#endif
 } // namespace urus
