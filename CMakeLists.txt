@@ -70,8 +70,8 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
     # engine/input
-    src/engine/input/input_processor.h
-    src/engine/input/input_processor.cpp
+    src/engine/input/input_dispatcher.h
+    src/engine/input/input_dispatcher.cpp
     src/engine/input/trackball.h
     # engine/glsl
     src/glsl/shader0.vert
@@ -161,8 +161,8 @@ source_group (engine\\graphics\\viewtransform
 
 source_group (engine\\input
     FILES 
-    src/engine/input/input_processor.h
-    src/engine/input/input_processor.cpp
+    src/engine/input/input_dispatcher.h
+    src/engine/input/input_dispatcher.cpp
     src/engine/input/trackball.h
     )
 
