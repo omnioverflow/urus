@@ -22,9 +22,18 @@ namespace urus
 		public:    
 			virtual ~Game();            
 
-			bool setup(int argc, char* argv[]);
+			/**
+			* Creates a GLUT view.
+			* As part of the view creation the method does the following:
+			* - initialize GLUT
+			* - create OpenGL rendering context (RC)
+			* - create GLUT window
+			* - bind GLUT callback to specific methods of the Game class
+			*/
+			void createView(int argc, char* argv[]);
+			void loadResources();
 			void shutdown();
-			int run(); 
+			int	 run(); 
 
 			GameView& gameView() const;
 			void setGameView(std::unique_ptr<GameView> gameView);
@@ -32,7 +41,6 @@ namespace urus
 			void setGameWorld(std::unique_ptr<GameWorld> gameWorld);
 
 			void updateViewPositionAndBounds() const;
-			void logScreenInfo() const;
 
 			// FIXME: shouldn't the glut callbacks be ideally private?
 			void animate();

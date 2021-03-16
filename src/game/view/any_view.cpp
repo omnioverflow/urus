@@ -11,8 +11,8 @@ namespace urus
     : mTitle(title)
     , mX(0)
     , mY(0)
-    , mWidth(DisplayConfig::getScreenWidth())
-    , mHeight(DisplayConfig::getScreenHeight())
+    , mWidth(DisplayConfig::getScreenWidthPx())
+    , mHeight(DisplayConfig::getScreenHeightPx())
     , mStyle(ViewStyle::FULLSCREEN) {}
 
     AnyView::AnyView(const std::string& title, ViewStyle style)
@@ -26,15 +26,15 @@ namespace urus
         std::lock_guard<std::mutex> lock(mObjectStateMutex);
 
         mX = 0, mY = 0;
-        mWidth = DisplayConfig::getScreenWidth();
-        mHeight = DisplayConfig::getScreenHeight();
+        mWidth = DisplayConfig::getScreenWidthPx();
+        mHeight = DisplayConfig::getScreenWidthPx();
         mStyle = ViewStyle::FULLSCREEN;
     }
 
     void AnyView::snapView(ViewStyle style)
     {
-        const auto screenWidth = DisplayConfig::getScreenWidth();
-        const auto screenHeight = DisplayConfig::getScreenHeight();
+        const auto screenWidth = DisplayConfig::getScreenWidthPx();
+        const auto screenHeight = DisplayConfig::getScreenHeightPx();
         auto widthToApply = screenWidth / 2;
         auto heightToApply = screenHeight / 2;
 

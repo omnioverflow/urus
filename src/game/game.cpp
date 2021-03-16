@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-#include "engine/graphics/display_config.h"
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
 #include "game/glut_dispatch.h"
@@ -22,8 +21,7 @@ GLuint Game::VBO;
 Texture* Game::sTexture;
 std::unique_ptr<ShaderProgram> Game::shaders[NB_SHADERS];
 
-Game::Game()
-: mGameView(nullptr)
+Game::Game() : mGameView(nullptr) 
 {}
 
 Game::~Game()
@@ -39,40 +37,15 @@ Game::~Game()
 	}  
 }
 
-GameView& Game::gameView() const
-{
-	return *mGameView;
-}
-
-void Game::setGameView(std::unique_ptr<GameView> gameView)
-{
-	mGameView = std::move(gameView);
-}
-
-GameWorld& Game::gameWorld() const
-{
-	return *mGameWorld;
-}
-
-void Game::setGameWorld(std::unique_ptr<GameWorld> gameWorld)
-{
-	mGameWorld = std::move(gameWorld);
-}
-
-#if !defined(NDEBUG)
-void Game::setConsoleView(std::unique_ptr<ConsoleView> consoleView)
-{
-	mConsoleView = std::move(consoleView);
-}
-#endif
-
-bool Game::setup(int argc, char* argv[])
+void Game::createView(int argc, char* argv[])
 {
 	if (!mGameView)
 	{
-		std::cerr << "[error] No window has been set" << std::endl;
+		std::cerr << "[error] No view was set" << std::endl;
 		assert(false);
 	}
+	const auto* const viewTitle = mGameView->title().c_str();
+
 	glutInit(&argc, argv);
 #ifdef __APPLE__
     // FIXME: GLUT was deprecated on mac os :(
@@ -99,7 +72,7 @@ bool Game::setup(int argc, char* argv[])
 #endif
     
 	glutInitDisplayMode(displayMode);
-	glutCreateWindow(mGameView->title().c_str());
+	glutCreateWindow(viewTitle);
 
 	glutIdleFunc(idle);
 	glutDisplayFunc(render);
@@ -114,12 +87,9 @@ bool Game::setup(int argc, char* argv[])
 	 */
 
 #ifdef _WIN64
-	glewExperimental = true;
 	GLint GlewInitResult = glewInit();
 	if (GlewInitResult != GLEW_OK) 
-	{
 		std::cerr << "ERROR: %s\n" << glewGetErrorString(GlewInitResult);
-	}
 #endif
     
 	std::cout << "OpenGL initialized: OpenGL version: " << glGetString(GL_VERSION) 
@@ -130,7 +100,10 @@ bool Game::setup(int argc, char* argv[])
 	std::cout << "Max number of attribs supported on the current hardware: " << maxNbAttribs << "\n";
 
 	glEnable(GL_DEPTH_TEST); // what the heck?
+}
 
+void Game::loadResources()
+{
 	float vertices[] = {
 		// xyz rgb st (uv)
 		 0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f, // top right
@@ -155,7 +128,7 @@ bool Game::setup(int argc, char* argv[])
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	const GLsizei stride = 8 * sizeof(float);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)(0));
 	glEnableVertexAttribArray(0);
@@ -171,11 +144,9 @@ bool Game::setup(int argc, char* argv[])
 	// load shaders
 	shaders[0] = std::make_unique<ShaderProgram>("shader0.vert", "shader0.frag");
 	shaders[1] = std::make_unique<ShaderProgram>("shader1.vert", "shader1.frag");
-	
+
 	// setup textures
 	sTexture = new Texture("assets/container.jpg", GL_RGB, GL_RGB);
-
-	return true;
 }
 
 void Game::render()
@@ -218,15 +189,6 @@ void Game::updateViewPositionAndBounds() const
 	if (mConsoleView)
 		mConsoleView->updateViewPositionAndBounds();
 #endif // NDEBUG
-}
-
-void Game::logScreenInfo() const
-{
-	const auto units = "px";
-	std::cout << "Screen width:  " << urus::DisplayConfig::getScreenWidth();
-	std::cout << " "<< units << ",\n";
-	std::cout << "Screen height: " << urus::DisplayConfig::getScreenHeight();
-	std::cout << " " << units << std::endl;
 }
 
 void Game::idle()
@@ -275,3 +237,30 @@ void Game::visible(int isVisible)
 	else
 		glutIdleFunc(0);
 }
+
+GameView& Game::gameView() const
+{
+	return *mGameView;
+}
+
+void Game::setGameView(std::unique_ptr<GameView> gameView)
+{
+	mGameView = std::move(gameView);
+}
+
+GameWorld& Game::gameWorld() const
+{
+	return *mGameWorld;
+}
+
+void Game::setGameWorld(std::unique_ptr<GameWorld> gameWorld)
+{
+	mGameWorld = std::move(gameWorld);
+}
+
+#if !defined(NDEBUG)
+void Game::setConsoleView(std::unique_ptr<ConsoleView> consoleView)
+{
+	mConsoleView = std::move(consoleView);
+}
+#endif

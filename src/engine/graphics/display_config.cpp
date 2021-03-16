@@ -1,5 +1,7 @@
 #include "display_config.h"
 
+#include <iostream>
+
 #ifdef _WIN64
 #include <windows.h>
 #elif __APPLE__
@@ -13,7 +15,7 @@ static_assert(false);
 
 using namespace urus;
 
-int DisplayConfig::getScreenWidth()
+int DisplayConfig::getScreenWidthPx()
 {
 	//mWindowWidth = glutGet(GLUT_SCREEN_WIDTH);
 #ifdef _WIN64
@@ -23,7 +25,7 @@ int DisplayConfig::getScreenWidth()
 #endif
 }
 
-int DisplayConfig::getScreenHeight()
+int DisplayConfig::getScreenHeightPx()
 {
 	//mWindowHeight = glutGet(GLUT_SCREEN_HEIGHT);
 #ifdef _WIN64
@@ -31,4 +33,13 @@ int DisplayConfig::getScreenHeight()
 #else
 	return CGDisplayPixelsHigh(CGMainDisplayID());
 #endif
+}
+
+void DisplayConfig::logScreenInfo()
+{
+	const auto units = "px";
+	std::cout << "Screen width:  " << urus::DisplayConfig::getScreenWidthPx();
+	std::cout << " " << units << ",\n";
+	std::cout << "Screen height: " << urus::DisplayConfig::getScreenHeightPx();
+	std::cout << " " << units << std::endl;
 }

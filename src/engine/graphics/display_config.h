@@ -9,10 +9,9 @@ namespace urus
 	class DisplayConfig
 	{
 		public:
-			/**
-			 * Get main screen width in pixels.
-			 */
-			static int getScreenWidth();
-			static int getScreenHeight();
+			
+			static int getScreenWidthPx();
+			static int getScreenHeightPx();
+			static void logScreenInfo();
 	}; // class DisplayConfig
 } // namespace urus
