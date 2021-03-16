@@ -22,9 +22,9 @@ namespace urus
 		public:    
 			virtual ~Game();            
 
-			virtual bool setup(int argc, char* argv[]);
-			virtual void shutdown();
-			virtual int run(); // FIXME: needs to be public?
+			bool setup(int argc, char* argv[]);
+			void shutdown();
+			int run(); 
 
 			GameView& gameView() const;
 			void setGameView(std::unique_ptr<GameView> gameView);
