@@ -20,6 +20,8 @@ int main(int argc, char* argv[])
 	game.logScreenInfo();
 
 	// Enter game infinite loop
-	game.run();
+	int exitCode = game.run();
 	game.shutdown();
+
+	return exitCode;
 }

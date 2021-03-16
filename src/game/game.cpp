@@ -175,10 +175,11 @@ void Game::shutdown()
 	// TODO: release all resources
 }
 
-
-void Game::run()
+int Game::run()
 {
 	glutMainLoop();
+
+	return 0;
 }
 
 void Game::updateViewPositionAndBounds() const

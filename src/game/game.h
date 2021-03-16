@@ -23,7 +23,7 @@ namespace urus
 
 			virtual bool setup(int argc, char* argv[]);
 			virtual void shutdown();
-			virtual void run(); // FIXME: needs to be public?
+			virtual int run(); // FIXME: needs to be public?
 
 			inline std::shared_ptr<GameView> gameView() const { return mGameView;  }
 			inline void setGameView(std::shared_ptr<GameView> gameView) { mGameView = gameView;  }
