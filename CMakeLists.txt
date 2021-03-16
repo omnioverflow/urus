@@ -37,6 +37,9 @@ target_sources (${PROJECT_NAME}
     src/game/game.h
     src/game/game.cpp
     src/game/glut_dispatch.h
+    # game/model
+    src/game/model/game_world.h
+    src/game/model/game_world.cpp
     # game/view
     src/game/view/any_view.h
     src/game/view/any_view.cpp
@@ -108,6 +111,12 @@ source_group (game
     src/game/game.h
     src/game/game.cpp
     src/game/glut_dispatch.h
+    )
+
+source_group (game\\model
+    FILES
+    src/game/model/game_world.h
+    src/game/model/game_world.cpp
     )
 
 source_group (game\\view
