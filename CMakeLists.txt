@@ -57,10 +57,6 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/draw.cpp
     src/engine/graphics/indexbuffer.h
     src/engine/graphics/indexbuffer.cpp
-    src/engine/graphics/node.h
-    src/engine/graphics/node.cpp
-    src/engine/graphics/scene.h
-    src/engine/graphics/scene.cpp
     src/engine/graphics/shader.h
     src/engine/graphics/shader.cpp
     src/engine/graphics/texture.h
@@ -79,6 +75,11 @@ target_sources (${PROJECT_NAME}
     src/engine/input/input_dispatcher.h
     src/engine/input/input_dispatcher.cpp
     src/engine/input/trackball.h
+    # engine/scene
+    src/engine/scene/node.h
+    src/engine/scene/node.cpp
+    src/engine/scene/scene.h
+    src/engine/scene/scene.cpp
     # engine/glsl
     src/glsl/shader0.vert
     src/glsl/shader0.frag
@@ -182,6 +183,14 @@ source_group (engine\\input
     src/engine/input/input_dispatcher.h
     src/engine/input/input_dispatcher.cpp
     src/engine/input/trackball.h
+    )
+
+source_group (engine\\scene
+    FILES
+    src/engine/scene/node.h
+    scr/engine/scene/node.cpp
+    src/engine/scene/scene.h
+    scr/engine/scene/scene.cpp
     )
 
 source_group (glsl
