@@ -121,7 +121,7 @@ source_group (game\\view
     src/game/view/views.h
     )
 
-source_group (engine/base
+source_group (engine\\base
     FILES
     src/engine/base/opengl_support.h
     src/engine/base/core.h
@@ -129,7 +129,7 @@ source_group (engine/base
     src/engine/base/singleton.h
     )
 
-source_group (engine/graphics 
+source_group (engine\\graphics 
     FILES 
     src/engine/graphics/vertex_attribute.h
     src/engine/graphics/vertex_attribute.cpp
@@ -153,13 +153,13 @@ source_group (engine/graphics
     src/engine/graphics/uniform.cpp
     )
 
-source_group (engine/graphics/viewtransform
+source_group (engine\\graphics\\viewtransform
     FILES
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
     )
 
-source_group (engine/input
+source_group (engine\\input
     FILES 
     src/engine/input/input_processor.h
     src/engine/input/input_processor.cpp
