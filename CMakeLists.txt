@@ -69,6 +69,9 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/texture_loader.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
+    # engine/graphics/render
+    src/engine/graphics/render/renderer.h
+    src/engine/graphics/render/renderer.cpp
     # engine/graphics/viewtransform
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
@@ -160,6 +163,12 @@ source_group (engine\\graphics
     src/engine/graphics/texture_loader.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
+    )
+
+source_group (engine\\graphics\\render
+    FILES
+    src/engine/graphics/render/renderer.h
+    src/engine/graphics/render/renderer.cpp
     )
 
 source_group (engine\\graphics\\viewtransform
