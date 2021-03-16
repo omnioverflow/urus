@@ -42,7 +42,7 @@ namespace urus
 			Game();
 			friend class Singleton<Game>;
 
-			// Walkaround for OpenGL (c api) to accept callbacks to c++:
+			// Workaround for OpenGL (c api) to accept callbacks to c++:
 			// must use static methods, otherwise this pointer will screw up
 			// the compilation, since the signatures will not match
 			static void idle();

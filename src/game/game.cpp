@@ -24,8 +24,7 @@ std::unique_ptr<ShaderProgram> Game::shaders[NB_SHADERS];
 
 Game::Game()
 : mGameView(nullptr)
-{
-}
+{}
 
 Game::~Game()
 {
