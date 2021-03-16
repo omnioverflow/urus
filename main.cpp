@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 	auto& game = Game::sharedInstance();
 
-	game.setGameView(std::make_shared<GameView>("Urus", ViewStyle::TOP_RIGHT));
+	game.setGameView(std::make_unique<GameView>("Urus", ViewStyle::TOP_RIGHT));
 
 #if !defined(NDEBUG)
 	game.setConsoleView(std::make_shared<ConsoleView>(ViewStyle::BOTTOM_RIGHT));

@@ -19,15 +19,15 @@ namespace urus
 
 	class Game : public Singleton<Game>
 	{
-		public:           
+		public:    
 			virtual ~Game();            
 
 			virtual bool setup(int argc, char* argv[]);
 			virtual void shutdown();
 			virtual int run(); // FIXME: needs to be public?
 
-			inline std::shared_ptr<GameView> gameView() const;
-			inline void setGameView(std::shared_ptr<GameView> gameView);
+			GameView& gameView() const;
+			void setGameView(std::unique_ptr<GameView> gameView);
 			GameWorld& gameWorld() const;
 			void setGameWorld(std::unique_ptr<GameWorld> gameWorld);
 
@@ -60,7 +60,7 @@ namespace urus
 			static Texture* sTexture; // don't care if it is a raw pointer, since it is static anyway
 			static std::unique_ptr<ShaderProgram> shaders[NB_SHADERS];
 			
-			std::shared_ptr<GameView> mGameView;
+			std::unique_ptr<GameView> mGameView;
 			std::unique_ptr<GameWorld> mGameWorld;
 
 #if !defined(NDEBUG)
@@ -70,16 +70,6 @@ namespace urus
 			std::shared_ptr<ConsoleView> mConsoleView;
 #endif // NDEBUG
 	}; // class Game
-
-	std::shared_ptr<GameView> Game::gameView() const 
-	{ 
-		return mGameView;
-	}
-
-	void Game::setGameView(std::shared_ptr<GameView> gameView) 
-	{ 
-		mGameView = gameView; 
-	}
 
 #if !defined(NDEBUG)
 	void Game::setConsoleView(std::shared_ptr<ConsoleView> consoleView) 

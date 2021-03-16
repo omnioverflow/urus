@@ -39,6 +39,15 @@ Game::~Game()
 	}  
 }
 
+GameView& Game::gameView() const
+{
+	return *mGameView;
+}
+
+void Game::setGameView(std::unique_ptr<GameView> gameView)
+{
+	mGameView = std::move(gameView);
+}
 
 GameWorld& Game::gameWorld() const
 {
@@ -243,9 +252,8 @@ void Game::reshape(int width, int height)
 {
 	// FIXME: remove early exit
 	return;
-	auto gameView = sharedInstance().gameView();
-	if (gameView)
-		gameView->setViewBounds(width, height);
+	GameView& gameView = sharedInstance().gameView();
+	gameView.setViewBounds(width, height);
 
 	// Update transformation from NDC (Normalised Device Coordinates)
 	// to WC (Window Coordinates)
