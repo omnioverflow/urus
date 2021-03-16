@@ -3,18 +3,16 @@
 #include "game/game.h"
 #include "game/view/views.h"
 
+using namespace urus;
+
 int main(int argc, char* argv[])
 {
-	auto& game = urus::Game::sharedInstance();
+	auto& game = Game::sharedInstance();
 
-	game.setGameView(
-		std::make_shared<urus::GameView>("Urus", urus::ViewStyle::TOP_RIGHT)
-	);
-	
+	game.setGameView(std::make_shared<GameView>("Urus", ViewStyle::TOP_RIGHT));
+
 #if !defined(NDEBUG)
-	game.setConsoleView(
-		std::make_shared<urus::ConsoleView>(urus::ViewStyle::BOTTOM_RIGHT)
-	);
+	game.setConsoleView(std::make_shared<ConsoleView>(ViewStyle::BOTTOM_RIGHT));
 #endif // NDEBUG
 
 	game.setup(argc, argv);
