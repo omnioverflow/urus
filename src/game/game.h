@@ -65,16 +65,9 @@ namespace urus
 
 #if !defined(NDEBUG)
 		public:
-			inline void setConsoleView(std::shared_ptr<ConsoleView> consoleView);
+			void setConsoleView(std::unique_ptr<ConsoleView> consoleView);
 		protected:
-			std::shared_ptr<ConsoleView> mConsoleView;
+			std::unique_ptr<ConsoleView> mConsoleView;
 #endif // NDEBUG
 	}; // class Game
-
-#if !defined(NDEBUG)
-	void Game::setConsoleView(std::shared_ptr<ConsoleView> consoleView) 
-	{ 
-		mConsoleView = consoleView; 
-	}
-#endif
 } // namespace urus

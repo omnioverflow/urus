@@ -59,6 +59,13 @@ void Game::setGameWorld(std::unique_ptr<GameWorld> gameWorld)
 	mGameWorld = std::move(gameWorld);
 }
 
+#if !defined(NDEBUG)
+void Game::setConsoleView(std::unique_ptr<ConsoleView> consoleView)
+{
+	mConsoleView = std::move(consoleView);
+}
+#endif
+
 bool Game::setup(int argc, char* argv[])
 {
 	if (!mGameView)
