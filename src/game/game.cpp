@@ -74,10 +74,10 @@ void Game::createView(int argc, char* argv[])
 	glutInitDisplayMode(displayMode);
 	glutCreateWindow(viewTitle);
 
-	glutIdleFunc(idle);
-	glutDisplayFunc(render);
-	glutVisibilityFunc(dispatchVisible);
-	glutIdleFunc(dispatchAnimate);
+	glutIdleFunc(glut_dispatch::idleFunc);
+	glutDisplayFunc(glut_dispatch::displayFunc);
+	glutVisibilityFunc(glut_dispatch::visibilityFunc);
+	
 	/*
 	   glutReshapeFunc(reshape);
 	   glutKeyboardFunc(keyboardCallback);

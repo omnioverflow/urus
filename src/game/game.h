@@ -44,6 +44,7 @@ namespace urus
 
 			// FIXME: shouldn't the glut callbacks be ideally private?
 			void animate();
+			void render();
 			void visible(int isVisible);
 
 		protected:
@@ -54,7 +55,6 @@ namespace urus
 			// must use static methods, otherwise this pointer will screw up
 			// the compilation, since the signatures will not match
 			static void idle();
-			static void render();
 			static void keyboardCallback(unsigned char key, int x, int y);
 			static void mouseCallback(int button, int state, int x, int y);
 			static void mouseWheelCallback(int wheel, int direction, int x, int y);			
