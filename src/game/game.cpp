@@ -44,7 +44,6 @@ void Game::createView(int argc, char* argv[])
 		std::cerr << "[error] No view was set" << std::endl;
 		assert(false);
 	}
-	const auto* const viewTitle = mGameView->title().c_str();
 
 	glutInit(&argc, argv);
 #ifdef __APPLE__
@@ -72,7 +71,8 @@ void Game::createView(int argc, char* argv[])
 #endif
     
 	glutInitDisplayMode(displayMode);
-	glutCreateWindow(viewTitle);
+	const std::string viewTitle = mGameView->title();
+	glutCreateWindow(viewTitle.c_str());
 
 	glutIdleFunc(glut_dispatch::idleFunc);
 	glutDisplayFunc(glut_dispatch::displayFunc);
