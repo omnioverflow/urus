@@ -77,5 +77,20 @@ namespace urus
 		protected:
 			std::unique_ptr<ConsoleView> mConsoleView;
 #endif // NDEBUG
+
+		private:
+
+			class GlutDispatcher
+			{
+				public:
+
+					static void displayFunc();
+					static void idleFunc();
+					static void keyboardFunc(unsigned char key, int x, int y);
+					static void mouseFunc(int button, int state, int x, int y);
+					static void mouseWheelFunc(int wheel, int direction, int x, int y);					
+					static void reshapeFunc(int width, int height);
+					static void visibilityFunc(int isVisible);									
+			}; // class GlutDispatcher
 	}; // class Game
 } // namespace urus

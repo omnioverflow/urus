@@ -36,7 +36,6 @@ target_sources (${PROJECT_NAME}
     src/game/point_cloud_viewer.cpp
     src/game/game.h
     src/game/game.cpp
-    src/game/glut_dispatch.h
     # game/model
     src/game/model/game_world.h
     src/game/model/game_world.cpp
@@ -114,7 +113,6 @@ source_group (game
     src/game/point_cloud_viewer.cpp
     src/game/game.h
     src/game/game.cpp
-    src/game/glut_dispatch.h
     )
 
 source_group (game\\model

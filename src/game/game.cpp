@@ -10,7 +10,6 @@
 
 #include "engine/graphics/shader.h"
 #include "engine/graphics/texture.h"
-#include "game/glut_dispatch.h"
 #include "game/model/game_world.h"
 #include "game/view/views.h"
 
@@ -20,6 +19,49 @@ GLuint Game::VAO;
 GLuint Game::VBO;
 Texture* Game::sTexture;
 std::unique_ptr<ShaderProgram> Game::shaders[NB_SHADERS];
+
+// ============================================================================
+// Game::GlutDispatcher impl
+// ============================================================================
+
+void Game::GlutDispatcher::displayFunc()
+{
+	urus::Game::sharedInstance().render();
+}
+
+void Game::GlutDispatcher::idleFunc()
+{
+	urus::Game::sharedInstance().animate();
+}
+
+void Game::GlutDispatcher::keyboardFunc(unsigned char key, int x, int y)
+{
+	// FIXME: provide impl
+}
+
+void Game::GlutDispatcher::mouseFunc(int button, int state, int x, int y)
+{
+	// FIXME: provide impl
+}
+
+void Game::GlutDispatcher::mouseWheelFunc(int wheel, int direction, int x, int y)
+{
+	// FIXME: provide impl
+}
+
+void Game::GlutDispatcher::reshapeFunc(int width, int height)
+{
+	// FIXME: provide impl
+}
+
+void Game::GlutDispatcher::visibilityFunc(int isVisible)
+{
+	urus::Game::sharedInstance().visible(isVisible);
+}
+
+// ============================================================================
+// Game impl
+// ============================================================================
 
 Game::Game() : mGameView(nullptr) 
 {}
@@ -74,9 +116,9 @@ void Game::createView(int argc, char* argv[])
 	const std::string viewTitle = mGameView->title();
 	glutCreateWindow(viewTitle.c_str());
 
-	glutIdleFunc(glut_dispatch::idleFunc);
-	glutDisplayFunc(glut_dispatch::displayFunc);
-	glutVisibilityFunc(glut_dispatch::visibilityFunc);
+	glutIdleFunc(GlutDispatcher::idleFunc);
+	glutDisplayFunc(GlutDispatcher::displayFunc);
+	glutVisibilityFunc(GlutDispatcher::visibilityFunc);
 	
 	/*
 	   glutReshapeFunc(reshape);
