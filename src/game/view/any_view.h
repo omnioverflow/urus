@@ -22,6 +22,10 @@ namespace urus
             explicit AnyView(const std::string& title);
             AnyView(const std::string& title, ViewStyle style);
             virtual ~AnyView() = default;
+            AnyView(const AnyView& other) = default;
+            AnyView& operator= (const AnyView& other) = default;
+            AnyView(AnyView&& other) = default;
+            AnyView& operator= (AnyView&& other) = default;
 
             /**
             * Set view to fullscreen style.
