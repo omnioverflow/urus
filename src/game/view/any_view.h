@@ -23,11 +23,15 @@ namespace urus
             AnyView(const std::string& title, ViewStyle style);
             virtual ~AnyView() = default;
 
+            /**
+            * Set view to fullscreen style.
+            */
             void setFullscreen();
 
             /**
-             * Corner snap positioning 
-             * (similar to window snap on Windows OS, e.g. Win + arrow)
+             * Corner snap positioning depending on the style
+             * (i.e. top left, top right, bottom left, bottom right)
+             * The snap behaviour is similar to window snap on Windows OS, e.g. Win + arrow)
              */
             void snapView(ViewStyle style);
 
