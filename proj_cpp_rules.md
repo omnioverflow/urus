@@ -12,3 +12,7 @@ The get method should not run any other code, like checking if the value is actu
 
 Also refer to:
 - https://github.com/lefticus/cppbestpractices/blob/master/00-Table_of_Contents.md
+
+C++ Core Guidelines
+https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
+https://github.com/isocpp/CppCoreGuidelines
