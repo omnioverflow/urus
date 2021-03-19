@@ -17,13 +17,14 @@ namespace urus
 		constexpr GLsizei double_buf_size = 256;
 	} // unnamed namespace 
 
-	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath,
-								 const std::string& fragmentShaderPath)
+	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 	: mProgramHandle(glCreateProgram())
+	, mAttributes{}
+	, mUniforms{}
+	, mLoaded(loadShaders(vertexShaderPath, fragmentShaderPath))
 	{
-		// TODO: lazy loading, on-demand might be a viable option other than 
-		// compiling and linking shaders inside the ctor
-		loadShaders(vertexShaderPath, fragmentShaderPath);
+		// lazy loading (i.e. on-demand) might be a viable option
+		// for compiling and linking of the input shaders		
 	}
 
 	ShaderProgram::~ShaderProgram()
@@ -199,7 +200,7 @@ namespace urus
 		glUseProgram(0);
 	}
 
-	void ShaderProgram::loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+	bool ShaderProgram::loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 	{
 		auto vertexShaderSource = std::string("");
 		auto fragmentShaderSource = std::string("");
@@ -225,11 +226,15 @@ namespace urus
 		const auto vertShaderHandle = compileVertexShader(vertexShaderSource);
 		const auto fragShaderHandle = compileFragmentShader(fragmentShaderSource);
 
+		bool loaded = false;
 		if (linkShaders(vertShaderHandle, fragShaderHandle))
 		{
 			populateAttributes();
 			populateUniforms();
+			loaded = true;
 		}
+
+		return loaded;
 	}
 
 	void ShaderProgram::bind() const

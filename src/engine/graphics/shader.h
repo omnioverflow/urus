@@ -57,7 +57,7 @@ namespace urus
 			/**
 			* Load vertex and fragment shaders (i.e. compile and link)
 			*/
-			void loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+			bool loadShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 
 			/**
 			* Get shader attribute by name
@@ -80,5 +80,6 @@ namespace urus
 			GLuint 						 mProgramHandle;
 			std::map<std::string, GLint> mAttributes;
 			std::map<std::string, GLint> mUniforms;
+			bool						 mLoaded;
 	}; // class Shader
 } // namespace urus
