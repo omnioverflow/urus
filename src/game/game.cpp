@@ -113,8 +113,7 @@ void Game::createView(int argc, char* argv[])
 #endif
     
 	glutInitDisplayMode(displayMode);
-	const std::string viewTitle = mGameView->title();
-	glutCreateWindow(viewTitle.c_str());
+	glutCreateWindow(mGameView->title().c_str());
 
 	glutIdleFunc(GlutDispatcher::idleFunc);
 	glutDisplayFunc(GlutDispatcher::displayFunc);

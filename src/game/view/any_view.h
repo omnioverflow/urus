@@ -44,7 +44,7 @@ namespace urus
             /**
              * Retrieve view's title
              */
-            inline std::string title() const;
+            inline const std::string& title() const;
 
             virtual void updateViewPositionAndBounds() const = 0;
 
@@ -59,7 +59,7 @@ namespace urus
             mutable std::mutex mObjectStateMutex;
     }; // class AnyView
 
-    std::string AnyView::title() const
+    const std::string& AnyView::title() const
     {
         return mTitle;
     }
