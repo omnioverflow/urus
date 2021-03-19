@@ -101,8 +101,11 @@ target_sources (${PROJECT_NAME}
 # third-party sources
 target_sources (${PROJECT_NAME}
     PRIVATE
+    # stb_image
     lib/include/stb_image/stb_image.h
     lib/impl/stb_image/stb_image.cpp
+    # gsl 
+    lib/include/gsl/assert.h
     )
 
 # configure source groups
@@ -213,10 +216,15 @@ source_group (macaque
     src/macaque/vec4.h
     )
 
-source_group (third_party
+source_group (third_party\\stb_image
     FILES
     lib/include/stb_image/stb_image.h
     lib/impl/stb_image/stb_image.cpp
+    )
+
+source_group (third_party\\gsl
+    FILES
+    lib/include/gsl/assert.h
     )
 
 source_group (main
