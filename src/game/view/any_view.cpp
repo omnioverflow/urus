@@ -13,7 +13,7 @@ namespace urus
     , mY(0)
     , mWidth(DisplayConfig::getScreenWidthPx())
     , mHeight(DisplayConfig::getScreenHeightPx())
-    , mStyle(ViewStyle::FULLSCREEN) {}
+    , mStyle(ViewStyle::Fullscreen) {}
 
     AnyView::AnyView(const std::string& title, ViewStyle style)
     : AnyView(title)
@@ -28,7 +28,7 @@ namespace urus
         mX = 0, mY = 0;
         mWidth = DisplayConfig::getScreenWidthPx();
         mHeight = DisplayConfig::getScreenWidthPx();
-        mStyle = ViewStyle::FULLSCREEN;
+        mStyle = ViewStyle::Fullscreen;
     }
 
     void AnyView::snapView(ViewStyle style)
@@ -42,7 +42,7 @@ namespace urus
 
         switch (style)
         {
-            case ViewStyle::BOTTOM_LEFT:
+            case ViewStyle::Bottom_Left:
             {
                 mX = 0;
                 mY = 1 + heightToApply;
@@ -50,7 +50,7 @@ namespace urus
                 mHeight = screenHeight - mY;           
                 break;
             }
-            case ViewStyle::BOTTOM_RIGHT:
+            case ViewStyle::Bottom_Right:
             {
                 mX = 1 + widthToApply;
                 mY  = 1 + heightToApply;
@@ -58,7 +58,7 @@ namespace urus
                 mHeight = screenHeight - mY;
                 break;
             }
-            case ViewStyle::TOP_LEFT:
+            case ViewStyle::Top_Left:
             {
                 mX = 0;
                 mY = 0;
@@ -66,7 +66,7 @@ namespace urus
                 mHeight = heightToApply;
                 break;
             }
-            case ViewStyle::TOP_RIGHT:
+            case ViewStyle::Top_Right:
             {
                 mX = 1 + widthToApply;
                 mY = 0;
@@ -94,7 +94,7 @@ void AnyView::setViewBounds(int width, int height)
 
         mWidth = width;
         mHeight = height;
-        mStyle = ViewStyle::ANY;
+        mStyle = ViewStyle::Any;
     }
 }
 } // namespace urus

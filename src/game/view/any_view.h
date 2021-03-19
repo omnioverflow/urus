@@ -7,12 +7,12 @@ namespace urus
 {
     enum class ViewStyle : int 
     {
-        BOTTOM_LEFT = 0,
-        BOTTOM_RIGHT,
-        TOP_LEFT,
-        TOP_RIGHT,
-        FULLSCREEN,
-        ANY
+        Bottom_Left = 0,
+        Bottom_Right,
+        Top_Left,
+        Top_Right,
+        Fullscreen,
+        Any
     }; // enum ViewStyle
 
     class AnyView

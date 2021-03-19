@@ -11,10 +11,10 @@ int main(int argc, char* argv[])
 	DisplayConfig::logScreenInfo();
 
 	auto& game = Game::sharedInstance();
-	game.setGameView(std::make_unique<GameView>("Urus", ViewStyle::TOP_RIGHT));
+	game.setGameView(std::make_unique<GameView>("Urus"));
 
 #if !defined(NDEBUG)
-	game.setConsoleView(std::make_unique<ConsoleView>(ViewStyle::BOTTOM_RIGHT));
+	game.setConsoleView(std::make_unique<ConsoleView>());
 #endif // NDEBUG
 
 	game.createView(argc, argv);

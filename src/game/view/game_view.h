@@ -15,6 +15,6 @@ namespace urus
 
 		private:
 
-			static constexpr ViewStyle default_style = ViewStyle::TOP_RIGHT;
+			static constexpr ViewStyle default_style = ViewStyle::Top_Right;
 	}; // class GameView
 } // namespace urus
