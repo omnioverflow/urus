@@ -9,7 +9,7 @@
 namespace urus
 {
 	/**
-	 * Wrapper around OpenGL boiler-plate code to compile, link and access shaders
+	 * Wrapper around OpenGL shader api
 	 */
 	class ShaderProgram
 	{
@@ -31,7 +31,7 @@ namespace urus
 			void unbind() const;
 
 			inline GLuint programHandle() const { return mProgramHandle;  }
-			inline void useProgram() { glUseProgram(mProgramHandle); }
+			inline void useProgram() const { glUseProgram(mProgramHandle); }
 
 		private:
 			/**
