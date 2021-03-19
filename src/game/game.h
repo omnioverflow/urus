@@ -47,6 +47,10 @@ namespace urus
 			void render();
 			void visible(int isVisible);
 
+#if !defined(NDEBUG)			
+			void setConsoleView(std::unique_ptr<ConsoleView> consoleView);
+#endif // NDEBUG
+
 		protected:
 			Game();
 			friend class Singleton<Game>;
@@ -58,9 +62,7 @@ namespace urus
 			static void keyboardCallback(unsigned char key, int x, int y);
 			static void mouseCallback(int button, int state, int x, int y);
 			static void mouseWheelCallback(int wheel, int direction, int x, int y);			
-			static void reshape(int width, int height);
-			
-		protected:
+			static void reshape(int width, int height);		
 
 			static constexpr GLuint NB_SHADERS = 2;
 			static GLuint VBO;
@@ -71,10 +73,7 @@ namespace urus
 			std::unique_ptr<GameView> mGameView;
 			std::unique_ptr<GameWorld> mGameWorld;
 
-#if !defined(NDEBUG)
-		public:
-			void setConsoleView(std::unique_ptr<ConsoleView> consoleView);
-		protected:
+#if !defined(NDEBUG)		
 			std::unique_ptr<ConsoleView> mConsoleView;
 #endif // NDEBUG
 

@@ -74,9 +74,8 @@ namespace urus
 			* Read the shader source from file path 
 			*/
 			std::string readShaderSource(const std::string& path) const;
-
-		private:
-			GLuint mProgramHandle;
+		
+			GLuint 						 mProgramHandle;
 			std::map<std::string, GLint> mAttributes;
 			std::map<std::string, GLint> mUniforms;
 	}; // class Shader
