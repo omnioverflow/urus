@@ -40,10 +40,7 @@ namespace urus
             void snapView(ViewStyle style);
 
             void setViewBounds(int width, int height);            
-
-            /**
-             * Retrieve view's title
-             */
+            
             inline const std::string& title() const;
 
             virtual void updateViewPositionAndBounds() const = 0;
