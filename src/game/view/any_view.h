@@ -39,9 +39,8 @@ namespace urus
              */
             void snapView(ViewStyle style);
 
-            void setViewBounds(int width, int height);            
-            
-            inline const std::string& title() const;
+            void setViewBounds(int width, int height);                        
+            const std::string& title() const { return mTitle;  }
 
             virtual void updateViewPositionAndBounds() const = 0;
 
@@ -55,9 +54,4 @@ namespace urus
             ViewStyle mStyle;
             mutable std::mutex mObjectStateMutex;
     }; // class AnyView
-
-    const std::string& AnyView::title() const
-    {
-        return mTitle;
-    }
 } // namespace urus
