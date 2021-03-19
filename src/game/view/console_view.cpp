@@ -2,11 +2,15 @@
 
 #include "console_view.h"
 
+#include <string>
+
 #if defined(_WIN64)
 # include <windows.h>
 
 namespace urus
 {
+    const std::string ConsoleView::default_title = "ConsoleView";
+
     void ConsoleView::updateViewPositionAndBounds() const
     {
         HWND handleWnd = GetConsoleWindow();

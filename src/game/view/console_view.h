@@ -9,13 +9,14 @@ namespace urus
 	{
 		public:
 			
-			ConsoleView() : AnyView(default_title) {}
+			ConsoleView() : AnyView(default_title, default_style) {}
 			ConsoleView(ViewStyle style) : AnyView(default_title, style) {}
 			void updateViewPositionAndBounds() const override;
 
 		private:
 			
-			static constexpr char* default_title = "ConsoleView";
+			static const ViewStyle default_style = ViewStyle::Bottom_Right;
+			static const std::string default_title;
 	}; // class ConsoleView
 } // namespace urus
 #endif // NDEBUG
