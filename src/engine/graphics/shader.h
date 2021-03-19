@@ -15,8 +15,10 @@ namespace urus
 	{
 		public:
 			ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
-			ShaderProgram(const ShaderProgram&) = delete;
-			ShaderProgram& operator=(const ShaderProgram&) = delete;
+			ShaderProgram(const ShaderProgram& other) = delete;
+			ShaderProgram& operator= (const ShaderProgram& other) = delete;
+			ShaderProgram(ShaderProgram&& other) = delete;
+			ShaderProgram& operator= (ShaderProgram&& other) = delete;
 			virtual ~ShaderProgram();  
 
 			/**
