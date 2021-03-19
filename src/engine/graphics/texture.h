@@ -21,8 +21,7 @@ namespace urus
                              GLint texFormat = GL_RGB,
                              GLint srcImgFormat = GL_RGBA) noexcept;
             ~Texture();
-
-            Texture() = delete; // No source image path, no texture
+            
             Texture(const Texture& other) = delete;
             Texture& operator= (const Texture& other) = delete;
 
