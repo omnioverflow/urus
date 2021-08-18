@@ -31,6 +31,10 @@ target_sources (${PROJECT_NAME}
     src/engine/base/core.h
     src/engine/base/macros.h
     src/engine/base/singleton.h
+    # engine/controls
+    src/engine/controls/input_dispatcher.h
+    src/engine/controls/input_dispatcher.cpp
+    src/engine/controls/trackball.h
     # game
     src/game/point_cloud_viewer.h
     src/game/point_cloud_viewer.cpp
@@ -70,10 +74,6 @@ target_sources (${PROJECT_NAME}
     # engine/graphics/viewtransform
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
-    # engine/input
-    src/engine/input/input_dispatcher.h
-    src/engine/input/input_dispatcher.cpp
-    src/engine/input/trackball.h
     # engine/scene
     src/engine/scene/node.h
     src/engine/scene/node.cpp
@@ -143,6 +143,13 @@ source_group (engine\\base
     src/engine/base/singleton.h
     )
 
+source_group (engine\\controls
+    FILES 
+    src/engine/controls/input_dispatcher.h
+    src/engine/controls/input_dispatcher.cpp
+    src/engine/controls/trackball.h
+    )
+
 source_group (engine\\graphics 
     FILES 
     src/engine/graphics/vertex_attribute.h
@@ -177,13 +184,6 @@ source_group (engine\\graphics\\viewtransform
     FILES
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
-    )
-
-source_group (engine\\input
-    FILES 
-    src/engine/input/input_dispatcher.h
-    src/engine/input/input_dispatcher.cpp
-    src/engine/input/trackball.h
     )
 
 source_group (engine\\scene
