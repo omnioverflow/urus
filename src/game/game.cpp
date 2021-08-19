@@ -8,8 +8,8 @@
 #include <string>
 #include <vector>
 
-#include "engine/graphics/shader.h"
-#include "engine/graphics/texture.h"
+#include "engine/graphics/shader/shader.h"
+#include "engine/graphics/tex/texture.h"
 #include "game/model/game_world.h"
 #include "game/view/views.h"
 

@@ -1,4 +1,4 @@
-#include "engine/graphics/texture_loader.h"
+#include "engine/graphics/tex/texture_loader.h"
 
 #include <cassert>
 #include <iostream>

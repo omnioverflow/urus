@@ -60,17 +60,17 @@ target_sources (${PROJECT_NAME}
     src/engine/graphics/draw.cpp
     src/engine/graphics/indexbuffer.h
     src/engine/graphics/indexbuffer.cpp
-    src/engine/graphics/shader.h
-    src/engine/graphics/shader.cpp
-    src/engine/graphics/texture.h
-    src/engine/graphics/texture.cpp
-    src/engine/graphics/texture_loader.h
-    src/engine/graphics/texture_loader.cpp
+    src/engine/graphics/shader/shader.h
+    src/engine/graphics/shader/shader.cpp
+    src/engine/graphics/tex/texture.h
+    src/engine/graphics/tex/texture.cpp
+    src/engine/graphics/tex/texture_loader.h
+    src/engine/graphics/tex/texture_loader.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
     # engine/graphics/render
-    src/engine/graphics/render/renderer.h
-    src/engine/graphics/render/renderer.cpp
+    src/engine/graphics/renderer/renderer.h
+    src/engine/graphics/renderer/renderer.cpp
     # engine/graphics/viewtransform
     src/engine/graphics/viewtransform/viewtransform.h
     src/engine/graphics/viewtransform/viewtransform.cpp
@@ -164,20 +164,20 @@ source_group (engine\\graphics
     src/engine/graphics/node.cpp
     src/engine/graphics/scene.h
     src/engine/graphics/scene.cpp
-    src/engine/graphics/shader.h
-    src/engine/graphics/shader.cpp
-    src/engine/graphics/texture.h
-    src/engine/graphics/texture.cpp
-    src/engine/graphics/texture_loader.h
-    src/engine/graphics/texture_loader.cpp
+    src/engine/graphics/shader/shader.h
+    src/engine/graphics/shader/shader.cpp
+    src/engine/graphics/tex/texture.h
+    src/engine/graphics/tex/texture.cpp
+    src/engine/graphics/tex/texture_loader.h
+    src/engine/graphics/tex/texture_loader.cpp
     src/engine/graphics/uniform.h
     src/engine/graphics/uniform.cpp
     )
 
 source_group (engine\\graphics\\render
     FILES
-    src/engine/graphics/render/renderer.h
-    src/engine/graphics/render/renderer.cpp
+    src/engine/graphics/renderer/renderer.h
+    src/engine/graphics/renderer/renderer.cpp
     )
 
 source_group (engine\\graphics\\viewtransform

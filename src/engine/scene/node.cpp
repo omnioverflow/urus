@@ -1,5 +1,5 @@
 #include "node.h"
-#include "engine/graphics/shader.h"
+#include "engine/graphics/shader/shader.h"
 
 namespace urus
 {
