@@ -36,6 +36,8 @@ target_sources (${PROJECT_NAME}
     src/engine/controls/input_dispatcher.cpp
     src/engine/controls/trackball.h
     # game
+    src/game/path_tracer.h
+    src/game/path_tracer.cpp
     src/game/point_cloud_viewer.h
     src/game/point_cloud_viewer.cpp
     src/game/game.h
