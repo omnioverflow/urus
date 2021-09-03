@@ -1,3 +1,7 @@
+* Use C++14 (use cmake config to specify that compiler option if possible)
+
+--------------------------------------------------------------------------
+
 https://stackoverflow.com/questions/18485381/opengl-how-many-vaos
 https://stackoverflow.com/questions/8923174/opengl-vao-best-practices
 
