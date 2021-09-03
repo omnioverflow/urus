@@ -1,9 +1,8 @@
-#include "vertex_attribute.h"
+#include "VertexAttribute.h"
 
-#include "macaque/vec.h"
-#include "vec.h"
+#include "mqMath/Vec.h"
 
-#include "engine/base/opengl_support.h"
+#include "engine/base/OpenGLSupport.h"
 
 namespace urus
 {

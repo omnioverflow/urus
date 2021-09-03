@@ -3,7 +3,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "engine/graphics/tex/texture_loader.h"
+#include "engine/texture/TextureLoader.h"
 #include "stb_image/stb_image.h"
 
 namespace urus

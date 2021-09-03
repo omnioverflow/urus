@@ -1,7 +1,7 @@
 #pragma once 
 
 #if !defined(NDEBUG)
-# include "game_view.h"
+# include "GameView.h"
 
 namespace urus
 {

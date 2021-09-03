@@ -6,7 +6,7 @@
 #include "uniform.h"
 
 #include "vec.h"
-#include "engine/base/opengl_support.h"
+#include "engine/base/OpenGLSupport.h"
 
 namespace urus
 {

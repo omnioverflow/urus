@@ -1,8 +1,8 @@
-#include "any_view.h"
+#include "AnyView.h"
 
 #include <cassert>
 
-#include "engine/graphics/display_config.h"
+#include "engine/viewtransform/DisplayConfig.h"
 #include "GL/freeglut.h"
 
 namespace urus

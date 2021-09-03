@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "macaque/mq_math.h"
+#include "mqMath/MqMath.h"
 
 /*
   FIXME:

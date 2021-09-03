@@ -1,7 +1,7 @@
 #pragma once
 
-#include "game/view/game_view.h"
+#include "game/view/GameView.h"
 
 #if !defined(NDEBUG)
-# include "game/view/console_view.h"
+# include "game/view/ConsoleView.h"
 #endif // NDEBUG

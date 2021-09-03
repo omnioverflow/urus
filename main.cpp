@@ -1,8 +1,8 @@
 #include <memory>
 
-#include "game/game.h"
-#include "game/view/views.h"
-#include "engine/graphics/display_config.h"
+#include "game/Game.h"
+#include "game/view/Views.h"
+#include "engine/viewtransform/DisplayConfig.h"
 
 using namespace urus;
 

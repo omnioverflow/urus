@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#include "macaque/vec.h"
+#include "mqMath/Vec.h"
 
 namespace urus
 {

@@ -27,61 +27,63 @@ add_executable (${PROJECT_NAME}
 target_sources (${PROJECT_NAME}
     PRIVATE
     # engine/base
-    src/engine/base/opengl_support.h
-    src/engine/base/core.h
-    src/engine/base/macros.h
-    src/engine/base/singleton.h
+    src/engine/base/OpenGLSupport.h
+    src/engine/base/Core.h
+    src/engine/base/Macros.h
+    src/engine/base/Singleton.h
     # engine/controls
-    src/engine/controls/input_dispatcher.h
-    src/engine/controls/input_dispatcher.cpp
-    src/engine/controls/trackball.h
-    # game
-    src/game/path_tracer.h
-    src/game/path_tracer.cpp
-    src/game/point_cloud_viewer.h
-    src/game/point_cloud_viewer.cpp
-    src/game/game.h
-    src/game/game.cpp
-    # game/model
-    src/game/model/game_world.h
-    src/game/model/game_world.cpp
-    # game/view
-    src/game/view/any_view.h
-    src/game/view/any_view.cpp
-    src/game/view/console_view.h
-    src/game/view/console_view.cpp
-    src/game/view/game_view.h
-    src/game/view/game_view.cpp
-    src/game/view/views.h
-    # engine/graphics
-    src/engine/graphics/vertex_attribute.h
-    src/engine/graphics/vertex_attribute.cpp
-    src/engine/graphics/display_config.h
-    src/engine/graphics/display_config.cpp
-    src/engine/graphics/draw.h
-    src/engine/graphics/draw.cpp
-    src/engine/graphics/indexbuffer.h
-    src/engine/graphics/indexbuffer.cpp
-    src/engine/graphics/shader/shader.h
-    src/engine/graphics/shader/shader.cpp
-    src/engine/graphics/tex/texture.h
-    src/engine/graphics/tex/texture.cpp
-    src/engine/graphics/tex/texture_loader.h
-    src/engine/graphics/tex/texture_loader.cpp
-    src/engine/graphics/uniform.h
-    src/engine/graphics/uniform.cpp
-    # engine/graphics/render
-    src/engine/graphics/renderer/renderer.h
-    src/engine/graphics/renderer/renderer.cpp
-    # engine/graphics/viewtransform
-    src/engine/graphics/viewtransform/viewtransform.h
-    src/engine/graphics/viewtransform/viewtransform.cpp
+    src/engine/controls/InputDispatcher.h
+    src/engine/controls/InputDispatcher.cpp
+    src/engine/controls/Trackball.h
+    # engine/backend/opengl
+    src/engine/backend/opengl/Draw.h
+    src/engine/backend/opengl/Draw.cpp
+    src/engine/backend/opengl/IndexBuffer.h
+    src/engine/backend/opengl/IndexBuffer.cpp
+    src/engine/backend/opengl/Uniform.h
+    src/engine/backend/opengl/Uniform.cpp
+    src/engine/backend/opengl/VertexAttribute.h
+    src/engine/backend/opengl/VertexAttribute.cpp
+    # engine/renderer
+    src/engine/renderer/AbstractRenderer.h
+    src/engine/renderer/AbstractRenderer.cpp
     # engine/scene
-    src/engine/scene/node.h
-    src/engine/scene/node.cpp
-    src/engine/scene/scene.h
-    src/engine/scene/scene.cpp
-    # engine/glsl
+    src/engine/scene/Node.h
+    src/engine/scene/Node.cpp
+    src/engine/scene/Scene.h
+    src/engine/scene/Scene.cpp
+    # engine/shader
+    src/engine/shader/Shader.h
+    src/engine/shader/Shader.cpp
+    # engine/texture
+    src/engine/texture/Texture.h
+    src/engine/texture/Texture.cpp
+    src/engine/texture/TextureLoader.h
+    src/engine/texture/TextureLoader.cpp
+    # engine/viewtransform
+    src/engine/viewtransform/DisplayConfig.h
+    src/engine/viewtransform/DisplayConfig.cpp
+    src/engine/viewtransform/ViewTransform.h
+    src/engine/viewtransform/ViewTransform.cpp
+    # game
+    src/game/PathTracer.h
+    src/game/PathTracer.cpp
+    src/game/PointCloudViewer.h
+    src/game/PointCloudViewer.cpp
+    src/game/Game.h
+    src/game/Game.cpp
+    # game/model
+    src/game/model/GameWorld.h
+    src/game/model/GameWorld.cpp
+    # game/view
+    src/game/view/AnyView.h
+    src/game/view/AnyView.cpp
+    src/game/view/ConsoleView.h
+    src/game/view/ConsoleView.cpp
+    src/game/view/GameView.h
+    src/game/view/GameView.cpp
+    src/game/view/Views.h
+    # glsl
     src/glsl/shader0.vert
     src/glsl/shader0.frag
     src/glsl/shader1.vert
@@ -90,14 +92,14 @@ target_sources (${PROJECT_NAME}
     src/glsl/coord_sys.frag
     # Macaque vector math lib
     # TODO: extract Macaque as a library into a dedicated repo
-    src/macaque/mat.h
-    src/macaque/mat4.h
-    src/macaque/mq_math.h
-    src/macaque/vec.h
-    src/macaque/vec2.h
-    src/macaque/vec3.h
-    src/macaque/vec3.cpp
-    src/macaque/vec4.h
+    src/mqMath/Mat.h
+    src/mqMath/Mat4.h
+    src/mqMath/MqMath.h
+    src/mqMath/Vec.h
+    src/mqMath/Vec2.h
+    src/mqMath/Vec3.h
+    src/mqMath/Vec3.cpp
+    src/mqMath/Vec4.h
     )
 
 # third-party sources
@@ -111,90 +113,99 @@ target_sources (${PROJECT_NAME}
     )
 
 # configure source groups
-
-source_group (game
-    FILES
-    src/game/point_cloud_viewer.h
-    src/game/point_cloud_viewer.cpp
-    src/game/game.h
-    src/game/game.cpp
-    )
-
-source_group (game\\model
-    FILES
-    src/game/model/game_world.h
-    src/game/model/game_world.cpp
-    )
-
-source_group (game\\view
-    FILES
-    src/game/view/any_view.h
-    src/game/view/any_view.cpp
-    src/game/view/console_view.h
-    src/game/view/console_view.cpp
-    src/game/view/game_view.h
-    src/game/view/game_view.cpp
-    src/game/view/views.h
-    )
+# ==============================================================================
 
 source_group (engine\\base
     FILES
-    src/engine/base/opengl_support.h
-    src/engine/base/core.h
-    src/engine/base/macros.h
-    src/engine/base/singleton.h
+    src/engine/base/OpenGLSupport.h
+    src/engine/base/Core.h
+    src/engine/base/Macros.h
+    src/engine/base/Singleton.h
+    )
+
+source_group (engine\\backend\\opengl
+    FILES 
+    src/engine/backend/opengl/VertexAttribute.h
+    src/engine/backend/opengl/VertexAttribute.cpp
+    src/engine/backend/opengl/Draw.h
+    src/engine/backend/opengl/Draw.cpp
+    src/engine/backend/opengl/IndexBuffer.h
+    src/engine/backend/opengl/IndexBuffer.cpp
+    src/engine/backend/opengl/Node.h
+    src/engine/backend/opengl/Node.cpp
+    src/engine/backend/opengl/Scene.h
+    src/engine/backend/opengl/Scene.cpp
+    src/engine/backend/opengl/Uniform.h
+    src/engine/backend/opengl/Uniform.cpp
     )
 
 source_group (engine\\controls
     FILES 
-    src/engine/controls/input_dispatcher.h
-    src/engine/controls/input_dispatcher.cpp
-    src/engine/controls/trackball.h
+    src/engine/controls/InputDispatcher.h
+    src/engine/controls/InputDispatcher.cpp
+    src/engine/controls/Trackball.h
     )
 
-source_group (engine\\graphics 
-    FILES 
-    src/engine/graphics/vertex_attribute.h
-    src/engine/graphics/vertex_attribute.cpp
-    src/engine/graphics/display_config.h
-    src/engine/graphics/display_config.cpp
-    src/engine/graphics/draw.h
-    src/engine/graphics/draw.cpp
-    src/engine/graphics/indexbuffer.h
-    src/engine/graphics/indexbuffer.cpp
-    src/engine/graphics/node.h
-    src/engine/graphics/node.cpp
-    src/engine/graphics/scene.h
-    src/engine/graphics/scene.cpp
-    src/engine/graphics/shader/shader.h
-    src/engine/graphics/shader/shader.cpp
-    src/engine/graphics/tex/texture.h
-    src/engine/graphics/tex/texture.cpp
-    src/engine/graphics/tex/texture_loader.h
-    src/engine/graphics/tex/texture_loader.cpp
-    src/engine/graphics/uniform.h
-    src/engine/graphics/uniform.cpp
-    )
-
-source_group (engine\\graphics\\render
+source_group (engine\\renderer
     FILES
-    src/engine/graphics/renderer/renderer.h
-    src/engine/graphics/renderer/renderer.cpp
-    )
-
-source_group (engine\\graphics\\viewtransform
-    FILES
-    src/engine/graphics/viewtransform/viewtransform.h
-    src/engine/graphics/viewtransform/viewtransform.cpp
+    src/engine/renderer/AbstractRenderer.h
+    src/engine/renderer/AbstractRenderer.cpp
     )
 
 source_group (engine\\scene
     FILES
-    src/engine/scene/node.h
-    scr/engine/scene/node.cpp
-    src/engine/scene/scene.h
-    scr/engine/scene/scene.cpp
+    src/engine/scene/Node.h
+    scr/engine/scene/Node.cpp
+    src/engine/scene/Scene.h
+    scr/engine/scene/Scene.cpp
     )
+
+source_group (engine\\shader
+    src/engine/shader/Shader.h
+    src/engine/shader/Shader.cpp
+    )
+
+source_group (engine\\texture
+    src/engine/texture/Texture.h
+    src/engine/texture/Texture.cpp
+    src/engine/texture/TextureLoader.h
+    src/engine/texture/TextureLoader.cpp
+    )
+
+source_group (engine\\viewtransform
+    FILES
+    src/engine/viewtransform/DisplayConfig.h
+    src/engine/viewtransform/DisplayConfig.cpp
+    src/engine/viewtransform/ViewTransform.h
+    src/engine/viewtransform/ViewTransform.cpp
+    )
+
+# ==============================================================================
+source_group (game
+    FILES
+    src/game/PointCloudViewer.h
+    src/game/PointCloudViewer.cpp
+    src/game/Game.h
+    src/game/Game.cpp
+    )
+
+source_group (game\\model
+    FILES
+    src/game/model/GameWorld.h
+    src/game/model/GameWorld.cpp
+    )
+
+source_group (game\\view
+    FILES
+    src/game/view/AnyView.h
+    src/game/view/AnyView.cpp
+    src/game/view/ConsoleView.h
+    src/game/view/ConsoleView.cpp
+    src/game/view/GameView.h
+    src/game/view/GameView.cpp
+    src/game/view/Views.h
+    )
+# ==============================================================================
 
 source_group (glsl
     FILES
@@ -206,17 +217,22 @@ source_group (glsl
     src/glsl/coord_sys.frag
     )
 
-source_group (macaque
+# ==============================================================================
+
+# Macaque Math (mqMath)
+source_group (mqMath
     FILES
-    src/macaque/mat.h
-    src/macaque/mat4.h
-    src/macaque/mq_math.h
-    src/macaque/vec.h
-    src/macaque/vec2.h
-    src/macaque/vec3.h
-    src/macaque/vec3.cpp
-    src/macaque/vec4.h
+    src/mqMath/Mat.h
+    src/mqMath/Mat4.h
+    src/mqMath/MwMath.h
+    src/mqMath/Vec.h
+    src/mqMath/Vec2.h
+    src/mqMath/Vec3.h
+    src/mqMath/Vec3.cpp
+    src/mqMath/Vec4.h
     )
+
+# ==============================================================================
 
 source_group (third_party\\stb_image
     FILES
@@ -233,6 +249,8 @@ source_group (main
     FILES
     main.cpp
     )
+
+# ==============================================================================
 
 # copy shaders to the output direcotry
 configure_file (src/glsl/shader0.vert ${CMAKE_CURRENT_BINARY_DIR}/shader0.vert)
@@ -251,7 +269,7 @@ target_include_directories (${PROJECT_NAME}
     PRIVATE
     lib/include
     src
-    src/macaque
+    src/mqMath
     )
 
 target_link_libraries (${PROJECT_NAME} 

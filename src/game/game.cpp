@@ -8,10 +8,10 @@
 #include <string>
 #include <vector>
 
-#include "engine/graphics/shader/shader.h"
-#include "engine/graphics/tex/texture.h"
-#include "game/model/game_world.h"
-#include "game/view/views.h"
+#include "engine/shader/Shader.h"
+#include "engine/texture/Texture.h"
+#include "game/model/GameWorld.h"
+#include "game/view/Views.h"
 
 using namespace urus;
 

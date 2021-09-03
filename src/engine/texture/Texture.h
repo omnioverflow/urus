@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "engine/base/opengl_support.h"
+#include "engine/base/OpenGLSupport.h"
 
 namespace urus
 {

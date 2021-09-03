@@ -1,4 +1,4 @@
-#include "game_world.h"
+#include "GameWorld.h"
 
 namespace urus
 {

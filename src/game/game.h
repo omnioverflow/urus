@@ -3,8 +3,8 @@
 #include <memory>
 #include <stdint.h>
 
-#include "engine/base/opengl_support.h"
-#include "engine/base/singleton.h"
+#include "engine/base/OpenGLSupport.h"
+#include "engine/base/Singleton.h"
 
 namespace urus 
 {

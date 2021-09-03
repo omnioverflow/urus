@@ -1,4 +1,4 @@
-#include "display_config.h"
+#include "DisplayConfig.h"
 
 #include <iostream>
 

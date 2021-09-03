@@ -1,6 +1,6 @@
 #if !defined(NDEBUG)
 
-#include "console_view.h"
+#include "ConsoleView.h"
 
 #include <string>
 
