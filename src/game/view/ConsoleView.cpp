@@ -6,6 +6,7 @@
 
 #if defined(_WIN64)
 # include <windows.h>
+#endif // _WIN64
 
 namespace urus
 {
@@ -13,20 +14,14 @@ namespace urus
 
     void ConsoleView::updateViewPositionAndBounds() const
     {
-        HWND handleWnd = GetConsoleWindow();
-        MoveWindow(handleWnd, mX, mY, mWidth, mHeight, TRUE /* repaint */);
-    }
-} // namespace urus
-#endif // _WIN64
+        #if defined(_WIN64)
+            HWND handleWnd = GetConsoleWindow();
+            MoveWindow(handleWnd, mX, mY, mWidth, mHeight, TRUE /* repaint */);
+        #endif // _WIN64
 
-#if defined(__APPLE__)
-namespace urus
-{
-    void ConsoleView::updateViewPositionAndBounds() const
-    {
+        #if defined(__APPLE__)
         // noop
+        #endif // __APPLE__
     }
 } // namespace urus
-#endif // __APPLE__
-
 #endif // NDEBUG
