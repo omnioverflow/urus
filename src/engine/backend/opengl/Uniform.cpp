@@ -3,9 +3,9 @@
 *   - Do not use glUniform* calls, use Uniform Buffers instead.
 *   - read https://gamedev.stackexchange.com/questions/133615/how-do-you-store-uniform-data
 */
-#include "uniform.h"
+#include "Uniform.h"
 
-#include "vec.h"
+#include "Vec.h"
 #include "engine/base/OpenGLSupport.h"
 
 namespace urus

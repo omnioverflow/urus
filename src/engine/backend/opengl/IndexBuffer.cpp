@@ -1,4 +1,4 @@
-#include "indexbuffer.h"
+#include "IndexBuffer.h"
 
 #include "engine/base/OpenGLSupport.h"
 
