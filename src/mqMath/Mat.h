@@ -1,31 +1,20 @@
-//////////////////////////////////////////////////////////////////////////////
-//
-//  --- Mat.h ---
-//
-//////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
 #include "Vec.h"
 
 namespace macaque
-{
-
-    //----------------------------------------------------------------------------
-    //
-    //  mat2 - 2D square matrix
-    //
-
+{    
+    /**
+    * mat2 - 2D square matrix
+    */    
     class mat2 {
-
-        vec2  _m[2];
-
     public:
-        //
-        //  --- Constructors and Destructors ---
-        //
+        // --------------------------------------------------------------------
+        //  ctors and dtors
+        // --------------------------------------------------------------------
 
-        mat2(const GLfloat d = GLfloat(1.0f))  // Create a diagional matrix
+        // Create a diagional matrix
+        mat2(const GLfloat d = GLfloat(1.0f))  
         {
             _m[0].x = d;  _m[1].y = d;
         }
@@ -47,16 +36,16 @@ namespace macaque
             }
         }
 
-        //
-        //  --- Indexing Operator ---
-        //
+        // --------------------------------------------------------------------
+        //  indexing operator
+        // --------------------------------------------------------------------
 
         vec2& operator [] (int i) { return _m[i]; }
         const vec2& operator [] (int i) const { return _m[i]; }
 
-        //
-        //  --- (non-modifying) Arithmatic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (non-modifying) Arithmatic Operators
+        // --------------------------------------------------------------------
 
         mat2 operator + (const mat2& m) const
         {
@@ -105,9 +94,9 @@ namespace macaque
             return a;
         }
 
-        //
-        //  --- (modifying) Arithmetic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (modifying) Arithmetic Operators
+        // --------------------------------------------------------------------
 
         mat2& operator += (const mat2& m) {
             _m[0] += m[0];  _m[1] += m[1];
@@ -151,18 +140,18 @@ namespace macaque
             return *this *= r;
         }
 
-        //
-        //  --- Matrix / Vector operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Matrix / Vector operators
+        // --------------------------------------------------------------------
 
         vec2 operator * (const vec2& v) const {  // m * v
             return vec2(_m[0][0] * v.x + _m[0][1] * v.y,
                 _m[1][0] * v.x + _m[1][1] * v.y);
         }
 
-        //
-        //  --- Insertion and Extraction Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Insertion and Extraction Operators
+        // --------------------------------------------------------------------
 
         friend std::ostream& operator << (std::ostream& os, const mat2& m)
         {
@@ -174,9 +163,9 @@ namespace macaque
             return is >> m._m[0] >> m._m[1];
         }
 
-        //
-        //  --- Conversion Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Conversion Operators
+        // --------------------------------------------------------------------
 
         operator const GLfloat* () const
         {
@@ -187,37 +176,34 @@ namespace macaque
         {
             return static_cast<GLfloat*>(&_m[0].x);
         }
-    };
 
-    //
-    //  --- Non-class mat2 Methods ---
-    //
+        // --------------------------------------------------------------------
+        private:
+            vec2  _m[2];
+    }; // class mat2
 
-    inline
-        mat2 matrixCompMult(const mat2& A, const mat2& B) {
-        return mat2(A[0][0] * B[0][0], A[0][1] * B[0][1],
+    // ------------------------------------------------------------------------
+    //  Non-class mat2 Methods
+    // ------------------------------------------------------------------------
+
+    inline mat2 matrixCompMult(const mat2& A, const mat2& B) {
+        return mat2(A[0][0] * B[0][0], A[0][1] * B[0][1], 
             A[1][0] * B[1][0], A[1][1] * B[1][1]);
     }
 
-    inline
-        mat2 transpose(const mat2& A) {
-        return mat2(A[0][0], A[1][0],
-            A[0][1], A[1][1]);
+    inline mat2 transpose(const mat2& A) {
+        return mat2(A[0][0], A[1][0],  A[0][1], A[1][1]);
     }
 
-    //----------------------------------------------------------------------------
-    //
-    //  mat3 - 3D square matrix 
-    //
-
+    
+    /**
+    * mat3 - 3D square matrix 
+    */
     class mat3 {
-
-        vec3  _m[3];
-
     public:
-        //
-        //  --- Constructors and Destructors ---
-        //
+        // --------------------------------------------------------------------
+        // ctors and dtors
+        // --------------------------------------------------------------------
 
         mat3(const GLfloat d = GLfloat(1.0f))  // Create a diagional matrix
         {
@@ -247,16 +233,16 @@ namespace macaque
             }
         }
 
-        //
-        //  --- Indexing Operator ---
-        //
+        // --------------------------------------------------------------------
+        //  Indexing Operator
+        // --------------------------------------------------------------------
 
         vec3& operator [] (int i) { return _m[i]; }
         const vec3& operator [] (int i) const { return _m[i]; }
 
-        //
-        //  --- (non-modifying) Arithmatic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (non-modifying) Arithmatic Operators
+        // --------------------------------------------------------------------
 
         mat3 operator + (const mat3& m) const
         {
@@ -305,9 +291,9 @@ namespace macaque
             return a;
         }
 
-        //
-        //  --- (modifying) Arithmetic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (modifying) Arithmetic Operators
+        // --------------------------------------------------------------------
 
         mat3& operator += (const mat3& m) {
             _m[0] += m[0];  _m[1] += m[1];  _m[2] += m[2];
@@ -351,9 +337,9 @@ namespace macaque
             return *this *= r;
         }
 
-        //
-        //  --- Matrix / Vector operators ---
-        //
+        // --------------------------------------------------------------------
+        // Matrix / Vector operators
+        // --------------------------------------------------------------------
 
         vec3 operator * (const vec3& v) const {  // m * v
             return vec3(_m[0][0] * v.x + _m[0][1] * v.y + _m[0][2] * v.z,
@@ -361,9 +347,9 @@ namespace macaque
                 _m[2][0] * v.x + _m[2][1] * v.y + _m[2][2] * v.z);
         }
 
-        //
-        //  --- Insertion and Extraction Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Insertion and Extraction Operators
+        // --------------------------------------------------------------------
 
         friend std::ostream& operator << (std::ostream& os, const mat3& m) {
             return os << std::endl
@@ -377,9 +363,9 @@ namespace macaque
             return is >> m._m[0] >> m._m[1] >> m._m[2];
         }
 
-        //
-        //  --- Conversion Operators ---
-        //
+        // --------------------------------------------------------------------
+        // Conversion Operators
+        // --------------------------------------------------------------------
 
         operator const GLfloat* () const
         {
@@ -390,39 +376,35 @@ namespace macaque
         {
             return static_cast<GLfloat*>(&_m[0].x);
         }
-    };
 
-    //
-    //  --- Non-class mat3 Methods ---
-    //
+        // --------------------------------------------------------------------
+        private:
+            vec3  _m[3];
+    }; // class mat3
 
-    inline
-        mat3 matrixCompMult(const mat3& A, const mat3& B) {
+    // ------------------------------------------------------------------------
+    // Non-class mat3 Methods
+    // ------------------------------------------------------------------------
+
+    inline mat3 matrixCompMult(const mat3& A, const mat3& B) {
         return mat3(A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2],
             A[1][0] * B[1][0], A[1][1] * B[1][1], A[1][2] * B[1][2],
             A[2][0] * B[2][0], A[2][1] * B[2][1], A[2][2] * B[2][2]);
     }
 
-    inline
-        mat3 transpose(const mat3& A) {
-        return mat3(A[0][0], A[1][0], A[2][0],
-            A[0][1], A[1][1], A[2][1],
+    inline mat3 transpose(const mat3& A) {
+        return mat3(A[0][0], A[1][0], A[2][0], A[0][1], A[1][1], A[2][1],
             A[0][2], A[1][2], A[2][2]);
     }
 
-    //----------------------------------------------------------------------------
-    //
-    //  mat4.h - 4D square matrix
-    //
-
+    /**
+    * mat4.h - 4D square matrix
+    */
     class mat4 {
-
-        vec4  _m[4];
-
     public:
-        //
-        //  --- Constructors and Destructors ---
-        //
+        // --------------------------------------------------------------------
+        //  ctors and dtors
+        // --------------------------------------------------------------------
 
         mat4(const GLfloat d = GLfloat(1.0f))  // Create a diagional matrix
         {
@@ -455,16 +437,16 @@ namespace macaque
             }
         }
 
-        //
-        //  --- Indexing Operator ---
-        //
+        // --------------------------------------------------------------------
+        // Indexing Operator
+        // --------------------------------------------------------------------
 
         vec4& operator [] (int i) { return _m[i]; }
         const vec4& operator [] (int i) const { return _m[i]; }
 
-        //
-        //  --- (non-modifying) Arithematic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (non-modifying) Arithematic Operators
+        // --------------------------------------------------------------------
 
         mat4 operator + (const mat4& m) const
         {
@@ -513,9 +495,9 @@ namespace macaque
             return a;
         }
 
-        //
-        //  --- (modifying) Arithematic Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  (modifying) Arithematic Operators
+        // --------------------------------------------------------------------
 
         mat4& operator += (const mat4& m) {
             _m[0] += m[0];  _m[1] += m[1];  _m[2] += m[2];  _m[3] += m[3];
@@ -559,9 +541,9 @@ namespace macaque
             return *this *= r;
         }
 
-        //
-        //  --- Matrix / Vector operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Matrix / Vector operators
+        // --------------------------------------------------------------------
 
         vec4 operator * (const vec4& v) const {  // m * v
             return vec4(_m[0][0] * v.x + _m[0][1] * v.y + _m[0][2] * v.z + _m[0][3] * v.w,
@@ -571,9 +553,9 @@ namespace macaque
             );
         }
 
-        //
-        //  --- Insertion and Extraction Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Insertion and Extraction Operators
+        // --------------------------------------------------------------------
 
         friend std::ostream& operator << (std::ostream& os, const mat4& m) {
             return os << std::endl
@@ -588,9 +570,9 @@ namespace macaque
             return is >> m._m[0] >> m._m[1] >> m._m[2] >> m._m[3];
         }
 
-        //
-        //  --- Conversion Operators ---
-        //
+        // --------------------------------------------------------------------
+        //  Conversion Operators
+        // --------------------------------------------------------------------
 
         operator const GLfloat* () const
         {
@@ -601,14 +583,17 @@ namespace macaque
         {
             return static_cast<GLfloat*>(&_m[0].x);
         }
-    };
 
-    //
-    //  --- Non-class mat4 Methods ---
-    //
+        // --------------------------------------------------------------------
+        private:
+            vec4  _m[4];
+    }; // class mat4
 
-    inline
-        mat4 matrixCompMult(const mat4& A, const mat4& B) {
+    // ------------------------------------------------------------------------
+    //  Non-class mat4 Methods
+    // ------------------------------------------------------------------------
+
+    inline  mat4 matrixCompMult(const mat4& A, const mat4& B) {
         return mat4(
             A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2], A[0][3] * B[0][3],
             A[1][0] * B[1][0], A[1][1] * B[1][1], A[1][2] * B[1][2], A[1][3] * B[1][3],
@@ -616,25 +601,23 @@ namespace macaque
             A[3][0] * B[3][0], A[3][1] * B[3][1], A[3][2] * B[3][2], A[3][3] * B[3][3]);
     }
 
-    inline
-        mat4 transpose(const mat4& A) {
+    inline mat4 transpose(const mat4& A) {
         return mat4(A[0][0], A[1][0], A[2][0], A[3][0],
             A[0][1], A[1][1], A[2][1], A[3][1],
             A[0][2], A[1][2], A[2][2], A[3][2],
             A[0][3], A[1][3], A[2][3], A[3][3]);
     }
 
-    //////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     //
     //  Helpful Matrix Methods
     //
-    //////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
 #define Error( str ) do { std::cerr << "[" __FILE__ ":" << __LINE__ << "] " \
 				    << str << std::endl; } while(0)
 
-    inline
-        vec4 mvmult(const mat4& a, const vec4& b)
+    inline vec4 mvmult(const mat4& a, const vec4& b)
     {
         Error("replace with vector matrix multiplcation operator");
 
@@ -647,13 +630,11 @@ namespace macaque
         return c;
     }
 
-    //----------------------------------------------------------------------------
-    //
+    // ------------------------------------------------------------------------
     //  Rotation matrix generators
-    //
+    // ------------------------------------------------------------------------
 
-    inline
-        mat4 RotateX(const GLfloat theta)
+    inline mat4 RotateX(const GLfloat theta)
     {
         GLfloat angle = DegreesToRadians * theta;
 
@@ -664,8 +645,7 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 RotateY(const GLfloat theta)
+    inline mat4 RotateY(const GLfloat theta)
     {
         GLfloat angle = DegreesToRadians * theta;
 
@@ -676,8 +656,7 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 RotateZ(const GLfloat theta)
+    inline mat4 RotateZ(const GLfloat theta)
     {
         GLfloat angle = DegreesToRadians * theta;
 
@@ -688,13 +667,11 @@ namespace macaque
         return c;
     }
 
-    //----------------------------------------------------------------------------
-    //
+    // ------------------------------------------------------------------------
     //  Translation matrix generators
-    //
+    // ------------------------------------------------------------------------
 
-    inline
-        mat4 Translate(const GLfloat x, const GLfloat y, const GLfloat z)
+    inline mat4 Translate(const GLfloat x, const GLfloat y, const GLfloat z)
     {
         mat4 c;
         c[0][3] = x;
@@ -703,25 +680,21 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 Translate(const vec3& v)
+    inline mat4 Translate(const vec3& v)
     {
         return Translate(v.x, v.y, v.z);
     }
 
-    inline
-        mat4 Translate(const vec4& v)
+    inline mat4 Translate(const vec4& v)
     {
         return Translate(v.x, v.y, v.z);
     }
 
-    //----------------------------------------------------------------------------
-    //
+    // ------------------------------------------------------------------------
     //  Scale matrix generators
-    //
+    // ------------------------------------------------------------------------
 
-    inline
-        mat4 Scale(const GLfloat x, const GLfloat y, const GLfloat z)
+    inline mat4 Scale(const GLfloat x, const GLfloat y, const GLfloat z)
     {
         mat4 c;
         c[0][0] = x;
@@ -730,25 +703,20 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 Scale(const vec3& v)
+    inline mat4 Scale(const vec3& v)
     {
         return Scale(v.x, v.y, v.z);
     }
 
-    //----------------------------------------------------------------------------
-    //
+    //-------------------------------------------------------------------------
     //  Projection transformation matrix geneartors
     //
     //    Note: Microsoft Windows (r) defines the keyword "far" in C/C++.  In
     //          order to avoid any name conflicts, we use the variable names
     //          "zNear" to reprsent "near", and "zFar" to reprsent "far".
-    //
+    // ------------------------------------------------------------------------
 
-
-
-    inline
-        mat4 Ortho(const GLfloat left, const GLfloat right,
+    inline mat4 Ortho(const GLfloat left, const GLfloat right,
             const GLfloat bottom, const GLfloat top,
             const GLfloat zNear, const GLfloat zFar)
     {
@@ -763,15 +731,13 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 Ortho2D(const GLfloat left, const GLfloat right,
+    inline mat4 Ortho2D(const GLfloat left, const GLfloat right,
             const GLfloat bottom, const GLfloat top)
     {
         return Ortho(left, right, bottom, top, -1.0, 1.0f);
     }
 
-    inline
-        mat4 Frustum(const GLfloat left, const GLfloat right,
+    inline mat4 Frustum(const GLfloat left, const GLfloat right,
             const GLfloat bottom, const GLfloat top,
             const GLfloat zNear, const GLfloat zFar)
     {
@@ -786,8 +752,7 @@ namespace macaque
         return c;
     }
 
-    inline
-        mat4 Perspective(const GLfloat fovy, const GLfloat aspect,
+    inline mat4 Perspective(const GLfloat fovy, const GLfloat aspect,
             const GLfloat zNear, const GLfloat zFar)
     {
         GLfloat top = tan(fovy * DegreesToRadians / 2) * zNear;
@@ -802,13 +767,11 @@ namespace macaque
         return c;
     }
 
-    //----------------------------------------------------------------------------
-    //
+    // ------------------------------------------------------------------------
     //  Viewing transformation matrix generation
-    //
+    // ------------------------------------------------------------------------
 
-    inline
-        mat4 LookAt(const vec4& eye, const vec4& at, const vec4& up)
+    inline mat4 LookAt(const vec4& eye, const vec4& at, const vec4& up)
     {
         vec4 n = normalize(eye - at);
         vec4 u = normalize(cross(up, n));
@@ -818,32 +781,30 @@ namespace macaque
         return c * Translate(-eye);
     }
 
-    //----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-    inline
-        vec4 minus(const vec4& a, const vec4& b)
+    inline vec4 minus(const vec4& a, const vec4& b)
     {
         Error("replace with vector subtraction");
         return vec4(a[0] - b[0], a[1] - b[1], a[2] - b[2], 0.0f);
     }
 
-    inline
-        void printv(const vec4& a)
+    inline void printv(const vec4& a)
     {
         Error("replace with vector insertion operator");
         printf("%f %f %f %f \n\n", a[0], a[1], a[2], a[3]);
     }
 
-    inline
-        void printm(const mat4 a)
+    inline void printm(const mat4 a)
     {
         Error("replace with matrix insertion operator");
-        for (int i = 0; i < 4; i++) printf("%f %f %f %f \n", a[i][0], a[i][1], a[i][2], a[i][3]);
+        for (int i = 0; i < 4; i++) printf("%f %f %f %f \n", a[i][0], a[i][1],
+            a[i][2], a[i][3]);
         printf("\n");
     }
 
-    inline
-        mat4 identity()
+    inline mat4 identity()
     {
         Error("replace with either a matrix constructor or identity method");
         mat4 c;
@@ -852,5 +813,4 @@ namespace macaque
         return c;
     }
 
-
-}  // namespace geom
+}  // namespace macaque
