@@ -4,10 +4,12 @@ namespace urus
 {
     class Scene;
 
+    /**
+    * Abstract renderer.
+    */
     class Renderer
     {
     public:
-        Renderer() {}
-        void draw(const Scene& scene) {}
+        virtual void draw(const Scene& scene) = 0;
     }; // class Renderer
 } // namespace urus
