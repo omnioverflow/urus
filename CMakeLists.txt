@@ -46,7 +46,6 @@ target_sources (${PROJECT_NAME}
     src/engine/backend/opengl/VertexAttribute.cpp
     # engine/renderer
     src/engine/renderer/Renderer.h
-    src/engine/renderer/Renderer.cpp
     # engine/scene
     src/engine/scene/Node.h
     src/engine/scene/Node.cpp
@@ -149,7 +148,6 @@ source_group (engine\\controls
 source_group (engine\\renderer
     FILES
     src/engine/renderer/Renderer.h
-    src/engine/renderer/Renderer.cpp
     )
 
 source_group (engine\\scene
