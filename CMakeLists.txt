@@ -38,6 +38,8 @@ target_sources (${PROJECT_NAME}
     # engine/backend/opengl
     src/engine/backend/opengl/Draw.h
     src/engine/backend/opengl/Draw.cpp
+    src/engine/backend/opengl/GLRenderer.h
+    src/engine/backend/opengl/GLRenderer.cpp
     src/engine/backend/opengl/IndexBuffer.h
     src/engine/backend/opengl/IndexBuffer.cpp
     src/engine/backend/opengl/Uniform.h
@@ -128,6 +130,8 @@ source_group (engine\\backend\\opengl
     src/engine/backend/opengl/VertexAttribute.cpp
     src/engine/backend/opengl/Draw.h
     src/engine/backend/opengl/Draw.cpp
+    src/engine/backend/opengl/GLRenderer.h
+    src/engine/backend/opengl/GLRenderer.cpp
     src/engine/backend/opengl/IndexBuffer.h
     src/engine/backend/opengl/IndexBuffer.cpp
     src/engine/backend/opengl/Node.h
