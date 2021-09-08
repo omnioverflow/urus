@@ -3,7 +3,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "engine/backend/opengl/IndexBuffer.h"
+#include "engine/backend/gl/IndexBuffer.h"
 #include "engine/base/OpenGLSupport.h"
 
 namespace urus

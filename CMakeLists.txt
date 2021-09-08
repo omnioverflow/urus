@@ -36,16 +36,16 @@ target_sources (${PROJECT_NAME}
     src/engine/controls/InputDispatcher.cpp
     src/engine/controls/Trackball.h
     # engine/backend/opengl
-    src/engine/backend/opengl/Draw.h
-    src/engine/backend/opengl/Draw.cpp
-    src/engine/backend/opengl/GLRenderer.h
-    src/engine/backend/opengl/GLRenderer.cpp
-    src/engine/backend/opengl/IndexBuffer.h
-    src/engine/backend/opengl/IndexBuffer.cpp
-    src/engine/backend/opengl/Uniform.h
-    src/engine/backend/opengl/Uniform.cpp
-    src/engine/backend/opengl/VertexAttribute.h
-    src/engine/backend/opengl/VertexAttribute.cpp
+    src/engine/backend/gl/Draw.h
+    src/engine/backend/gl/Draw.cpp
+    src/engine/backend/gl/GLRenderer.h
+    src/engine/backend/gl/GLRenderer.cpp
+    src/engine/backend/gl/IndexBuffer.h
+    src/engine/backend/gl/IndexBuffer.cpp
+    src/engine/backend/gl/Uniform.h
+    src/engine/backend/gl/Uniform.cpp
+    src/engine/backend/gl/VertexAttribute.h
+    src/engine/backend/gl/VertexAttribute.cpp
     # engine/renderer
     src/engine/renderer/Renderer.h
     # engine/scene
@@ -124,22 +124,22 @@ source_group (engine\\base
     src/engine/base/Singleton.h
     )
 
-source_group (engine\\backend\\opengl
+source_group (engine\\backend\\gl
     FILES 
-    src/engine/backend/opengl/VertexAttribute.h
-    src/engine/backend/opengl/VertexAttribute.cpp
-    src/engine/backend/opengl/Draw.h
-    src/engine/backend/opengl/Draw.cpp
-    src/engine/backend/opengl/GLRenderer.h
-    src/engine/backend/opengl/GLRenderer.cpp
-    src/engine/backend/opengl/IndexBuffer.h
-    src/engine/backend/opengl/IndexBuffer.cpp
-    src/engine/backend/opengl/Node.h
-    src/engine/backend/opengl/Node.cpp
-    src/engine/backend/opengl/Scene.h
-    src/engine/backend/opengl/Scene.cpp
-    src/engine/backend/opengl/Uniform.h
-    src/engine/backend/opengl/Uniform.cpp
+    src/engine/backend/gl/VertexAttribute.h
+    src/engine/backend/gl/VertexAttribute.cpp
+    src/engine/backend/gl/Draw.h
+    src/engine/backend/gl/Draw.cpp
+    src/engine/backend/gl/GLRenderer.h
+    src/engine/backend/gl/GLRenderer.cpp
+    src/engine/backend/gl/IndexBuffer.h
+    src/engine/backend/gl/IndexBuffer.cpp
+    src/engine/backend/gl/Node.h
+    src/engine/backend/gl/Node.cpp
+    src/engine/backend/gl/Scene.h
+    src/engine/backend/gl/Scene.cpp
+    src/engine/backend/gl/Uniform.h
+    src/engine/backend/gl/Uniform.cpp
     )
 
 source_group (engine\\controls
