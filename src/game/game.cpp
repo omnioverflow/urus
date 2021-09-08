@@ -18,6 +18,10 @@ using namespace urus;
 GLuint Game::VAO;
 GLuint Game::VBO;
 Texture* Game::sTexture;
+// Refactor the following c-style array into std::vector
+// or unique_ptr<vector>; 
+// vector<unique_ptr> might not be a good choice because of negative impact
+// on cache coherency?
 std::unique_ptr<ShaderProgram> Game::shaders[NB_SHADERS];
 
 // ============================================================================
