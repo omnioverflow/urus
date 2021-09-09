@@ -78,9 +78,7 @@ namespace mq
     }; // struct vec3_t
 
     typedef vec3_t<float> vec3;
-    typedef std::vector<vec3> vec3vec;
     typedef vec3_t<int> ivec3;
-    typedef std::vector<ivec3> ivec3vec;
 
     template <typename T>
     inline T& vec3_t<T>::operator[] (int index)
