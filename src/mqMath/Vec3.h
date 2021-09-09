@@ -75,6 +75,8 @@ namespace mq
         inline vec3_t() : x(0), y(0), z(0) {}
         inline vec3_t(T xval, T yval, T zval) : x(xval), y(yval), z(zval) {}
         inline vec3_t(const T* array) : x(array[0]), y(array[1]), z(array[2]) {}
+
+        static vec3_t<T> getZero() { return vec3_t(0, 0, 0); }
     }; // struct vec3_t
 
     typedef vec3_t<float> vec3;
