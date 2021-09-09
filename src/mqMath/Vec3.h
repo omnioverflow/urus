@@ -22,7 +22,7 @@
        (https://docs.microsoft.com/en-us/cpp/build/reference/ob-inline-function-expansion?view=msvc-160)
 */
 
-namespace macaque
+namespace mq
 {
     template <typename T>
     struct vec3_t
@@ -260,4 +260,4 @@ namespace macaque
         return normalized(lerp(v0, v1, t));
     }
 
-} // namespace macaque
+} // namespace mq

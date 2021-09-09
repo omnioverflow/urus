@@ -8,10 +8,10 @@ namespace urus
 {
     template VertexAttribute<int>;
     template VertexAttribute<float>;
-    template VertexAttribute<macaque::vec2>;
-    template VertexAttribute<macaque::vec3>;
-    template VertexAttribute<macaque::vec4>;
-    template VertexAttribute<macaque::ivec4>;
+    template VertexAttribute<mq::vec2>;
+    template VertexAttribute<mq::vec3>;
+    template VertexAttribute<mq::vec4>;
+    template VertexAttribute<mq::ivec4>;
 
     template <typename T>
     VertexAttribute<T>::VertexAttribute()
@@ -46,25 +46,25 @@ namespace urus
     }
 
     template <>
-    void VertexAttribute<macaque::vec2>::setVertexAttribPointer(GLuint index)
+    void VertexAttribute<mq::vec2>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::vec3>::setVertexAttribPointer(GLuint index)
+    void VertexAttribute<mq::vec3>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::vec4>::setVertexAttribPointer(GLuint index)
+    void VertexAttribute<mq::vec4>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, 0, 0);
     }
 
     template <>
-    void VertexAttribute<macaque::ivec4>::setVertexAttribPointer(GLuint index)
+    void VertexAttribute<mq::ivec4>::setVertexAttribPointer(GLuint index)
     {
         glVertexAttribIPointer(index, 4, GL_INT, 0, (void*)0);
     }

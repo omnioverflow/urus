@@ -1,6 +1,6 @@
 #pragma once
 
-namespace macaque
+namespace mq
 {
     template <typename T>
     struct vec2_t
@@ -38,4 +38,4 @@ namespace macaque
     {
         return data[index];
     }
-} // namespace macaque
+} // namespace mq

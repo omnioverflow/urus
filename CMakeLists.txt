@@ -94,8 +94,8 @@ target_sources (${PROJECT_NAME}
     src/glsl/shader1.frag
     src/glsl/coord_sys.vert
     src/glsl/coord_sys.frag
-    # Macaque vector math lib
-    # TODO: extract Macaque as a library into a dedicated repo
+    # Macaque Math (mqMath) vector math lib
+    # TODO: extract mqMath as a library into a dedicated repo
     src/mqMath/Mat.h
     src/mqMath/Mat4.h
     src/mqMath/MqMath.h

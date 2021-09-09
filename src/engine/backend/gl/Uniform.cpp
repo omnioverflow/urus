@@ -12,11 +12,11 @@ namespace urus
 {
     template Uniform<int>;
     template Uniform<float>;
-    template Uniform<macaque::ivec2>;
-    template Uniform<macaque::ivec4>;
-    template Uniform<macaque::vec2>;
-    template Uniform<macaque::vec3>;
-    template Uniform<macaque::vec4>;
+    template Uniform<mq::ivec2>;
+    template Uniform<mq::ivec4>;
+    template Uniform<mq::vec2>;
+    template Uniform<mq::vec3>;
+    template Uniform<mq::vec4>;
 
     // FIXME: quaternion and mat4 template specializations:
     // template Uniform<quat>;
@@ -65,11 +65,11 @@ namespace urus
     
     UNIFORM_IMPL(glUniform1iv, int, int)
     UNIFORM_IMPL(glUniform1fv, float, float)
-    UNIFORM_VEC_IMPL(glUniform2iv, macaque::ivec2, int)
-    UNIFORM_VEC_IMPL(glUniform4iv, macaque::ivec4, int)
-    UNIFORM_VEC_IMPL(glUniform2fv, macaque::vec2, float)
-    UNIFORM_VEC_IMPL(glUniform3fv, macaque::vec3, float)
-    UNIFORM_VEC_IMPL(glUniform4fv, macaque::vec4, float)
+    UNIFORM_VEC_IMPL(glUniform2iv, mq::ivec2, int)
+    UNIFORM_VEC_IMPL(glUniform4iv, mq::ivec4, int)
+    UNIFORM_VEC_IMPL(glUniform2fv, mq::vec2, float)
+    UNIFORM_VEC_IMPL(glUniform3fv, mq::vec3, float)
+    UNIFORM_VEC_IMPL(glUniform4fv, mq::vec4, float)
 
     // FIXME: fix quat & mat4 implementations
     // UNIFORM_IMPL(glUniform4fv, quat, float)

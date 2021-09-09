@@ -18,7 +18,7 @@
         - does not comply with the OpenGL convetion
 */
 
-namespace macaque
+namespace mq
 {
     struct row_major_mat4
     {
@@ -146,4 +146,4 @@ namespace macaque
     }; // struct mat4
 
     typedef row_major_mat4 mat4;
-} // namespace macaque
+} // namespace mq

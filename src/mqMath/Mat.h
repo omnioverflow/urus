@@ -2,7 +2,7 @@
 
 #include "Vec.h"
 
-namespace macaque
+namespace mq
 {    
     /**
     * mat2 - 2D square matrix
@@ -813,4 +813,4 @@ namespace macaque
         return c;
     }
 
-}  // namespace macaque
+}  // namespace mq

@@ -1,10 +1,10 @@
 #pragma once
 
 /**
- * mq_math.h a.k.a. macaque math
+ * mq_math.h a.k.a. mq math
 */
 
-namespace macaque
+namespace mq
 {
     namespace internal
     {
@@ -15,4 +15,4 @@ namespace macaque
     {
         return (x < internal::MQ_EPSILON) && (x > -internal::MQ_EPSILON);
     }
-} // namespace macaque
+} // namespace mq
