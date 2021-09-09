@@ -1,9 +1,9 @@
-#include "Node.h"
+#include "SceneNode.h"
 #include "engine/shader/Shader.h"
 
 namespace urus
 {
-    Node::Node(const std::vector<float>& vertices, 
+    SceneNode::SceneNode(const std::vector<float>& vertices, 
                           std::shared_ptr<ShaderProgram> shaderProgram)
     : mVertices(vertices)
     , mShaderProgram(shaderProgram)

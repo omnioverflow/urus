@@ -7,11 +7,11 @@ namespace urus
 {
     class ShaderProgram;
     
-    class Node
+    class SceneNode
     {
         public:
 
-            explicit Node(const std::vector<float>& vertices,
+            explicit SceneNode(const std::vector<float>& vertices,
                           std::shared_ptr<ShaderProgram> shaderProgram);
         private:
 

@@ -49,8 +49,8 @@ target_sources (${PROJECT_NAME}
     # engine/renderer
     src/engine/renderer/Renderer.h
     # engine/scene
-    src/engine/scene/Node.h
-    src/engine/scene/Node.cpp
+    src/engine/scene/SceneNode.h
+    src/engine/scene/SceneNode.cpp
     src/engine/scene/Scene.h
     src/engine/scene/Scene.cpp
     # engine/shader
@@ -134,10 +134,6 @@ source_group (engine\\backend\\gl
     src/engine/backend/gl/GLRenderer.cpp
     src/engine/backend/gl/IndexBuffer.h
     src/engine/backend/gl/IndexBuffer.cpp
-    src/engine/backend/gl/Node.h
-    src/engine/backend/gl/Node.cpp
-    src/engine/backend/gl/Scene.h
-    src/engine/backend/gl/Scene.cpp
     src/engine/backend/gl/Uniform.h
     src/engine/backend/gl/Uniform.cpp
     )
@@ -156,8 +152,8 @@ source_group (engine\\renderer
 
 source_group (engine\\scene
     FILES
-    src/engine/scene/Node.h
-    scr/engine/scene/Node.cpp
+    src/engine/scene/SceneNode.h
+    scr/engine/scene/SceneNode.cpp
     src/engine/scene/Scene.h
     scr/engine/scene/Scene.cpp
     )
