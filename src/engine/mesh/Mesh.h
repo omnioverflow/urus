@@ -26,15 +26,24 @@ namespace urus {
         // check this out https://en.cppreference.com/w/cpp/language/operators
         // regarding using friends when overloading arithmetic operators.
         Mesh& operator+=(const Mesh& rhs);
-        const Mesh& operator+(const Mesh& rhs);
+        const Mesh& operator+(const Mesh& rhs);        
 
+        bool isEmpty() const;
         bool hasVertices() const { return !mVertices.empty(); }
         bool hasNormals() const { return !mVertexNormals.empty(); }
         bool hasVertexColors() const { return !mVertexColors.empty(); }
 
+        mq::vec3 getMinBound() const;
+        mq::vec3 getMaxBound() const;
+        mq::vec3 getCenter() const;
+
         void paintUniformColor(const mq::vec3& color);
 
         void normalizeNormals();
+
+        // virtual methods:
+
+        virtual clear();
 
     protected:
         std::vector<mq::vec3> mVertices;
@@ -49,6 +58,8 @@ namespace urus {
             const std::vector<mq::vec3>& vert,
             const std::vector<mq::ivec3> tri
         );
+
+        virtual clear() override;
       
     public: // public static
         static std::shared_ptr<TriangleMesh> createBox(
