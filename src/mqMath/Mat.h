@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "Vec.h"
 
 namespace mq
@@ -14,18 +16,15 @@ namespace mq
         // --------------------------------------------------------------------
 
         // Create a diagional matrix
-        mat2(const GLfloat d = GLfloat(1.0f))  
-        {
+        mat2(const GLfloat d = GLfloat(1.0f)) {
             _m[0].x = d;  _m[1].y = d;
         }
 
-        mat2(const vec2& a, const vec2& b)
-        {
+        mat2(const vec2& a, const vec2& b) {
             _m[0] = a;  _m[1] = b;
         }
 
-        mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11)
-        {
+        mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11) {
             _m[0] = vec2(m00, m01); _m[1] = vec2(m10, m11);
         }
 
@@ -47,22 +46,19 @@ namespace mq
         //  (non-modifying) Arithmatic Operators
         // --------------------------------------------------------------------
 
-        mat2 operator + (const mat2& m) const
-        {
+        mat2 operator+ (const mat2& m) const {
             return mat2(_m[0] + m[0], _m[1] + m[1]);
         }
 
-        mat2 operator - (const mat2& m) const
-        {
+        mat2 operator- (const mat2& m) const {
             return mat2(_m[0] - m[0], _m[1] - m[1]);
         }
 
-        mat2 operator * (const GLfloat s) const
-        {
+        mat2 operator* (const GLfloat s) const {
             return mat2(s * _m[0], s * _m[1]);
         }
 
-        mat2 operator / (const GLfloat s) const {
+        mat2 operator/ (const GLfloat s) const {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -75,12 +71,11 @@ namespace mq
             return *this * r;
         }
 
-        friend mat2 operator * (const GLfloat s, const mat2& m)
-        {
+        friend mat2 operator* (const GLfloat s, const mat2& m) {
             return m * s;
         }
 
-        mat2 operator * (const mat2& m) const {
+        mat2 operator* (const mat2& m) const {
             mat2  a(0.0f);
 
             for (int i = 0; i < 2; ++i) {
@@ -98,22 +93,22 @@ namespace mq
         //  (modifying) Arithmetic Operators
         // --------------------------------------------------------------------
 
-        mat2& operator += (const mat2& m) {
+        mat2& operator+= (const mat2& m) {
             _m[0] += m[0];  _m[1] += m[1];
             return *this;
         }
 
-        mat2& operator -= (const mat2& m) {
+        mat2& operator-= (const mat2& m) {
             _m[0] -= m[0];  _m[1] -= m[1];
             return *this;
         }
 
-        mat2& operator *= (const GLfloat s) {
+        mat2& operator*= (const GLfloat s) {
             _m[0] *= s;  _m[1] *= s;
             return *this;
         }
 
-        mat2& operator *= (const mat2& m) {
+        mat2& operator*= (const mat2& m) {
             mat2  a(0.0f);
 
             for (int i = 0; i < 2; ++i) {
@@ -127,7 +122,7 @@ namespace mq
             return *this = a;
         }
 
-        mat2& operator /= (const GLfloat s) {
+        mat2& operator/= (const GLfloat s) {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -144,7 +139,7 @@ namespace mq
         //  Matrix / Vector operators
         // --------------------------------------------------------------------
 
-        vec2 operator * (const vec2& v) const {  // m * v
+        vec2 operator* (const vec2& v) const {  // m * v
             return vec2(_m[0][0] * v.x + _m[0][1] * v.y,
                 _m[1][0] * v.x + _m[1][1] * v.y);
         }
@@ -153,13 +148,11 @@ namespace mq
         //  Insertion and Extraction Operators
         // --------------------------------------------------------------------
 
-        friend std::ostream& operator << (std::ostream& os, const mat2& m)
-        {
+        friend std::ostream& operator<< (std::ostream& os, const mat2& m) {
             return os << std::endl << m[0] << std::endl << m[1] << std::endl;
         }
 
-        friend std::istream& operator >> (std::istream& is, mat2& m)
-        {
+        friend std::istream& operator>> (std::istream& is, mat2& m) {
             return is >> m._m[0] >> m._m[1];
         }
 
@@ -167,13 +160,11 @@ namespace mq
         //  Conversion Operators
         // --------------------------------------------------------------------
 
-        operator const GLfloat* () const
-        {
+        operator const GLfloat* () const {
             return static_cast<const GLfloat*>(&_m[0].x);
         }
 
-        operator GLfloat* ()
-        {
+        operator GLfloat* () {
             return static_cast<GLfloat*>(&_m[0].x);
         }
 
@@ -186,14 +177,17 @@ namespace mq
     //  Non-class mat2 Methods
     // ------------------------------------------------------------------------
 
+    /*
     inline mat2 matrixCompMult(const mat2& A, const mat2& B) {
         return mat2(A[0][0] * B[0][0], A[0][1] * B[0][1], 
             A[1][0] * B[1][0], A[1][1] * B[1][1]);
     }
+    
 
     inline mat2 transpose(const mat2& A) {
         return mat2(A[0][0], A[1][0],  A[0][1], A[1][1]);
     }
+    */
 
     
     /**
@@ -205,27 +199,26 @@ namespace mq
         // ctors and dtors
         // --------------------------------------------------------------------
 
-        mat3(const GLfloat d = GLfloat(1.0f))  // Create a diagional matrix
-        {
+        /**
+        * ctor - create a diagonal matrix.
+        */
+        mat3(const GLfloat d = GLfloat(1.0f)) {
             _m[0].x = d;  _m[1].y = d;  _m[2].z = d;
         }
 
-        mat3(const vec3& a, const vec3& b, const vec3& c)
-        {
+        mat3(const vec3& a, const vec3& b, const vec3& c) {
             _m[0] = a;  _m[1] = b;  _m[2] = c;
         }
 
         mat3(GLfloat m00, GLfloat m10, GLfloat m20,
             GLfloat m01, GLfloat m11, GLfloat m21,
-            GLfloat m02, GLfloat m12, GLfloat m22)
-        {
+            GLfloat m02, GLfloat m12, GLfloat m22) {
             _m[0] = vec3(m00, m01, m02);
             _m[1] = vec3(m10, m11, m12);
             _m[2] = vec3(m20, m21, m22);
         }
 
-        mat3(const mat3& m)
-        {
+        mat3(const mat3& m) {
             if (*this != m) {
                 _m[0] = m._m[0];
                 _m[1] = m._m[1];
@@ -244,18 +237,15 @@ namespace mq
         //  (non-modifying) Arithmatic Operators
         // --------------------------------------------------------------------
 
-        mat3 operator + (const mat3& m) const
-        {
+        mat3 operator + (const mat3& m) const {
             return mat3(_m[0] + m[0], _m[1] + m[1], _m[2] + m[2]);
         }
 
-        mat3 operator - (const mat3& m) const
-        {
+        mat3 operator - (const mat3& m) const {
             return mat3(_m[0] - m[0], _m[1] - m[1], _m[2] - m[2]);
         }
 
-        mat3 operator * (const GLfloat s) const
-        {
+        mat3 operator * (const GLfloat s) const {
             return mat3(s * _m[0], s * _m[1], s * _m[2]);
         }
 
@@ -272,8 +262,7 @@ namespace mq
             return *this * r;
         }
 
-        friend mat3 operator * (const GLfloat s, const mat3& m)
-        {
+        friend mat3 operator * (const GLfloat s, const mat3& m) {
             return m * s;
         }
 
@@ -351,15 +340,14 @@ namespace mq
         //  Insertion and Extraction Operators
         // --------------------------------------------------------------------
 
-        friend std::ostream& operator << (std::ostream& os, const mat3& m) {
+        friend std::ostream& operator<< (std::ostream& os, const mat3& m) {
             return os << std::endl
                 << m[0] << std::endl
                 << m[1] << std::endl
                 << m[2] << std::endl;
         }
 
-        friend std::istream& operator >> (std::istream& is, mat3& m)
-        {
+        friend std::istream& operator>> (std::istream& is, mat3& m) {
             return is >> m._m[0] >> m._m[1] >> m._m[2];
         }
 
@@ -367,13 +355,11 @@ namespace mq
         // Conversion Operators
         // --------------------------------------------------------------------
 
-        operator const GLfloat* () const
-        {
+        operator const GLfloat* () const {
             return static_cast<const GLfloat*>(&_m[0].x);
         }
 
-        operator GLfloat* ()
-        {
+        operator GLfloat* () {
             return static_cast<GLfloat*>(&_m[0].x);
         }
 
@@ -405,30 +391,29 @@ namespace mq
         // --------------------------------------------------------------------
         //  ctors and dtors
         // --------------------------------------------------------------------
-
-        mat4(const GLfloat d = GLfloat(1.0f))  // Create a diagional matrix
-        {
+        
+        /**
+        * ctor - create a diagonal matrix.
+        */
+        mat4(const GLfloat d = GLfloat(1.0f)) {
             _m[0].x = d;  _m[1].y = d;  _m[2].z = d;  _m[3].w = d;
         }
 
-        mat4(const vec4& a, const vec4& b, const vec4& c, const vec4& d)
-        {
+        mat4(const vec4& a, const vec4& b, const vec4& c, const vec4& d) {
             _m[0] = a;  _m[1] = b;  _m[2] = c;  _m[3] = d;
         }
 
         mat4(GLfloat m00, GLfloat m10, GLfloat m20, GLfloat m30,
             GLfloat m01, GLfloat m11, GLfloat m21, GLfloat m31,
             GLfloat m02, GLfloat m12, GLfloat m22, GLfloat m32,
-            GLfloat m03, GLfloat m13, GLfloat m23, GLfloat m33)
-        {
+            GLfloat m03, GLfloat m13, GLfloat m23, GLfloat m33) {
             _m[0] = vec4(m00, m01, m02, m03);
             _m[1] = vec4(m10, m11, m12, m13);
             _m[2] = vec4(m20, m21, m22, m23);
             _m[3] = vec4(m30, m31, m32, m33);
         }
 
-        mat4(const mat4& m)
-        {
+        mat4(const mat4& m) {
             if (*this != m) {
                 _m[0] = m._m[0];
                 _m[1] = m._m[1];
@@ -448,18 +433,15 @@ namespace mq
         //  (non-modifying) Arithematic Operators
         // --------------------------------------------------------------------
 
-        mat4 operator + (const mat4& m) const
-        {
+        mat4 operator + (const mat4& m) const {
             return mat4(_m[0] + m[0], _m[1] + m[1], _m[2] + m[2], _m[3] + m[3]);
         }
 
-        mat4 operator - (const mat4& m) const
-        {
+        mat4 operator - (const mat4& m) const {
             return mat4(_m[0] - m[0], _m[1] - m[1], _m[2] - m[2], _m[3] - m[3]);
         }
 
-        mat4 operator * (const GLfloat s) const
-        {
+        mat4 operator * (const GLfloat s) const {
             return mat4(s * _m[0], s * _m[1], s * _m[2], s * _m[3]);
         }
 
@@ -476,8 +458,7 @@ namespace mq
             return *this * r;
         }
 
-        friend mat4 operator * (const GLfloat s, const mat4& m)
-        {
+        friend mat4 operator * (const GLfloat s, const mat4& m) {
             return m * s;
         }
 
@@ -565,8 +546,7 @@ namespace mq
                 << m[3] << std::endl;
         }
 
-        friend std::istream& operator >> (std::istream& is, mat4& m)
-        {
+        friend std::istream& operator >> (std::istream& is, mat4& m) {
             return is >> m._m[0] >> m._m[1] >> m._m[2] >> m._m[3];
         }
 
@@ -574,13 +554,11 @@ namespace mq
         //  Conversion Operators
         // --------------------------------------------------------------------
 
-        operator const GLfloat* () const
-        {
+        operator const GLfloat* () const {
             return static_cast<const GLfloat*>(&_m[0].x);
         }
 
-        operator GLfloat* ()
-        {
+        operator GLfloat* () {
             return static_cast<GLfloat*>(&_m[0].x);
         }
 
@@ -617,8 +595,7 @@ namespace mq
 #define Error( str ) do { std::cerr << "[" __FILE__ ":" << __LINE__ << "] " \
 				    << str << std::endl; } while(0)
 
-    inline vec4 mvmult(const mat4& a, const vec4& b)
-    {
+    inline vec4 mvmult(const mat4& a, const vec4& b) {
         Error("replace with vector matrix multiplcation operator");
 
         vec4 c;
@@ -634,8 +611,7 @@ namespace mq
     //  Rotation matrix generators
     // ------------------------------------------------------------------------
 
-    inline mat4 RotateX(const GLfloat theta)
-    {
+    inline mat4 RotateX(const GLfloat theta) {
         GLfloat angle = DegreesToRadians * theta;
 
         mat4 c;
@@ -645,8 +621,7 @@ namespace mq
         return c;
     }
 
-    inline mat4 RotateY(const GLfloat theta)
-    {
+    inline mat4 RotateY(const GLfloat theta) {
         GLfloat angle = DegreesToRadians * theta;
 
         mat4 c;
@@ -656,8 +631,7 @@ namespace mq
         return c;
     }
 
-    inline mat4 RotateZ(const GLfloat theta)
-    {
+    inline mat4 RotateZ(const GLfloat theta) {
         GLfloat angle = DegreesToRadians * theta;
 
         mat4 c;
@@ -671,8 +645,7 @@ namespace mq
     //  Translation matrix generators
     // ------------------------------------------------------------------------
 
-    inline mat4 Translate(const GLfloat x, const GLfloat y, const GLfloat z)
-    {
+    inline mat4 Translate(const GLfloat x, const GLfloat y, const GLfloat z) {
         mat4 c;
         c[0][3] = x;
         c[1][3] = y;
@@ -680,13 +653,11 @@ namespace mq
         return c;
     }
 
-    inline mat4 Translate(const vec3& v)
-    {
+    inline mat4 Translate(const vec3& v) {
         return Translate(v.x, v.y, v.z);
     }
 
-    inline mat4 Translate(const vec4& v)
-    {
+    inline mat4 Translate(const vec4& v) {
         return Translate(v.x, v.y, v.z);
     }
 
@@ -694,8 +665,7 @@ namespace mq
     //  Scale matrix generators
     // ------------------------------------------------------------------------
 
-    inline mat4 Scale(const GLfloat x, const GLfloat y, const GLfloat z)
-    {
+    inline mat4 Scale(const GLfloat x, const GLfloat y, const GLfloat z) {
         mat4 c;
         c[0][0] = x;
         c[1][1] = y;
@@ -703,8 +673,7 @@ namespace mq
         return c;
     }
 
-    inline mat4 Scale(const vec3& v)
-    {
+    inline mat4 Scale(const vec3& v) {
         return Scale(v.x, v.y, v.z);
     }
 
@@ -718,8 +687,7 @@ namespace mq
 
     inline mat4 Ortho(const GLfloat left, const GLfloat right,
             const GLfloat bottom, const GLfloat top,
-            const GLfloat zNear, const GLfloat zFar)
-    {
+            const GLfloat zNear, const GLfloat zFar) {
         mat4 c;
         c[0][0] = 2.0f / (right - left);
         c[1][1] = 2.0f / (top - bottom);
@@ -732,15 +700,13 @@ namespace mq
     }
 
     inline mat4 Ortho2D(const GLfloat left, const GLfloat right,
-            const GLfloat bottom, const GLfloat top)
-    {
+            const GLfloat bottom, const GLfloat top) {
         return Ortho(left, right, bottom, top, -1.0, 1.0f);
     }
 
     inline mat4 Frustum(const GLfloat left, const GLfloat right,
             const GLfloat bottom, const GLfloat top,
-            const GLfloat zNear, const GLfloat zFar)
-    {
+            const GLfloat zNear, const GLfloat zFar) {
         mat4 c;
         c[0][0] = 2.0f * zNear / (right - left);
         c[0][2] = (right + left) / (right - left);
@@ -753,8 +719,7 @@ namespace mq
     }
 
     inline mat4 Perspective(const GLfloat fovy, const GLfloat aspect,
-            const GLfloat zNear, const GLfloat zFar)
-    {
+            const GLfloat zNear, const GLfloat zFar) {
         GLfloat top = tan(fovy * DegreesToRadians / 2) * zNear;
         GLfloat right = top * aspect;
 
@@ -771,8 +736,7 @@ namespace mq
     //  Viewing transformation matrix generation
     // ------------------------------------------------------------------------
 
-    inline mat4 LookAt(const vec4& eye, const vec4& at, const vec4& up)
-    {
+    inline mat4 LookAt(const vec4& eye, const vec4& at, const vec4& up) {
         vec4 n = normalize(eye - at);
         vec4 u = normalize(cross(up, n));
         vec4 v = normalize(cross(n, u));
@@ -784,28 +748,24 @@ namespace mq
     // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
 
-    inline vec4 minus(const vec4& a, const vec4& b)
-    {
+    inline vec4 minus(const vec4& a, const vec4& b) {
         Error("replace with vector subtraction");
         return vec4(a[0] - b[0], a[1] - b[1], a[2] - b[2], 0.0f);
     }
 
-    inline void printv(const vec4& a)
-    {
+    inline void printv(const vec4& a) {
         Error("replace with vector insertion operator");
         printf("%f %f %f %f \n\n", a[0], a[1], a[2], a[3]);
     }
 
-    inline void printm(const mat4 a)
-    {
+    inline void printm(const mat4 a) {
         Error("replace with matrix insertion operator");
         for (int i = 0; i < 4; i++) printf("%f %f %f %f \n", a[i][0], a[i][1],
             a[i][2], a[i][3]);
         printf("\n");
     }
 
-    inline mat4 identity()
-    {
+    inline mat4 identity() {
         Error("replace with either a matrix constructor or identity method");
         mat4 c;
         for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++) c[i][j] = 0.0f;
