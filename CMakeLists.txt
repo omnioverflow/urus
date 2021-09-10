@@ -47,6 +47,7 @@ target_sources (${PROJECT_NAME}
     src/engine/backend/gl/VertexAttribute.h
     src/engine/backend/gl/VertexAttribute.cpp
     # engine/geometry
+    src/engine/geometry/BoundingBox.h
     src/engine/geometry/Mesh.h
     src/engine/geometry/Mesh.cpp
     # engine/renderer
@@ -150,6 +151,7 @@ source_group (engine\\controls
 
 source_group (engine\\geometry
     FILES
+    src/engine/geometry/BoundingBox.h
     src/engine/geometry/Mesh.h
     src/engine/geometry/Mesh.cpp
     )
