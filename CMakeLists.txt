@@ -46,9 +46,9 @@ target_sources (${PROJECT_NAME}
     src/engine/backend/gl/Uniform.cpp
     src/engine/backend/gl/VertexAttribute.h
     src/engine/backend/gl/VertexAttribute.cpp
-    # engine/mesh
-    src/engine/mesh/Mesh.h
-    src/engine/mesh/Mesh.cpp
+    # engine/geometry
+    src/engine/geometry/Mesh.h
+    src/engine/geometry/Mesh.cpp
     # engine/renderer
     src/engine/renderer/Renderer.h
     # engine/scene
@@ -148,10 +148,10 @@ source_group (engine\\controls
     src/engine/controls/Trackball.h
     )
 
-source_group (engine\\mesh
+source_group (engine\\geometry
     FILES
-    src/engine/mesh/Mesh.h
-    src/engine/mesh/Mesh.cpp
+    src/engine/geometry/Mesh.h
+    src/engine/geometry/Mesh.cpp
     )
 
 source_group (engine\\renderer
