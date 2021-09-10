@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include "mqMath/Mat.h"
+#include "mqMath/Mat4.h"
 #include "mqMath/Vec3.h"
 
 // Inspired by mesh interfaces from Open3d.
@@ -11,6 +13,13 @@
 // http://www.open3d.org/docs/0.12.0/cpp_api/classopen3d_1_1geometry_1_1_triangle_mesh.html
 
 namespace urus {
+    class AxisAlignedBoundingBox;
+    class OrientedBoundingBox;
+
+// -----------------------------------------------------------------------------
+// Mesh
+// -----------------------------------------------------------------------------
+
     class Mesh {
     public: 
         Mesh() = default;
@@ -37,29 +46,43 @@ namespace urus {
         mq::vec3 getMaxBound() const;
         mq::vec3 getCenter() const;
 
-        void paintUniformColor(const mq::vec3& color);
+        AxisAlignedBoundingBox getAxisAlignedBoundingBox() const;
+        OrientedBoundingBox getOrientedBoundingBox() const;
 
+        void transform(const mq::mat4 transformation);
+        void translate(const mq::vec3 translation, bool relative=true);
+        void scale(float scale, mq::vec3 center);
+        void rotate(const mq::mat3& R, const mq::vec3& center);
+
+        void paintUniformColor(const mq::vec3& color);
         void normalizeNormals();
 
         // virtual methods:
 
-        virtual clear();
+        virtual void clear();
 
     protected:
         std::vector<mq::vec3> mVertices;
         std::vector<mq::vec3> mVertexColors;
         std::vector<mq::vec3> mVertexNormals;
     }; // class Mesh
+    
+
+// -----------------------------------------------------------------------------
+// TriangleMesh
+// -----------------------------------------------------------------------------
 
     class TriangleMesh : public Mesh {
     public:
         TriangleMesh() = default;
         TriangleMesh(
-            const std::vector<mq::vec3>& vert,
-            const std::vector<mq::ivec3> tri
+            const std::vector<mq::vec3>& vertices,
+            const std::vector<mq::ivec3> triangles
         );
 
-        virtual clear() override;
+        virtual void clear() override;
+
+        std::shared_ptr<TriangleMesh> computeConvexCull() const;
       
     public: // public static
         static std::shared_ptr<TriangleMesh> createBox(
@@ -83,7 +106,7 @@ namespace urus {
         );
 
     private:
-        std::vector<mq::vec3> mVert; // vertices
-        std::vector<mq::ivec3> mTri; // triangles
+        std::vector<mq::ivec3> mTriangles; // triangles
     }; // class TriangleMesh
+
 } // namespace urus
