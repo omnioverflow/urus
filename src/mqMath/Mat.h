@@ -18,15 +18,18 @@ namespace mq
 
         // Create a diagional matrix
         mat2(const GLfloat d = GLfloat(1.0f)) {
-            _m[0].x = d;  _m[1].y = d;
+            _m[0].x = d;
+            _m[1].y = d;
         }
 
         mat2(const vec2& a, const vec2& b) {
-            _m[0] = a;  _m[1] = b;
+            _m[0] = a;
+            _m[1] = b;
         }
 
         mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11) {
-            _m[0] = vec2(m00, m01); _m[1] = vec2(m10, m11);
+            _m[0] = vec2(m00, m01);
+            _m[1] = vec2(m10, m11);
         }
 
         mat2(const mat2& m) {
@@ -95,17 +98,20 @@ namespace mq
         // --------------------------------------------------------------------
 
         mat2& operator+= (const mat2& m) {
-            _m[0] += m[0];  _m[1] += m[1];
+            _m[0] += m[0];
+            _m[1] += m[1];
             return *this;
         }
 
         mat2& operator-= (const mat2& m) {
-            _m[0] -= m[0];  _m[1] -= m[1];
+            _m[0] -= m[0];
+            _m[1] -= m[1];
             return *this;
         }
 
         mat2& operator*= (const GLfloat s) {
-            _m[0] *= s;  _m[1] *= s;
+            _m[0] *= s;
+            _m[1] *= s;
             return *this;
         }
 
@@ -204,11 +210,15 @@ namespace mq
         * ctor - create a diagonal matrix.
         */
         mat3(const GLfloat d = GLfloat(1.0f)) {
-            _m[0].x = d;  _m[1].y = d;  _m[2].z = d;
+            _m[0].x = d;
+            _m[1].y = d;
+            _m[2].z = d;
         }
 
         mat3(const vec3& a, const vec3& b, const vec3& c) {
-            _m[0] = a;  _m[1] = b;  _m[2] = c;
+            _m[0] = a;
+            _m[1] = b;
+            _m[2] = c;
         }
 
         mat3(GLfloat m00, GLfloat m10, GLfloat m20,
@@ -286,17 +296,23 @@ namespace mq
         // --------------------------------------------------------------------
 
         mat3& operator += (const mat3& m) {
-            _m[0] += m[0];  _m[1] += m[1];  _m[2] += m[2];
+            _m[0] += m[0];
+            _m[1] += m[1];
+            _m[2] += m[2];
             return *this;
         }
 
         mat3& operator -= (const mat3& m) {
-            _m[0] -= m[0];  _m[1] -= m[1];  _m[2] -= m[2];
+            _m[0] -= m[0];
+            _m[1] -= m[1];
+            _m[2] -= m[2];
             return *this;
         }
 
         mat3& operator *= (const GLfloat s) {
-            _m[0] *= s;  _m[1] *= s;  _m[2] *= s;
+            _m[0] *= s;
+            _m[1] *= s;
+            _m[2] *= s;
             return *this;
         }
 
@@ -397,11 +413,17 @@ namespace mq
         * ctor - create a diagonal matrix.
         */
         mat4(const GLfloat d = GLfloat(1.0f)) {
-            _m[0].x = d;  _m[1].y = d;  _m[2].z = d;  _m[3].w = d;
+            _m[0].x = d;
+            _m[1].y = d;
+            _m[2].z = d;
+            _m[3].w = d;
         }
 
         mat4(const vec4& a, const vec4& b, const vec4& c, const vec4& d) {
-            _m[0] = a;  _m[1] = b;  _m[2] = c;  _m[3] = d;
+            _m[0] = a;
+            _m[1] = b;
+            _m[2] = c;
+            _m[3] = d;
         }
 
         mat4(GLfloat m00, GLfloat m10, GLfloat m20, GLfloat m30,
@@ -482,17 +504,26 @@ namespace mq
         // --------------------------------------------------------------------
 
         mat4& operator += (const mat4& m) {
-            _m[0] += m[0];  _m[1] += m[1];  _m[2] += m[2];  _m[3] += m[3];
+            _m[0] += m[0];
+            _m[1] += m[1];
+            _m[2] += m[2];
+            _m[3] += m[3];
             return *this;
         }
 
         mat4& operator -= (const mat4& m) {
-            _m[0] -= m[0];  _m[1] -= m[1];  _m[2] -= m[2];  _m[3] -= m[3];
+            _m[0] -= m[0];
+            _m[1] -= m[1];
+            _m[2] -= m[2];
+            _m[3] -= m[3];
             return *this;
         }
 
         mat4& operator *= (const GLfloat s) {
-            _m[0] *= s;  _m[1] *= s;  _m[2] *= s;  _m[3] *= s;
+            _m[0] *= s;
+            _m[1] *= s;
+            _m[2] *= s;
+            _m[3] *= s;
             return *this;
         }
 
