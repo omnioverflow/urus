@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "engine/base/OpenGLSupport.h"
 #include "Vec.h"
 
 namespace mq
