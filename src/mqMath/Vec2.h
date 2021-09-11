@@ -22,6 +22,8 @@ namespace mq
 
         T& operator[] (int index);
         const T& operator[] (int index) const;
+        vec2_t<T>& operator+= (const vec2_t<T>& rhs);
+        vec2_t<T> operator+ (const vec2_t<T>& rhs) const;
     }; // struct base_vec2
 
     typedef vec2_t<float> vec2;
@@ -37,5 +39,19 @@ namespace mq
     inline const T& vec2_t<T>::operator[] (int index) const
     {
         return data[index];
+    }
+
+    template <typename T>
+    vec2_T<T>& vec2_t<T>::operator+= (const vec2_t<T>& rhs) {
+        (*this)[0] += rhs[0];
+        (*this)[1] += rhs[1];
+        return *this;
+    }
+    
+    template <typename T>
+    vec2_t<T> vec2_t<T>::operator+ (const vec2_t<T>& rhs) const {
+        auto temp(*this);
+        temp += rhs;
+        return temp;
     }
 } // namespace mq
