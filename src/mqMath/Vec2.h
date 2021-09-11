@@ -26,6 +26,8 @@ namespace mq
         vec2_t<T> operator+ (const vec2_t<T>& rhs) const;
         vec2_t<T>& operator-= (const vec2_t<T>& rhs);
         vec2_t<T> operator- (const vec2_t<T>& rhs) const;
+        vec2_t<T>& operator* (float scalar);
+        friend vec2_t<T> operator* (float scalar, const vec2_t<T>& vector);
     }; // struct base_vec2
 
     typedef vec2_t<float> vec2;
@@ -68,6 +70,21 @@ namespace mq
     vec2_t<T> vec2_t<T>::operator- (const vec2_t<T>& rhs) const {
         auto temp(*this);
         temp -= rhs;
+        return temp;
+    }
+
+    template <typename T>
+    vec2_t<T>& vec2_t<T>::operator* (float scalar) {
+        (*this)[0] *= scalar;
+        (*this)[1] *= scalar;
+        return *this;
+    }
+
+    // Non-member operator for scalar multiplication
+    template <typename T>
+    vec2_t<T> operator* (float scalar, const vec2_t<T>& vector) {
+        auto temp(vector);
+        temp *= scalar;
         return temp;
     }
 } // namespace mq
