@@ -33,11 +33,9 @@ namespace mq
         vec2_t<T> operator- (const vec2_t<T>& rhs) const;
         vec2_t<T>& operator*= (float scalar);
         vec2_t<T> operator* (float scalar) const;
-        friend vec2_t<T> operator* (float scalar, const vec2_t<T>& vector);
+        friend vec2_t<T> operator* (float scalar, const vec2_t<T>& rhs);
         friend std::ostream& operator<< (std::ostream& os, 
-            const vec2_t<T>& vec2);
-        friend std::istream& operator>> (const std::iostream& is,
-            vec2_t<T>& vec2);
+            const vec2_t<T>& rhs);
         friend std::istream& operator>> (const std::istream& is,
             vec2_t<T>& rhs);
     }; // struct base_vec2
@@ -103,7 +101,7 @@ namespace mq
     // Non-member operators
     // ------------------------------------------------------------------------
     template <typename T>
-    vec2_t<T> operator* (float scalar, const vec2_t<T>& vector) {
+    vec2_t<T> operator* (float scalar, const vec2_t<T>& rhs) {
         auto temp(vector);
         temp *= scalar;
         return temp;
