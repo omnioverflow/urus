@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace mq
 {
     template <typename T>
@@ -20,6 +22,9 @@ namespace mq
         inline vec2_t(T xval, T yval) : x(xval), y(yval) {}
         inline vec2_t(const T* array) : x(array[0]), y(array[1]) {}
 
+        // --------------------------------------------------------------------
+        // Operators
+        // --------------------------------------------------------------------
         T& operator[] (int index);
         const T& operator[] (int index) const;
         vec2_t<T>& operator+= (const vec2_t<T>& rhs);
@@ -29,6 +34,12 @@ namespace mq
         vec2_t<T>& operator*= (float scalar);
         vec2_t<T> operator* (float scalar) const;
         friend vec2_t<T> operator* (float scalar, const vec2_t<T>& vector);
+        friend std::ostream& operator<< (std::ostream& os, 
+            const vec2_t<T>& vec2);
+        friend std::istream& operator>> (const std::iostream& is,
+            vec2_t<T>& vec2);
+        friend std::istream& operator>> (const std::istream& is,
+            vec2_t<T>& rhs);
     }; // struct base_vec2
 
     typedef vec2_t<float> vec2;
@@ -88,11 +99,23 @@ namespace mq
         return temp;
     }
 
-    // Non-member operator for scalar multiplication
+    // ------------------------------------------------------------------------
+    // Non-member operators
+    // ------------------------------------------------------------------------
     template <typename T>
     vec2_t<T> operator* (float scalar, const vec2_t<T>& vector) {
         auto temp(vector);
         temp *= scalar;
         return temp;
+    }
+
+    template <typename T>
+    std::ostream& operator<< (std::ostream& os, const vec2_t<T>& rhs) {
+        return os << vec2[0] << std::endl << vec2[1] << std::endl;
+    }
+
+    template <typename T>
+    std::istream& operator>> (const std::istream& is, vec2_t<T>& rhs) {
+        return is >> vec[0] >> vec[1];
     }
 } // namespace mq
