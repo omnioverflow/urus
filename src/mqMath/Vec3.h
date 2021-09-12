@@ -42,33 +42,27 @@ namespace mq
         T& operator[] (int index);
         const T& operator[] (int index) const;
 
-        friend vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
-        {
+        friend vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
             return vec3_t<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
         }
 
-        friend vec3_t<T> operator- (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
-        {
+        friend vec3_t<T> operator- (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
             return vec3_t<T>(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
         }
 
-        friend vec3_t<T> operator* (const vec3_t<T>& lhs, float scalar)
-        {
+        friend vec3_t<T> operator* (const vec3_t<T>& lhs, float scalar) {
             return vec3_t<T>(lhs.x * scalar, lhs.y * scalar, lhs.z * scalar);
         }
 
-        friend vec3_t<T> operator* (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
-        {
+        friend vec3_t<T> operator* (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
             return vec3_t<T>(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);
         }
 
-        friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
-        {
+        friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
             return isZero(lengthSq(lhs - rhs));
         }
 
-        friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs)
-        {
+        friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
             return !(lhs == rhs);
         }
 
@@ -83,14 +77,12 @@ namespace mq
     typedef vec3_t<int> ivec3;
 
     template <typename T>
-    inline T& vec3_t<T>::operator[] (int index)
-    {
+    inline T& vec3_t<T>::operator[] (int index) {
         return data[index];
     }
 
     template <typename T>
-    inline const T& vec3_t<T>::operator[] (int index) const
-    {
+    inline const T& vec3_t<T>::operator[] (int index) const {
         return data[index];
     }
 
@@ -98,8 +90,7 @@ namespace mq
     * Cross product between the input vectors.
     */
     template <typename T>
-    vec3_t<T> cross(const vec3_t<T>& a, const vec3_t<T>& b)
-    {
+    vec3_t<T> cross(const vec3_t<T>& a, const vec3_t<T>& b) {
         return vec3(a.y * b.z - a.z * b.y,
                     a.z * b.x - a.x * b.z,
                     a.x * b.y - a.y * b.x);
@@ -109,8 +100,7 @@ namespace mq
     * Dot product.
     */
     template <typename T>
-    inline float dot(const vec3_t<T>& a, const vec3_t<T>& b) 
-    { 
+    inline float dot(const vec3_t<T>& a, const vec3_t<T>& b) {
         return a.x * b.x + a.y * b.y + a.z * b.z; 
     }
 
@@ -118,8 +108,7 @@ namespace mq
     * Squared lenght of the vector.
     */
     template <typename T>
-    inline float lengthSq(const vec3_t<T>& v) 
-    { 
+    inline float lengthSq(const vec3_t<T>& v) {
         return dot(v, v); 
     }
 
@@ -127,8 +116,7 @@ namespace mq
     * Length of the vector.
     */
     template <typename T>
-    float length(const vec3_t<T>& v)
-    {
+    float length(const vec3_t<T>& v) {
         const float lenSq = lengthSq(v);
         if (isZero(lenSq))
             return 0.f;
@@ -140,8 +128,7 @@ namespace mq
     * Normalize the input vector so that it lenght is 1.
     */
     template <typename T>
-    void normalize(vec3_t<T>& v)
-    {
+    void normalize(vec3_t<T>& v) {
         const float lenSq = lengthSq(v);
         if (isZero(lenSq))
             return;
@@ -156,8 +143,7 @@ namespace mq
     * Return a normalized vector obtained from the input vector.
     */
     template <typename T>
-    vec3_t<T> normalized(const vec3_t<T>& v)
-    {
+    vec3_t<T> normalized(const vec3_t<T>& v) {
         const float lenSq = lengthSq(v);
         if (isZero(lenSq))
             return v;
@@ -170,8 +156,7 @@ namespace mq
     * Compute and return the angle between the vectors.
     */
     template <typename T>
-    float angle(const vec3_t<T>& a, const vec3_t<T>& b)
-    {
+    float angle(const vec3_t<T>& a, const vec3_t<T>& b) {
         const float lengthA = length(a);
         const float lengthB = length(b);
         if (isZero(lengthA) || isZero(lengthB))
@@ -183,8 +168,7 @@ namespace mq
      * Vector projection of a on b.
      */
     template <typename T>
-    vec3_t<T> projection(const vec3_t<T>& a, const vec3_t<T>& b)
-    {
+    vec3_t<T> projection(const vec3_t<T>& a, const vec3_t<T>& b) {
         const float lengthB = length(b);
         if (isZero(lengthB))
             return vec3();
@@ -199,8 +183,7 @@ namespace mq
      * (see https://en.wikipedia.org/wiki/Vector_projection#Vector_rejection_3)
      */
     template <typename T>
-    vec3_t<T> rejection(const vec3_t<T>& a, const vec3_t<T>& b)
-    {
+    vec3_t<T> rejection(const vec3_t<T>& a, const vec3_t<T>& b) {
         vec3 projA = projection(a, b);
         return a - projA;
     }
@@ -210,8 +193,7 @@ namespace mq
      * bounce sourface)
      */
     template <typename T>
-    vec3_t<T> reflect(const vec3_t<T>& a, const vec3_t<T>& n)
-    {
+    vec3_t<T> reflect(const vec3_t<T>& a, const vec3_t<T>& n) {
         const float lengthB = length(n);
         if (isZero(lengthB))
             return vec3();
@@ -226,8 +208,7 @@ namespace mq
      * Linear interpolation between the input vectors.
      */    
     template <typename T>
-    vec3_t<T> lerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t)
-    {
+    vec3_t<T> lerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t) {
         return vec3(v0.x + (v1.x - v0.x) * t,
                     v0.y + (v1.y - v0.y) * t,
                     v0.z + (v1.z - v0.z) * t);
@@ -237,8 +218,7 @@ namespace mq
      * Spherical linear interpolation between the input vectors.
      */
     template <typename T>
-    vec3_t<T> slerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t)
-    {
+    vec3_t<T> slerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t) {
         if(t < 0.01f) // FIXME: declare in constants to avoid magic number stuff
             return lerp(v0, v1, t);
 
@@ -255,8 +235,7 @@ namespace mq
      * Normalized linear interpolation between the input vectors.
      */
     template <typename T>
-    vec3_t<T> nlerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t)
-    {
+    vec3_t<T> nlerp(const vec3_t<T>& v0, const vec3_t<T>& v1, float t) {
         return normalized(lerp(v0, v1, t));
     }
 
