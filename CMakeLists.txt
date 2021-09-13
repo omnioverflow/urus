@@ -105,6 +105,7 @@ target_sources (${PROJECT_NAME}
     src/mqMath/Vec3.h
     src/mqMath/Vec3.cpp
     src/mqMath/Vec4.h
+    src/mqMath/Vec4.cpp
     )
 
 # third-party sources
@@ -239,6 +240,7 @@ source_group (mqMath
     src/mqMath/Vec3.h
     src/mqMath/Vec3.cpp
     src/mqMath/Vec4.h
+    src/mqMath/Vec4.cpp
     )
 
 # ==============================================================================
