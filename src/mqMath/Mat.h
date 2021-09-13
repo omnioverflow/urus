@@ -357,7 +357,7 @@ namespace mq
         //  Insertion and Extraction Operators
         // --------------------------------------------------------------------
 
-        friend std::ostream& operator<< (std::ostream& os, const mat3& m) {
+        friend std::ostream& operator<< (std::ostream& os, const mat3& m) {            
             return os << std::endl
                 << m[0] << std::endl
                 << m[1] << std::endl
