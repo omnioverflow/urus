@@ -15,25 +15,75 @@ namespace mq {
         return data[index];
     }
 
+    // ------------------------------------------------------------------------
     // Non-member operators
+    // ------------------------------------------------------------------------
+
+    template <typename T>
+    vec3_t<T>& operator+= (vec3_t<T>& lhs, const vec3_t<T>& rhs) {
+        lhs.x += rhs.x;
+        lhs.y += rhs.y;
+        lhs.z += rhs.z;
+        return lhs;
+    }
+
     template <typename T>
     vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
-        return vec3_t<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
+        auto temp(lhs);
+        temp += rhs;
+        return temp;        
+    }
+
+    template <typename T>
+    vec3_t<T>& operator-= (vec3_t<T>& lhs, const vec3_t<T>& rhs) {
+        lhs.x -= rhs.x;
+        lhs.y -= rhs.y;
+        lhs.z -= rhs.z;
+        return lhs;
     }
 
     template <typename T>
     vec3_t<T> operator- (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
-        return vec3_t<T>(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+        auto temp(lhs);
+        temp -= rhs;
+        return temp;
+    }
+
+    template <typename T>
+    vec3_t<T>& operator*= (vec3_t<T>& lhs, float scalar) {
+        lhs.x *= scalar;
+        lhs.y *= scalar;
+        lhs.z *= scalar;
+        return scalar;
     }
 
     template <typename T>
     vec3_t<T> operator* (const vec3_t<T>& lhs, float scalar) {
-        return vec3_t<T>(lhs.x * scalar, lhs.y * scalar, lhs.z * scalar);
+        auto temp(lhs);
+        temp *= scalar;
+        return temp;
+    }
+
+    template <typename T>
+    vec3_t<T> operator* (float scalar, const vec3_t<T>& rhs) {
+        auto temp(rhs);
+        temp *= scalar;
+        return temp;
+    }
+
+    template <typename T>
+    vec3_t<T>& operator*= (vec3_t<T>& lhs, const vec3_t<T>& rhs) {
+        lhs.x *= rhs.x;
+        lhs.y *= rhs.y;
+        lhs.z *= rhs.z;
+        return lhs;
     }
 
     template <typename T>
     vec3_t<T> operator* (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
-        return vec3_t<T>(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);
+        auto temp(lhs);
+        temp *= rhs;
+        return temp;
     }
 
     template <typename T>
@@ -44,6 +94,16 @@ namespace mq {
     template <typename T>
     bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs) {
         return !(lhs == rhs);
+    }
+
+    template <typename T>
+    std::ostream& operator<< (std::ostream& os, const vec3_t<T>& rhs) {
+        return os << rhs[0] << ", " << rhs[1] << ", " << rhs[2];
+    }
+
+    template <typename T>
+    std::istream& operator>> (std::istream& is, vec3_t<T>& rhs) {
+        return is >> rhs[0] >> rhs[1] >> rhs[2];
     }
 
     // ------------------------------------------------------------------------

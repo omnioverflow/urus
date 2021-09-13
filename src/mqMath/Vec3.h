@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <iostream>
 #include <vector>
 
 #include "mqMath/MqMath.h"
@@ -42,12 +43,19 @@ namespace mq
         T& operator[] (int index);
         const T& operator[] (int index) const;
 
+        friend vec3_t<T>& operator+= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
         friend vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
+        friend vec3_t<T>& operator-= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
         friend vec3_t<T> operator- (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
+        friend vec3_t<T>& operator*= (vec3_t<T>& lhs, float scalar);
         friend vec3_t<T> operator* (const vec3_t<T>& lhs, float scalar);
+        friend vec3_t<T> operator* (float scalar, const vec3_t<T>& rhs);
+        friend vec3_t<T>& operator*= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
         friend vec3_t<T> operator* (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
         friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
         friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
+        friend std::ostream operator<< (std::ostream& os, const vec3_t<T>& rhs);
+        friend std::istream operator>> (std::istream& is, vec3_t<T>& rhs);
 
         inline vec3_t() : x(0), y(0), z(0) {}
         inline vec3_t(T xval, T yval, T zval) : x(xval), y(yval), z(zval) {}
