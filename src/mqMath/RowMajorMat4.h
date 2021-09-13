@@ -1,6 +1,9 @@
+
+/*
 #pragma once
 
 #include <cmath>
+*/
 
 /*
     Note on implementation.
@@ -18,6 +21,7 @@
         - does not comply with the OpenGL convetion
 */
 
+/*
 namespace mq
 {
     struct row_major_mat4
@@ -147,3 +151,4 @@ namespace mq
 
     typedef row_major_mat4 mat4;
 } // namespace mq
+*/
