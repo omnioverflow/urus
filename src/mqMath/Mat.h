@@ -241,26 +241,26 @@ namespace mq
         //  Indexing Operator
         // --------------------------------------------------------------------
 
-        vec3& operator [] (int i) { return _m[i]; }
-        const vec3& operator [] (int i) const { return _m[i]; }
+        vec3& operator[] (int i) { return _m[i]; }
+        const vec3& operator[] (int i) const { return _m[i]; }
 
         // --------------------------------------------------------------------
         //  (non-modifying) Arithmatic Operators
         // --------------------------------------------------------------------
 
-        mat3 operator + (const mat3& m) const {
+        mat3 operator+ (const mat3& m) const {
             return mat3(_m[0] + m[0], _m[1] + m[1], _m[2] + m[2]);
         }
 
-        mat3 operator - (const mat3& m) const {
+        mat3 operator- (const mat3& m) const {
             return mat3(_m[0] - m[0], _m[1] - m[1], _m[2] - m[2]);
         }
 
-        mat3 operator * (const GLfloat s) const {
+        mat3 operator* (const GLfloat s) const {
             return mat3(s * _m[0], s * _m[1], s * _m[2]);
         }
 
-        mat3 operator / (const GLfloat s) const {
+        mat3 operator/ (const GLfloat s) const {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -273,11 +273,11 @@ namespace mq
             return *this * r;
         }
 
-        friend mat3 operator * (const GLfloat s, const mat3& m) {
+        friend mat3 operator* (const GLfloat s, const mat3& m) {
             return m * s;
         }
 
-        mat3 operator * (const mat3& m) const {
+        mat3 operator* (const mat3& m) const {
             mat3  a(0.0f);
 
             for (int i = 0; i < 3; ++i) {
@@ -295,28 +295,28 @@ namespace mq
         //  (modifying) Arithmetic Operators
         // --------------------------------------------------------------------
 
-        mat3& operator += (const mat3& m) {
+        mat3& operator+= (const mat3& m) {
             _m[0] += m[0];
             _m[1] += m[1];
             _m[2] += m[2];
             return *this;
         }
 
-        mat3& operator -= (const mat3& m) {
+        mat3& operator-= (const mat3& m) {
             _m[0] -= m[0];
             _m[1] -= m[1];
             _m[2] -= m[2];
             return *this;
         }
 
-        mat3& operator *= (const GLfloat s) {
+        mat3& operator*= (const GLfloat s) {
             _m[0] *= s;
             _m[1] *= s;
             _m[2] *= s;
             return *this;
         }
 
-        mat3& operator *= (const mat3& m) {
+        mat3& operator*= (const mat3& m) {
             mat3  a(0.0f);
 
             for (int i = 0; i < 3; ++i) {
@@ -330,7 +330,7 @@ namespace mq
             return *this = a;
         }
 
-        mat3& operator /= (const GLfloat s) {
+        mat3& operator/= (const GLfloat s) {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -347,7 +347,7 @@ namespace mq
         // Matrix / Vector operators
         // --------------------------------------------------------------------
 
-        vec3 operator * (const vec3& v) const {  // m * v
+        vec3 operator* (const vec3& v) const {  // m * v
             return vec3(_m[0][0] * v.x + _m[0][1] * v.y + _m[0][2] * v.z,
                 _m[1][0] * v.x + _m[1][1] * v.y + _m[1][2] * v.z,
                 _m[2][0] * v.x + _m[2][1] * v.y + _m[2][2] * v.z);
@@ -449,26 +449,26 @@ namespace mq
         // Indexing Operator
         // --------------------------------------------------------------------
 
-        vec4& operator [] (int i) { return _m[i]; }
-        const vec4& operator [] (int i) const { return _m[i]; }
+        vec4& operator[] (int i) { return _m[i]; }
+        const vec4& operator[] (int i) const { return _m[i]; }
 
         // --------------------------------------------------------------------
         //  (non-modifying) Arithematic Operators
         // --------------------------------------------------------------------
 
-        mat4 operator + (const mat4& m) const {
+        mat4 operator+ (const mat4& m) const {
             return mat4(_m[0] + m[0], _m[1] + m[1], _m[2] + m[2], _m[3] + m[3]);
         }
 
-        mat4 operator - (const mat4& m) const {
+        mat4 operator- (const mat4& m) const {
             return mat4(_m[0] - m[0], _m[1] - m[1], _m[2] - m[2], _m[3] - m[3]);
         }
 
-        mat4 operator * (const GLfloat s) const {
+        mat4 operator* (const GLfloat s) const {
             return mat4(s * _m[0], s * _m[1], s * _m[2], s * _m[3]);
         }
 
-        mat4 operator / (const GLfloat s) const {
+        mat4 operator/ (const GLfloat s) const {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -481,11 +481,11 @@ namespace mq
             return *this * r;
         }
 
-        friend mat4 operator * (const GLfloat s, const mat4& m) {
+        friend mat4 operator* (const GLfloat s, const mat4& m) {
             return m * s;
         }
 
-        mat4 operator * (const mat4& m) const {
+        mat4 operator* (const mat4& m) const {
             mat4  a(0.0f);
 
             for (int i = 0; i < 4; ++i) {
@@ -503,7 +503,7 @@ namespace mq
         //  (modifying) Arithematic Operators
         // --------------------------------------------------------------------
 
-        mat4& operator += (const mat4& m) {
+        mat4& operator+= (const mat4& m) {
             _m[0] += m[0];
             _m[1] += m[1];
             _m[2] += m[2];
@@ -511,7 +511,7 @@ namespace mq
             return *this;
         }
 
-        mat4& operator -= (const mat4& m) {
+        mat4& operator-= (const mat4& m) {
             _m[0] -= m[0];
             _m[1] -= m[1];
             _m[2] -= m[2];
@@ -519,7 +519,7 @@ namespace mq
             return *this;
         }
 
-        mat4& operator *= (const GLfloat s) {
+        mat4& operator*= (const GLfloat s) {
             _m[0] *= s;
             _m[1] *= s;
             _m[2] *= s;
@@ -527,7 +527,7 @@ namespace mq
             return *this;
         }
 
-        mat4& operator *= (const mat4& m) {
+        mat4& operator*= (const mat4& m) {
             mat4  a(0.0f);
 
             for (int i = 0; i < 4; ++i) {
@@ -541,7 +541,7 @@ namespace mq
             return *this = a;
         }
 
-        mat4& operator /= (const GLfloat s) {
+        mat4& operator/= (const GLfloat s) {
 #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -558,7 +558,7 @@ namespace mq
         //  Matrix / Vector operators
         // --------------------------------------------------------------------
 
-        vec4 operator * (const vec4& v) const {  // m * v
+        vec4 operator* (const vec4& v) const {  // m * v
             return vec4(_m[0][0] * v.x + _m[0][1] * v.y + _m[0][2] * v.z + _m[0][3] * v.w,
                 _m[1][0] * v.x + _m[1][1] * v.y + _m[1][2] * v.z + _m[1][3] * v.w,
                 _m[2][0] * v.x + _m[2][1] * v.y + _m[2][2] * v.z + _m[2][3] * v.w,
@@ -570,7 +570,7 @@ namespace mq
         //  Insertion and Extraction Operators
         // --------------------------------------------------------------------
 
-        friend std::ostream& operator << (std::ostream& os, const mat4& m) {
+        friend std::ostream& operator<< (std::ostream& os, const mat4& m) {
             return os << std::endl
                 << m[0] << std::endl
                 << m[1] << std::endl
@@ -578,7 +578,7 @@ namespace mq
                 << m[3] << std::endl;
         }
 
-        friend std::istream& operator >> (std::istream& is, mat4& m) {
+        friend std::istream& operator>> (std::istream& is, mat4& m) {
             return is >> m._m[0] >> m._m[1] >> m._m[2] >> m._m[3];
         }
 
