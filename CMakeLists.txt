@@ -99,7 +99,6 @@ target_sources (${PROJECT_NAME}
     # TODO: extract mqMath as a library into a dedicated repo
     src/mqMath/Mat.h
     src/mqMath/RowMajorMat4.h
-    src/mqMath/Mat4.cpp
     src/mqMath/MqMath.h
     src/mqMath/Vec.h
     src/mqMath/Vec2.h
@@ -235,7 +234,6 @@ source_group (mqMath
     FILES
     src/mqMath/Mat.h
     src/mqMath/RowMajorMat4.h
-    src/mqMath/Mat4.cpp
     src/mqMath/MwMath.h
     src/mqMath/Vec.h
     src/mqMath/Vec2.h
