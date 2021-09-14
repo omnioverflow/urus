@@ -36,8 +36,8 @@ namespace mq
         mat2& operator/= (const GLfloat s);
         mat2 operator/ (const GLfloat s) const;
      
-        friend std::ostream& operator<< (std::ostream& os, const mat2& m);
-        friend std::istream& operator>> (std::istream& is, mat2& m);
+        friend std::ostream& operator<< (std::ostream& os, const mat2& rhs);
+        friend std::istream& operator>> (std::istream& is, mat2& rhs);
 
         //  mat2 conversion operators
         operator const GLfloat* () const;
