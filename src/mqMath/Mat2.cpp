@@ -6,7 +6,7 @@ namespace mq {
     // ------------------------------------------------------------------------
     
     // Create a diagional matrix
-    mat2::mat2(const GLfloat d = GLfloat(1.0f))
+    mat2::mat2(GLFloat d = GLfloat(1.0f))
     : mat2(d, 0.f, 0.0f, d) {}
     mat2::mat2(const vec2& a, const vec2& b)
     : m_{a, b} {}
@@ -64,19 +64,19 @@ namespace mq {
         return temp;
     }
 
-    mat2& mat2::operator*= (const GLfloat s) {
+    mat2& mat2::operator*= (GLFloat s) {
         m_[0] *= s;
         m_[1] *= s;
         return *this;
     }
 
-    mat2 mat2::operator* (const GLfloat s) const {
+    mat2 mat2::operator* (GLFloat s) const {
         auto temp(*this);
         temp *= s;
         return temp;
     }
 
-    mat2 operator* (const GLfloat s, const mat2& m) {
+    mat2 operator* (GLFloat s, const mat2& m) {
         return m * s;
     }
 
@@ -85,7 +85,7 @@ namespace mq {
             m_[1][0] * rhs.x + m_[1][1] * rhs.y);
     }
 
-    mat2& mat2::operator/= (const GLfloat s) {
+    mat2& mat2::operator/= (GLFloat s) {
         #ifdef DEBUG
         if (std::fabs(s) < DivideByZeroTolerance) {
             std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -98,7 +98,7 @@ namespace mq {
         return (*this) *= r;
     }
 
-    mat2 mat2::operator/ (const GLfloat s) const {        
+    mat2 mat2::operator/ (GLFloat s) const {        
         auto temp(*this);
         temp /= s;
         return temp;        

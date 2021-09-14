@@ -2,7 +2,7 @@
 
 namespace mq {
 
-        explicit mat3(const GLfloat d = GLfloat(1.0f))
+        explicit mat3(GLFloat d = GLfloat(1.0f))
         : mat3(vec3(d, 0.f, 0.f), vec3(0.f, d, 0.f), vec3(0.f, 0.f, d)) {}
 
         mat3(const vec3& row0, const vec3& row1, const vec3& row2)
@@ -63,24 +63,24 @@ namespace mq {
             return temp;
         }
 
-        mat3& operator*= (const GLfloat s) {
+        mat3& operator*= (GLFloat s) {
             m_[0] *= s;
             m_[1] *= s;
             m_[2] *= s;
             return *this;
         }
 
-        mat3 operator* (const GLfloat s) const {
+        mat3 operator* (GLFloat s) const {
             auto temp(*this);
             temp *= s;
             return temp;
         }        
 
-        mat3 operator* (const GLfloat s, const mat3& rhs) {
+        mat3 operator* (GLFloat s, const mat3& rhs) {
             return m * s;
         }        
 
-        mat3& operator/= (const GLfloat s) {
+        mat3& operator/= (GLFloat s) {
             #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -93,7 +93,7 @@ namespace mq {
             return (*this) *= r;
         }    
         
-        mat3 operator/ (const GLfloat s) const {
+        mat3 operator/ (GLFloat s) const {
             auto temp(*this);
             temp /= s;
             return temp;

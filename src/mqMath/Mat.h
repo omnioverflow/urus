@@ -13,7 +13,7 @@ namespace mq
     class mat2 {
     public:
 
-        explicit mat2(const GLfloat d = GLfloat(1.0f));
+        explicit mat2(GLFloat d = GLfloat(1.0f));
         mat2(const vec2& a, const vec2& b);
         mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11);
         mat2(const mat2& m);
@@ -28,19 +28,19 @@ namespace mq
 
         mat2& operator*= (const mat2& rhs);
         mat2 operator* (const mat2& rhs) const;
-        mat2& operator*= (const GLfloat s);
-        mat2 operator* (const GLfloat s) const;
-        friend mat2 operator* (const GLfloat s, const mat2& rhs);
+        mat2& operator*= (GLFloat s);
+        mat2 operator* (GLFloat s) const;
+        friend mat2 operator* (GLFloat s, const mat2& rhs);
         vec2 operator* (const vec2& rhs) const;
 
-        mat2& operator/= (const GLfloat s);
-        mat2 operator/ (const GLfloat s) const;
+        mat2& operator/= (GLFloat s);
+        mat2 operator/ (GLFloat s) const;
      
         friend std::ostream& operator<< (std::ostream& os, const mat2& rhs);
         friend std::istream& operator>> (std::istream& is, mat2& rhs);
 
-        //  mat2 conversion operators
-        operator const GLfloat* () const;
+        // Cconversion operators
+        operator const GLFloat* () const;
         operator GLfloat* ();
 
         private:
@@ -53,7 +53,7 @@ namespace mq
     class mat3 {
     public:
 
-        explicit mat3(const GLfloat d = GLfloat(1.0f));
+        explicit mat3(GLFloat d = GLfloat(1.0f));
         mat3(const vec3& a, const vec3& b, const vec3& c);
         mat3(GLfloat m00, GLfloat m10, GLfloat m20,
             GLfloat m01, GLfloat m11, GLfloat m21,
@@ -69,22 +69,19 @@ namespace mq
         mat3 operator- (const mat3& rhs) const;
         mat3& operator*= (const mat3& rhs);
         mat3 operator* (const mat3& rhs) const;
-        mat3& operator*= (const GLfloat s);
-        mat3 operator* (const GLfloat s) const;
-        friend mat3 operator* (const GLfloat s, const mat3& rhs);
-        mat3& operator/= (const GLfloat s);
-        mat3 operator/ (const GLfloat s) const;
+        mat3& operator*= (GLFloat s);
+        mat3 operator* (GLFloat s) const;
+        friend mat3 operator* (GLFloat s, const mat3& rhs);
+        mat3& operator/= (GLFloat s);
+        mat3 operator/ (GLFloat s) const;
 
         vec3 operator* (const vec3& v) const;        
 
         friend std::ostream& operator<< (std::ostream& os, const mat3& rhs);
         friend std::istream& operator>> (std::istream& is, mat3& rhs);
 
-        // --------------------------------------------------------------------
-        // Conversion Operators
-        // --------------------------------------------------------------------
-
-        operator const GLfloat* () const;
+        // Conversion operators
+        operator const GLFloat* () const;
         operator GLfloat* ();
 
         // --------------------------------------------------------------------
