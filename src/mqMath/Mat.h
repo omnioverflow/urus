@@ -52,203 +52,52 @@ namespace mq
     */
     class mat3 {
     public:
-        // --------------------------------------------------------------------
-        // ctors and dtors
-        // --------------------------------------------------------------------
 
-        /**
-        * ctor - create a diagonal matrix.
-        */
-        mat3(const GLfloat d = GLfloat(1.0f)) {
-            _m[0].x = d;
-            _m[1].y = d;
-            _m[2].z = d;
-        }
-
-        mat3(const vec3& a, const vec3& b, const vec3& c) {
-            _m[0] = a;
-            _m[1] = b;
-            _m[2] = c;
-        }
-
+        explicit mat3(const GLfloat d = GLfloat(1.0f));
+        mat3(const vec3& a, const vec3& b, const vec3& c);
         mat3(GLfloat m00, GLfloat m10, GLfloat m20,
             GLfloat m01, GLfloat m11, GLfloat m21,
-            GLfloat m02, GLfloat m12, GLfloat m22) {
-            _m[0] = vec3(m00, m01, m02);
-            _m[1] = vec3(m10, m11, m12);
-            _m[2] = vec3(m20, m21, m22);
-        }
+            GLfloat m02, GLfloat m12, GLfloat m22);
+        mat3(const mat3& other);
 
-        mat3(const mat3& m) {
-            if (*this != m) {
-                _m[0] = m._m[0];
-                _m[1] = m._m[1];
-                _m[2] = m._m[2];
-            }
-        }
+        vec3& operator[] (int i);
+        const vec3& operator[] (int i) const;
 
-        // --------------------------------------------------------------------
-        //  Indexing Operator
-        // --------------------------------------------------------------------
+        mat3& operator+= (const mat3& rhs);
+        mat3 operator+ (const mat3& rhs) const;
+        mat3& operator-= (const mat3& rhs);
+        mat3 operator- (const mat3& rhs) const;
+        mat3& operator*= (const mat3& rhs);
+        mat3 operator* (const mat3& rhs) const;
+        mat3& operator*= (const GLfloat s);
+        mat3 operator* (const GLfloat s) const;
+        friend mat3 operator* (const GLfloat s, const mat3& rhs);
+        mat3& operator/= (const GLfloat s);
+        mat3 operator/ (const GLfloat s) const;
 
-        vec3& operator[] (int i) { return _m[i]; }
-        const vec3& operator[] (int i) const { return _m[i]; }
+        vec3 operator* (const vec3& v) const;        
 
-        // --------------------------------------------------------------------
-        //  (non-modifying) Arithmatic Operators
-        // --------------------------------------------------------------------
-
-        mat3 operator+ (const mat3& m) const {
-            return mat3(_m[0] + m[0], _m[1] + m[1], _m[2] + m[2]);
-        }
-
-        mat3 operator- (const mat3& m) const {
-            return mat3(_m[0] - m[0], _m[1] - m[1], _m[2] - m[2]);
-        }
-
-        mat3 operator* (const GLfloat s) const {
-            return mat3(s * _m[0], s * _m[1], s * _m[2]);
-        }
-
-        mat3 operator/ (const GLfloat s) const {
-#ifdef DEBUG
-            if (std::fabs(s) < DivideByZeroTolerance) {
-                std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-                    << "Division by zero" << std::endl;
-                return mat3();
-            }
-#endif // DEBUG
-
-            GLfloat r = GLfloat(1.0f) / s;
-            return *this * r;
-        }
-
-        friend mat3 operator* (const GLfloat s, const mat3& m) {
-            return m * s;
-        }
-
-        mat3 operator* (const mat3& m) const {
-            mat3  a(0.0f);
-
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 3; ++j) {
-                    for (int k = 0; k < 3; ++k) {
-                        a[i][j] += _m[i][k] * m[k][j];
-                    }
-                }
-            }
-
-            return a;
-        }
-
-        // --------------------------------------------------------------------
-        //  (modifying) Arithmetic Operators
-        // --------------------------------------------------------------------
-
-        mat3& operator+= (const mat3& m) {
-            _m[0] += m[0];
-            _m[1] += m[1];
-            _m[2] += m[2];
-            return *this;
-        }
-
-        mat3& operator-= (const mat3& m) {
-            _m[0] -= m[0];
-            _m[1] -= m[1];
-            _m[2] -= m[2];
-            return *this;
-        }
-
-        mat3& operator*= (const GLfloat s) {
-            _m[0] *= s;
-            _m[1] *= s;
-            _m[2] *= s;
-            return *this;
-        }
-
-        mat3& operator*= (const mat3& m) {
-            mat3  a(0.0f);
-
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 3; ++j) {
-                    for (int k = 0; k < 3; ++k) {
-                        a[i][j] += _m[i][k] * m[k][j];
-                    }
-                }
-            }
-
-            return *this = a;
-        }
-
-        mat3& operator/= (const GLfloat s) {
-#ifdef DEBUG
-            if (std::fabs(s) < DivideByZeroTolerance) {
-                std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-                    << "Division by zero" << std::endl;
-                return *this;
-            }
-#endif // DEBUG
-
-            GLfloat r = GLfloat(1.0f) / s;
-            return *this *= r;
-        }
-
-        // --------------------------------------------------------------------
-        // Matrix / Vector operators
-        // --------------------------------------------------------------------
-
-        vec3 operator* (const vec3& v) const {  // m * v
-            return vec3(_m[0][0] * v.x + _m[0][1] * v.y + _m[0][2] * v.z,
-                _m[1][0] * v.x + _m[1][1] * v.y + _m[1][2] * v.z,
-                _m[2][0] * v.x + _m[2][1] * v.y + _m[2][2] * v.z);
-        }
-
-        // --------------------------------------------------------------------
-        //  Insertion and Extraction Operators
-        // --------------------------------------------------------------------
-
-        friend std::ostream& operator<< (std::ostream& os, const mat3& m) {            
-            return os << std::endl
-                << m[0] << std::endl
-                << m[1] << std::endl
-                << m[2] << std::endl;
-        }
-
-        friend std::istream& operator>> (std::istream& is, mat3& m) {
-            return is >> m._m[0] >> m._m[1] >> m._m[2];
-        }
+        friend std::ostream& operator<< (std::ostream& os, const mat3& rhs);
+        friend std::istream& operator>> (std::istream& is, mat3& rhs);
 
         // --------------------------------------------------------------------
         // Conversion Operators
         // --------------------------------------------------------------------
 
-        operator const GLfloat* () const {
-            return static_cast<const GLfloat*>(&_m[0].x);
-        }
-
-        operator GLfloat* () {
-            return static_cast<GLfloat*>(&_m[0].x);
-        }
+        operator const GLfloat* () const;
+        operator GLfloat* ();
 
         // --------------------------------------------------------------------
         private:
-            vec3  _m[3];
+            vec3  m_[3];
     }; // class mat3
 
     // ------------------------------------------------------------------------
     // Non-class mat3 Methods
     // ------------------------------------------------------------------------
 
-    inline mat3 matrixCompMult(const mat3& A, const mat3& B) {
-        return mat3(A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2],
-            A[1][0] * B[1][0], A[1][1] * B[1][1], A[1][2] * B[1][2],
-            A[2][0] * B[2][0], A[2][1] * B[2][1], A[2][2] * B[2][2]);
-    }
-
-    inline mat3 transpose(const mat3& A) {
-        return mat3(A[0][0], A[1][0], A[2][0], A[0][1], A[1][1], A[2][1],
-            A[0][2], A[1][2], A[2][2]);
-    }
+    mat3 matrixCompMult(const mat3& A, const mat3& B);
+    mat3 transpose(const mat3& A);
 
     /**
     * mat4.h - 4D square matrix
