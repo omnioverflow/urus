@@ -13,7 +13,7 @@ namespace mq
     class mat2 {
     public:
 
-        mat2(const GLfloat d = GLfloat(1.0f));
+        explicit mat2(const GLfloat d = GLfloat(1.0f));
         mat2(const vec2& a, const vec2& b);
         mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11);
         mat2(const mat2& m);
