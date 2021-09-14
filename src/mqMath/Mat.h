@@ -6,178 +6,45 @@
 #include "Vec.h"
 
 namespace mq
-{    
+{
     /**
     * mat2 - 2D square matrix
     */    
     class mat2 {
     public:
-        // --------------------------------------------------------------------
-        //  ctors and dtors
-        // --------------------------------------------------------------------
 
-        // Create a diagional matrix
-        mat2(const GLfloat d = GLfloat(1.0f)) {
-            _m[0].x = d;
-            _m[1].y = d;
-        }
+        mat2(const GLfloat d = GLfloat(1.0f));
+        mat2(const vec2& a, const vec2& b);
+        mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11);
+        mat2(const mat2& m);
 
-        mat2(const vec2& a, const vec2& b) {
-            _m[0] = a;
-            _m[1] = b;
-        }
+        vec2& operator[] (int i);
+        const vec2& operator[] (int i) const;
 
-        mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11) {
-            _m[0] = vec2(m00, m01);
-            _m[1] = vec2(m10, m11);
-        }
+        mat2& operator+= (const mat2& rhs);
+        mat2 operator+ (const mat2& rhs) const;
+        mat2& operator-= (const mat2& rhs);
+        mat2 operator- (const mat2& rhs) const;
 
-        mat2(const mat2& m) {
-            if (*this != m) {
-                _m[0] = m._m[0];
-                _m[1] = m._m[1];
-            }
-        }
+        mat2& operator*= (const mat2& rhs);
+        mat2 operator* (const mat2& rhs) const;
+        mat2& operator*= (const GLfloat s);
+        mat2 operator* (const GLfloat s) const;
+        friend mat2 operator* (const GLfloat s, const mat2& rhs);
+        vec2 operator* (const vec2& rhs) const;
 
-        // --------------------------------------------------------------------
-        //  indexing operator
-        // --------------------------------------------------------------------
+        mat2& operator/= (const GLfloat s);
+        mat2 operator/ (const GLfloat s) const;
+     
+        friend std::ostream& operator<< (std::ostream& os, const mat2& m);
+        friend std::istream& operator>> (std::istream& is, mat2& m);
 
-        vec2& operator [] (int i) { return _m[i]; }
-        const vec2& operator [] (int i) const { return _m[i]; }
+        //  mat2 conversion operators
+        operator const GLfloat* () const;
+        operator GLfloat* ();
 
-        // --------------------------------------------------------------------
-        //  (non-modifying) Arithmatic Operators
-        // --------------------------------------------------------------------
-
-        mat2 operator+ (const mat2& m) const {
-            return mat2(_m[0] + m[0], _m[1] + m[1]);
-        }
-
-        mat2 operator- (const mat2& m) const {
-            return mat2(_m[0] - m[0], _m[1] - m[1]);
-        }
-
-        mat2 operator* (const GLfloat s) const {
-            return mat2(s * _m[0], s * _m[1]);
-        }
-
-        mat2 operator/ (const GLfloat s) const {
-#ifdef DEBUG
-            if (std::fabs(s) < DivideByZeroTolerance) {
-                std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-                    << "Division by zero" << std::endl;
-                return mat2();
-            }
-#endif // DEBUG
-
-            GLfloat r = GLfloat(1.0f) / s;
-            return *this * r;
-        }
-
-        friend mat2 operator* (const GLfloat s, const mat2& m) {
-            return m * s;
-        }
-
-        mat2 operator* (const mat2& m) const {
-            mat2  a(0.0f);
-
-            for (int i = 0; i < 2; ++i) {
-                for (int j = 0; j < 2; ++j) {
-                    for (int k = 0; k < 2; ++k) {
-                        a[i][j] += _m[i][k] * m[k][j];
-                    }
-                }
-            }
-
-            return a;
-        }
-
-        // --------------------------------------------------------------------
-        //  (modifying) Arithmetic Operators
-        // --------------------------------------------------------------------
-
-        mat2& operator+= (const mat2& m) {
-            _m[0] += m[0];
-            _m[1] += m[1];
-            return *this;
-        }
-
-        mat2& operator-= (const mat2& m) {
-            _m[0] -= m[0];
-            _m[1] -= m[1];
-            return *this;
-        }
-
-        mat2& operator*= (const GLfloat s) {
-            _m[0] *= s;
-            _m[1] *= s;
-            return *this;
-        }
-
-        mat2& operator*= (const mat2& m) {
-            mat2  a(0.0f);
-
-            for (int i = 0; i < 2; ++i) {
-                for (int j = 0; j < 2; ++j) {
-                    for (int k = 0; k < 2; ++k) {
-                        a[i][j] += _m[i][k] * m[k][j];
-                    }
-                }
-            }
-
-            return *this = a;
-        }
-
-        mat2& operator/= (const GLfloat s) {
-#ifdef DEBUG
-            if (std::fabs(s) < DivideByZeroTolerance) {
-                std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-                    << "Division by zero" << std::endl;
-                return *this;
-            }
-#endif // DEBUG
-
-            GLfloat r = GLfloat(1.0f) / s;
-            return *this *= r;
-        }
-
-        // --------------------------------------------------------------------
-        //  Matrix / Vector operators
-        // --------------------------------------------------------------------
-
-        vec2 operator* (const vec2& v) const {  // m * v
-            return vec2(_m[0][0] * v.x + _m[0][1] * v.y,
-                _m[1][0] * v.x + _m[1][1] * v.y);
-        }
-
-        // --------------------------------------------------------------------
-        //  Insertion and Extraction Operators
-        // --------------------------------------------------------------------
-
-        friend std::ostream& operator<< (std::ostream& os, const mat2& m) {
-            return os << std::endl << m[0] << std::endl << m[1] << std::endl;
-        }
-
-        friend std::istream& operator>> (std::istream& is, mat2& m) {
-            return is >> m._m[0] >> m._m[1];
-        }
-
-        // --------------------------------------------------------------------
-        //  Conversion Operators
-        // --------------------------------------------------------------------
-
-        operator const GLfloat* () const {
-            return static_cast<const GLfloat*>(&_m[0].x);
-        }
-
-        operator GLfloat* () {
-            return static_cast<GLfloat*>(&_m[0].x);
-        }
-
-        // --------------------------------------------------------------------
         private:
-            vec2  _m[2];
+            vec2  m_[2];
     }; // class mat2
 
     /**
