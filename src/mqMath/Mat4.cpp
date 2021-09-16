@@ -124,16 +124,13 @@ namespace mq {
             );
         }
 
-        std::ostream& operator<< (std::ostream& os, const mat4& m) {
-            return os << std::endl
-                << m[0] << std::endl
-                << m[1] << std::endl
-                << m[2] << std::endl
-                << m[3] << std::endl;
+        std::ostream& operator<< (std::ostream& os, const mat4& rhs) {
+            return os << std::endl << rhs[0] << std::endl << rhs[1] << std::endl << rhs[2] <<
+                   std::endl << rhs[3] << std::endl;
         }
 
-        std::istream& operator>> (std::istream& is, mat4& m) {
-            return is >> m.m_[0] >> m.m_[1] >> m.m_[2] >> m.m_[3];
+        std::istream& operator>> (std::istream& is, mat4& rhs) {
+            return is >> rhs.m_[0] >> rhs.m_[1] >> rhs.m_[2] >> rhs.m_[3];
         }
 
         //  Conversion Operators
