@@ -101,10 +101,8 @@ namespace mq
     // Non-member operators
     // ------------------------------------------------------------------------
     template <typename T>
-    vec2_t<T> operator* (float scalar, const vec2_t<T>& rhs) {
-        auto temp(vector);
-        temp *= scalar;
-        return temp;
+    vec2_t<T> operator* (float s, const vec2_t<T>& rhs) {
+        return rhs * s;
     }
 
     template <typename T>
