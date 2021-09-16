@@ -1,4 +1,4 @@
-#include "Mat4.cpp"
+#include "Mat.h"
 
 #include <cassert>
 
