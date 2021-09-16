@@ -5,7 +5,7 @@
 #include "MqMath.h"
 
 namespace mq {
-        mat4::mat4(float d = float(1.0f))
+        mat4::mat4(float d)
         : m_{vec4(d, 0.f, 0.f, 0.f), vec4(0.f, d, 0.f, 0.f),
             vec4(0.f, 0.f, d, 0.f), vec4(0.f, 0.f, 0.f, d)} {}
 
@@ -26,10 +26,10 @@ namespace mq {
         const vec4& mat4::operator[] (int i) const { return m_[i]; }
 
         mat4& mat4::operator+= (const mat4& rhs) {
-            m_[0] += m[0];
-            m_[1] += m[1];
-            m_[2] += m[2];
-            m_[3] += m[3];
+            m_[0] += rhs[0];
+            m_[1] += rhs[1];
+            m_[2] += rhs[2];
+            m_[3] += rhs[3];
             return *this;
         }
 
@@ -40,17 +40,17 @@ namespace mq {
         }
 
         mat4& mat4::operator-= (const mat4& rhs) {
-            m_[0] -= m[0];
-            m_[1] -= m[1];
-            m_[2] -= m[2];
-            m_[3] -= m[3];
+            m_[0] -= rhs[0];
+            m_[1] -= rhs[1];
+            m_[2] -= rhs[2];
+            m_[3] -= rhs[3];
             return *this;
         }
 
         mat4 mat4::operator- (const mat4& rhs) const {
             auto temp(rhs);
             temp -= rhs;
-            return
+            return temp;
         }
 
         mat4& mat4::operator*= (const mat4& rhs) {
@@ -102,7 +102,7 @@ namespace mq {
             return *this * r;
         }
 
-        mat4& operator/= (float s) {
+        mat4& mat4::operator/= (float s) {
             #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -116,7 +116,7 @@ namespace mq {
         }
 
         //  Matrix / Vector operators
-        vec4 operator* (const vec4& v) const {  // m * v
+        vec4 mat4::operator* (const vec4& v) const {  // m * v
             return vec4(m_[0][0] * v.x + m_[0][1] * v.y + m_[0][2] * v.z + m_[0][3] * v.w,
                 m_[1][0] * v.x + m_[1][1] * v.y + m_[1][2] * v.z + m_[1][3] * v.w,
                 m_[2][0] * v.x + m_[2][1] * v.y + m_[2][2] * v.z + m_[2][3] * v.w,
@@ -124,7 +124,7 @@ namespace mq {
             );
         }
 
-        friend std::ostream& operator<< (std::ostream& os, const mat4& m) {
+        std::ostream& operator<< (std::ostream& os, const mat4& m) {
             return os << std::endl
                 << m[0] << std::endl
                 << m[1] << std::endl
@@ -132,16 +132,16 @@ namespace mq {
                 << m[3] << std::endl;
         }
 
-        friend std::istream& operator>> (std::istream& is, mat4& m) {
+        std::istream& operator>> (std::istream& is, mat4& m) {
             return is >> m.m_[0] >> m.m_[1] >> m.m_[2] >> m.m_[3];
         }
 
         //  Conversion Operators
-        operator const float* () const {
+        mat4::operator const float* () const {
             return static_cast<const float*>(&m_[0].x);
         }
 
-        operator float* () {
+        mat4::operator float* () {
             return static_cast<float*>(&m_[0].x);
         }
 
@@ -253,19 +253,19 @@ namespace mq {
         temp[2][2] = -(zFar + zNear) / (zFar - zNear);
         temp[2][3] = -2.f * zFar * zNear / (zFar - zNear);
         temp[3][2] = -1.f;
-        return c;
+        return temp;
     }
 
     mat4 Perspective(float fovy, float aspect, float zNear, float zFar) {
-        assert(!isZero(rught));
-        assert(!isZero(top));
-
         float top = tan(fovy * DegreesToRadians / 2.f) * zNear;
         float right = top * aspect;
+        
+        assert(!isZero(right));
+        assert(!isZero(top));
 
         mat4 temp;
         temp[0][0] = zNear / right;
-        tmep[1][1] = zNear / top;
+        temp[1][1] = zNear / top;
         temp[2][2] = -(zFar + zNear) / (zFar - zNear);
         temp[2][3] = -2.f * zFar * zNear / (zFar - zNear);
         temp[3][2] = -1.f;
