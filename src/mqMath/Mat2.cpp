@@ -6,7 +6,7 @@ namespace mq {
     // ------------------------------------------------------------------------
     
     // Create a diagional matrix
-    mat2::mat2(float d = float(1.0f))
+    mat2::mat2(float d)
     : mat2(d, 0.f, 0.0f, d) {}
     mat2::mat2(const vec2& a, const vec2& b)
     : m_{a, b} {}
