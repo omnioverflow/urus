@@ -6,11 +6,11 @@ namespace mq {
     // ------------------------------------------------------------------------
     
     // Create a diagional matrix
-    mat2::mat2(GLFloat d = GLfloat(1.0f))
+    mat2::mat2(float d = float(1.0f))
     : mat2(d, 0.f, 0.0f, d) {}
     mat2::mat2(const vec2& a, const vec2& b)
     : m_{a, b} {}
-    mat2::mat2(GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11)
+    mat2::mat2(float m00, float m10, float m01, float m11)
     : mat2(vec2(m00, m01), vec2(m10, m11)) {}
     mat2::mat2(const mat2& other)
     : m_{other.m_[0], other.m_[1]} {}
@@ -64,19 +64,19 @@ namespace mq {
         return temp;
     }
 
-    mat2& mat2::operator*= (GLFloat s) {
+    mat2& mat2::operator*= (float s) {
         m_[0] *= s;
         m_[1] *= s;
         return *this;
     }
 
-    mat2 mat2::operator* (GLFloat s) const {
+    mat2 mat2::operator* (float s) const {
         auto temp(*this);
         temp *= s;
         return temp;
     }
 
-    mat2 operator* (GLFloat s, const mat2& m) {
+    mat2 operator* (float s, const mat2& m) {
         return m * s;
     }
 
@@ -85,7 +85,7 @@ namespace mq {
             m_[1][0] * rhs.x + m_[1][1] * rhs.y);
     }
 
-    mat2& mat2::operator/= (GLFloat s) {
+    mat2& mat2::operator/= (float s) {
         #ifdef DEBUG
         if (std::fabs(s) < DivideByZeroTolerance) {
             std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -94,11 +94,11 @@ namespace mq {
         }
         #endif // DEBUG
 
-        GLfloat r = GLfloat(1.0f) / s;
+        float r = float(1.0f) / s;
         return (*this) *= r;
     }
 
-    mat2 mat2::operator/ (GLFloat s) const {        
+    mat2 mat2::operator/ (float s) const {
         auto temp(*this);
         temp /= s;
         return temp;        
@@ -116,11 +116,11 @@ namespace mq {
     //  mat2 conversion cperators
     // ------------------------------------------------------------------------
 
-    mat2::operator const GLfloat* () const {
-        return static_cast<const GLfloat*>(&m_[0].x);
+    mat2::operator const float* () const {
+        return static_cast<const float*>(&m_[0].x);
     }
 
-    mat2::operator GLfloat* () {
-        return static_cast<GLfloat*>(&m_[0].x);
+    mat2::operator float* () {
+        return static_cast<float*>(&m_[0].x);
     }
 } // namespace mq

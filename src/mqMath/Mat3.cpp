@@ -2,15 +2,15 @@
 
 namespace mq {
 
-        explicit mat3(GLFloat d = GLfloat(1.0f))
+        explicit mat3(float d = float(1.0f))
         : mat3(vec3(d, 0.f, 0.f), vec3(0.f, d, 0.f), vec3(0.f, 0.f, d)) {}
 
         mat3(const vec3& row0, const vec3& row1, const vec3& row2)
         : m_{a, b, c} {}
 
-        mat3(GLfloat m00, GLfloat m10, GLfloat m20,
-            GLfloat m01, GLfloat m11, GLfloat m21,
-            GLfloat m02, GLfloat m12, GLfloat m22)
+        mat3(float m00, float m10, float m20,
+            float m01, float m11, float m21,
+            float m02, float m12, float m22)
             : mat3(vec3(m00, m01, m02), vec3(m10, m11, m12), vec3(m20, m21, m22)
             {}
 
@@ -63,24 +63,24 @@ namespace mq {
             return temp;
         }
 
-        mat3& operator*= (GLFloat s) {
+        mat3& operator*= (float s) {
             m_[0] *= s;
             m_[1] *= s;
             m_[2] *= s;
             return *this;
         }
 
-        mat3 operator* (GLFloat s) const {
+        mat3 operator* (float s) const {
             auto temp(*this);
             temp *= s;
             return temp;
         }        
 
-        mat3 operator* (GLFloat s, const mat3& rhs) {
+        mat3 operator* (float s, const mat3& rhs) {
             return m * s;
         }        
 
-        mat3& operator/= (GLFloat s) {
+        mat3& operator/= (float s) {
             #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -89,11 +89,11 @@ namespace mq {
             }
             #endif // DEBUG
 
-            GLfloat r = GLfloat(1.0f) / s;
+            float r = float(1.0f) / s;
             return (*this) *= r;
         }    
         
-        mat3 operator/ (GLFloat s) const {
+        mat3 operator/ (float s) const {
             auto temp(*this);
             temp /= s;
             return temp;
@@ -124,12 +124,12 @@ namespace mq {
         // Conversion Operators
         // ---------------------------------------------------------------------
 
-        operator const GLfloat* () const {
-            return static_cast<const GLfloat*>(&m_[0].x);
+        operator const float* () const {
+            return static_cast<const float*>(&m_[0].x);
         }
 
-        operator GLfloat* () {
-            return static_cast<GLfloat*>(&m_[0].x);
+        operator float* () {
+            return static_cast<float*>(&m_[0].x);
         }
 
         mat3 matrixCompMult(const mat3& A, const mat3& B) {

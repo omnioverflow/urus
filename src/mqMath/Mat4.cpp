@@ -5,17 +5,17 @@
 #include "MqMath.h"
 
 namespace mq {
-        mat4::mat4(GLFloat d = GLfloat(1.0f))
+        mat4::mat4(float d = float(1.0f))
         : m_{vec4(d, 0.f, 0.f, 0.f), vec4(0.f, d, 0.f, 0.f),
             vec4(0.f, 0.f, d, 0.f), vec4(0.f, 0.f, 0.f, d)} {}
 
         mat4::mat4(const vec4& a, const vec4& b, const vec4& c, const vec4& d)
         : m_{a, b, c, d} {}
 
-        mat4::mat4(GLfloat m00, GLfloat m10, GLfloat m20, GLfloat m30,
-            GLfloat m01, GLfloat m11, GLfloat m21, GLfloat m31,
-            GLfloat m02, GLfloat m12, GLfloat m22, GLfloat m32,
-            GLfloat m03, GLfloat m13, GLfloat m23, GLfloat m33)
+        mat4::mat4(float m00, float m10, float m20, float m30,
+            float m01, float m11, float m21, float m31,
+            float m02, float m12, float m22, float m32,
+            float m03, float m13, float m23, float m33)
             : m_{vec4(m00, m01, m02, m03), vec4(m10, m11, m12, m13)
             , vec4(m20, m21, m22, m23), vec4(m30, m31, m32, m33)} {}
 
@@ -71,7 +71,7 @@ namespace mq {
             return temp;
         }
 
-        mat4& mat4::operator*= (GLFloat s) {
+        mat4& mat4::operator*= (float s) {
             m_[0] *= s;
             m_[1] *= s;
             m_[2] *= s;
@@ -79,17 +79,17 @@ namespace mq {
             return *this;
         }
 
-        mat4 mat4::operator* (GLFloat s) const {
+        mat4 mat4::operator* (float s) const {
             auto temp(*this);
             temp *= s;
             return temp;
         }
 
-        mat4 operator* (GLFloat s, const mat4& m) {
+        mat4 operator* (float s, const mat4& m) {
             return m * s;
         }
 
-        mat4 mat4::operator/ (GLFloat s) const {
+        mat4 mat4::operator/ (float s) const {
             #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -98,11 +98,11 @@ namespace mq {
             }
             #endif // DEBUG
 
-            GLfloat r = GLfloat(1.0f) / s;
+            float r = float(1.0f) / s;
             return *this * r;
         }
 
-        mat4& operator/= (GLFloat s) {
+        mat4& operator/= (float s) {
             #ifdef DEBUG
             if (std::fabs(s) < DivideByZeroTolerance) {
                 std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -111,7 +111,7 @@ namespace mq {
             }
             #endif // DEBUG
 
-            GLfloat r = GLfloat(1.0f) / s;
+            float r = float(1.0f) / s;
             return *this *= r;
         }
 
@@ -137,12 +137,12 @@ namespace mq {
         }
 
         //  Conversion Operators
-        operator const GLfloat* () const {
-            return static_cast<const GLfloat*>(&m_[0].x);
+        operator const float* () const {
+            return static_cast<const float*>(&m_[0].x);
         }
 
-        operator GLfloat* () {
-            return static_cast<GLfloat*>(&m_[0].x);
+        operator float* () {
+            return static_cast<float*>(&m_[0].x);
         }
 
     // ------------------------------------------------------------------------
@@ -165,8 +165,8 @@ namespace mq {
     }    
 
     //  Rotation matrix generators
-    mat4 RotateX(GLFloat theta) {
-        GLfloat angle = DegreesToRadians * theta;
+    mat4 RotateX(float theta) {
+        float angle = DegreesToRadians * theta;
 
         mat4 c;
         c[2][2] = c[1][1] = cos(angle);
@@ -175,8 +175,8 @@ namespace mq {
         return c;
     }
 
-    mat4 RotateY(GLFloat theta) {
-        GLfloat angle = DegreesToRadians * theta;
+    mat4 RotateY(float theta) {
+        float angle = DegreesToRadians * theta;
 
         mat4 c;
         c[2][2] = c[0][0] = cos(angle);
@@ -185,8 +185,8 @@ namespace mq {
         return c;
     }
 
-    mat4 RotateZ(GLFloat theta) {
-        GLfloat angle = DegreesToRadians * theta;
+    mat4 RotateZ(float theta) {
+        float angle = DegreesToRadians * theta;
 
         mat4 c;
         c[0][0] = c[1][1] = cos(angle);
@@ -196,7 +196,7 @@ namespace mq {
     }
 
     //  Translation matrix generators    
-    mat4 Translate(GLFloat x, GLFloat y, GLFloat z) {
+    mat4 Translate(float x, float y, float z) {
         mat4 c;
         c[0][3] = x;
         c[1][3] = y;
@@ -213,7 +213,7 @@ namespace mq {
     }
 
     //  Scale matrix generators
-    mat4 Scale(GLFloat x, GLFloat y, GLFloat z) {
+    mat4 Scale(float x, float y, float z) {
         mat4 c;
         c[0][0] = x;
         c[1][1] = y;
@@ -226,8 +226,8 @@ namespace mq {
     }
 
     //  Projection transformation matrix geneartors
-    mat4 Ortho(GLFloat left, GLFloat right, GLFloat bottom, GLFloat top,
-            GLFloat zNear, GLFloat zFar) {
+    mat4 Ortho(float left, float right, float bottom, float top,
+            float zNear, float zFar) {
         mat4 temp;
         temp[0][0] = 2.f / (right - left);
         temp[1][1] = 2.f / (top - bottom);
@@ -239,12 +239,12 @@ namespace mq {
         return temp;
     }
 
-    mat4 Ortho2D(GLFloat left, GLFloat right, GLFloat bottom, GLFloat top) {
+    mat4 Ortho2D(float left, float right, float bottom, float top) {
         return Ortho(left, right, bottom, top, -1.f, 1.f);
     }
 
-    mat4 Frustum(GLFloat left, GLFloat right, GLFloat bottom, GLFloat top,
-            GLFloat zNear, GLFloat zFar) {
+    mat4 Frustum(float left, float right, float bottom, float top,
+            float zNear, float zFar) {
         mat4 temp;
         temp[0][0] = 2.f * zNear / (right - left);
         temp[0][2] = (right + left) / (right - left);
@@ -256,12 +256,12 @@ namespace mq {
         return c;
     }
 
-    mat4 Perspective(GLFloat fovy, GLFloat aspect, GLFloat zNear, GLFloat zFar) {
+    mat4 Perspective(float fovy, float aspect, float zNear, float zFar) {
         assert(!isZero(rught));
         assert(!isZero(top));
 
-        GLfloat top = tan(fovy * DegreesToRadians / 2.f) * zNear;
-        GLfloat right = top * aspect;
+        float top = tan(fovy * DegreesToRadians / 2.f) * zNear;
+        float right = top * aspect;
 
         mat4 temp;
         temp[0][0] = zNear / right;
