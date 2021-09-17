@@ -9,6 +9,7 @@ namespace mq
     namespace internal
     {
         constexpr float MQ_EPSILON = 1.0e-7;
+        constexpr float MQ_PI = 3.14159265359;
     }
     
     inline bool isZero(float x)
