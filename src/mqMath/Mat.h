@@ -144,16 +144,16 @@ namespace mq
     mat4 matrixCompMult(const mat4& A, const mat4& B);
     mat4 transpose(const mat4& A);
     // Rotation matrix generators
-    mat4 RotateX(float theta);
-    mat4 RotateY(float theta);
-    mat4 RotateZ(float theta);
+    mat4 rotateX(float theta);
+    mat4 rotateY(float theta);
+    mat4 rotateZ(float theta);
     //  Translation matrix generators
-    mat4 Translate(float x, float y, float z);
-    mat4 Translate(const vec3& v);
-    mat4 Translate(const vec4& v);
+    mat4 translate(float x, float y, float z);
+    mat4 translate(const vec3& v);
+    mat4 translate(const vec4& v);
     //  Scale matrix generators
-    mat4 Scale(float x, float y, float z);
-    mat4 Scale(const vec3& v);
+    mat4 scale(float x, float y, float z);
+    mat4 scale(const vec3& v);
 
     //-------------------------------------------------------------------------
     //  Projection transformation matrix geneartors
@@ -162,13 +162,13 @@ namespace mq
     //          order to avoid any name conflicts, we use the variable names
     //          "zNear" to reprsent "near", and "zFar" to reprsent "far".
     // ------------------------------------------------------------------------
-    mat4 Ortho(float left, float right, float bottom, float top,
+    mat4 ortho(float left, float right, float bottom, float top,
         float zNear, float zFar);
-    mat4 Ortho2D(float left, float right, float bottom, float top);
-    mat4 Frustum(float left, float right, float bottom, float top,
+    mat4 ortho2D(float left, float right, float bottom, float top);
+    mat4 frustum(float left, float right, float bottom, float top,
         float zNear, float zFar);
-    mat4 Perspective(float fovy, float aspect, float zNear, float zFar);
+    mat4 perspective(float fovy, float aspect, float zNear, float zFar);
     //  Viewing transformation matrix generation
-    mat4 LookAt(const vec4& eye, const vec4& at, const vec4& up);
+    mat4 lookAt(const vec4& eye, const vec4& at, const vec4& up);
 
 }  // namespace mq
