@@ -240,7 +240,7 @@ source_group (mqMath
     src/mqMath/Mat3.cpp
     src/mqMath/Mat4.cpp
     src/mqMath/RowMajorMat4.h
-    src/mqMath/MwMath.h
+    src/mqMath/MqMath.h
     src/mqMath/Vec.h
     src/mqMath/Vec2.h
     src/mqMath/Vec3.h
