@@ -143,28 +143,10 @@ namespace mq {
         }
 
     // ------------------------------------------------------------------------
-    //  Non-class mat4 Methods
+    //  static mat4 Methods
     // ------------------------------------------------------------------------
-    mat4 matrixCompMult(const mat4& A, const mat4& B) {
-        return mat4(
-            A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2], A[0][3] * B[0][3],
-            A[1][0] * B[1][0], A[1][1] * B[1][1], A[1][2] * B[1][2], A[1][3] * B[1][3],
-            A[2][0] * B[2][0], A[2][1] * B[2][1], A[2][2] * B[2][2], A[2][3] * B[2][3],
-            A[3][0] * B[3][0], A[3][1] * B[3][1], A[3][2] * B[3][2], A[3][3] * B[3][3]
-        );
-    }
-
-    mat4 transpose(const mat4& A) {
-        return mat4(A[0][0], A[1][0], A[2][0], A[3][0],
-            A[0][1], A[1][1], A[2][1], A[3][1],
-            A[0][2], A[1][2], A[2][2], A[3][2],
-            A[0][3], A[1][3], A[2][3], A[3][3]);
-    }    
-
-    //  Rotation matrix generators
-    mat4 rotateX(float theta) {
-        float angle = DegreesToRadians * theta;
-
+    
+    mat4 mat4::rotateX(float theta) {
         mat4 c;
         c[2][2] = c[1][1] = cos(angle);
         c[2][1] = sin(angle);
@@ -172,9 +154,7 @@ namespace mq {
         return c;
     }
 
-    mat4 rotateY(float theta) {
-        float angle = DegreesToRadians * theta;
-
+    mat4 mat4::rotateY(float theta) {
         mat4 c;
         c[2][2] = c[0][0] = cos(angle);
         c[0][2] = sin(angle);
@@ -182,9 +162,7 @@ namespace mq {
         return c;
     }
 
-    mat4 rotateZ(float theta) {
-        float angle = DegreesToRadians * theta;
-
+    mat4 mat4::rotateZ(float theta) {
         mat4 c;
         c[0][0] = c[1][1] = cos(angle);
         c[1][0] = sin(angle);
@@ -192,8 +170,19 @@ namespace mq {
         return c;
     }
 
-    //  Translation matrix generators    
-    mat4 translate(float x, float y, float z) {
+    mat4 mat4::rotateXDegrees(float theta) {
+        rotateX(internal::MQ_RADIANS_PER_DEGREE * theta);
+    }
+
+    mat4 mat4::rotateYDegrees(float theta) {
+        rotateY(internal::MQ_RADIANS_PER_DEGREE * theta);
+    }
+
+    mat4 mat4::rotateZDegrees(float theta) {
+        rotateZ(internal::MQ_RADIANS_PER_DEGREE * theta);
+    }
+
+    mat4 mat4::translate(float x, float y, float z) {
         mat4 c;
         c[0][3] = x;
         c[1][3] = y;
@@ -201,16 +190,15 @@ namespace mq {
         return c;
     }
 
-    mat4 translate(const vec3& v) {
+    mat4 mat4::translate(const vec3& v) {
         return translate(v.x, v.y, v.z);
     }
 
-    mat4 translate(const vec4& v) {
+    mat4 mat4::translate(const vec4& v) {
         return Translate(v.x, v.y, v.z);
     }
 
-    //  Scale matrix generators
-    mat4 scale(float x, float y, float z) {
+    mat4 mat4::scale(float x, float y, float z) {
         mat4 c;
         c[0][0] = x;
         c[1][1] = y;
@@ -218,12 +206,12 @@ namespace mq {
         return c;
     }
 
-    mat4 scale(const vec3& v) {
+    mat4 mat4::scale(const vec3& v) {
         return scale(v.x, v.y, v.z);
     }
 
     //  Projection transformation matrix geneartors
-    mat4 ortho(float left, float right, float bottom, float top,
+    mat4 mat4::ortho(float left, float right, float bottom, float top,
             float zNear, float zFar) {
         mat4 temp;
         temp[0][0] = 2.f / (right - left);
@@ -236,11 +224,11 @@ namespace mq {
         return temp;
     }
 
-    mat4 ortho2D(float left, float right, float bottom, float top) {
+    mat4 mat4::ortho2D(float left, float right, float bottom, float top) {
         return Ortho(left, right, bottom, top, -1.f, 1.f);
     }
 
-    mat4 frustum(float left, float right, float bottom, float top,
+    mat4 mat4::frustum(float left, float right, float bottom, float top,
             float zNear, float zFar) {
         mat4 temp;
         temp[0][0] = 2.f * zNear / (right - left);
@@ -253,7 +241,7 @@ namespace mq {
         return temp;
     }
 
-    mat4 perspective(float fovy, float aspect, float zNear, float zFar) {
+    mat4 mat4::perspective(float fovy, float aspect, float zNear, float zFar) {
         float top = tan(fovy * DegreesToRadians / 2.f) * zNear;
         float right = top * aspect;
         
@@ -270,13 +258,29 @@ namespace mq {
     }
 
     //  Viewing transformation matrix generation
-    mat4 lookAt(const vec4& eye, const vec4& at, const vec4& up) {
+    mat4 mat4::lookAt(const vec4& eye, const vec4& at, const vec4& up) {
         vec4 n = normalize(eye - at);
         vec4 u = normalize(cross(up, n));
         vec4 v = normalize(cross(n, u));
         vec4 t = vec4(0.f, 0.f, 0.f, 1.f);
         mat4 c = mat4(u, v, n, t);
         return c * translate(-eye);
+    }
+
+    mat4 mat4::matrixCompMult(const mat4& A, const mat4& B) {
+        return mat4(
+            A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2], A[0][3] * B[0][3],
+            A[1][0] * B[1][0], A[1][1] * B[1][1], A[1][2] * B[1][2], A[1][3] * B[1][3],
+            A[2][0] * B[2][0], A[2][1] * B[2][1], A[2][2] * B[2][2], A[2][3] * B[2][3],
+            A[3][0] * B[3][0], A[3][1] * B[3][1], A[3][2] * B[3][2], A[3][3] * B[3][3]
+        );
+    }
+
+    mat4 mat4::transpose(const mat4& A) {
+        return mat4(A[0][0], A[1][0], A[2][0], A[3][0],
+            A[0][1], A[1][1], A[2][1], A[3][1],
+            A[0][2], A[1][2], A[2][2], A[3][2],
+            A[0][3], A[1][3], A[2][3], A[3][3]);
     }
     
 } // namespace mq

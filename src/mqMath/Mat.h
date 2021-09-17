@@ -133,42 +133,40 @@ namespace mq
         operator const float* () const;
         operator float* ();
 
+    public:
+
+        static mat4 translate(float x, float y, float z);
+        static mat4 translate(const vec3& v);
+        static mat4 translate(const vec4& v);
+        static mat4 rotateX(float theta);
+        static mat4 rotateY(float theta);
+        static mat4 rotateZ(float theta);
+        static mat4 rotateXDegrees(float theta);
+        static mat4 rotateYDegrees(float theta);
+        static mat4 rotateZDegrees(float theta);
+        static mat4 scale(float x, float y, float z);
+        static mat4 scale(const vec3& v);
+        //-------------------------------------------------------------------------
+        //  Projection transformation matrix geneartors
+        //
+        //    Note: Microsoft Windows (r) defines the keyword "far" in C/C++.  In
+        //          order to avoid any name conflicts, we use the variable names
+        //          "zNear" to reprsent "near", and "zFar" to reprsent "far".
+        // ------------------------------------------------------------------------
+        static mat4 ortho(float left, float right, float bottom, float top,
+            float zNear, float zFar);
+        static mat4 ortho2D(float left, float right, float bottom, float top);
+        static mat4 frustum(float left, float right, float bottom, float top,
+            float zNear, float zFar);
+        static mat4 perspective(float fovy, float aspect, float zNear, float zFar);
+
+        //  Viewing transformation matrix generation
+        static mat4 lookAt(const vec4& eye, const vec4& at, const vec4& up);
+
+        static mat4 matrixCompMult(const mat4& A, const mat4& B);
+        static mat4 transpose(const mat4& A);
+
         private:
             vec4 m_[4];
     }; // class mat4
-
-    // ------------------------------------------------------------------------
-    //  Non-class mat4 Methods
-    // ------------------------------------------------------------------------
-
-    mat4 matrixCompMult(const mat4& A, const mat4& B);
-    mat4 transpose(const mat4& A);
-    // Rotation matrix generators
-    mat4 rotateX(float theta);
-    mat4 rotateY(float theta);
-    mat4 rotateZ(float theta);
-    //  Translation matrix generators
-    mat4 translate(float x, float y, float z);
-    mat4 translate(const vec3& v);
-    mat4 translate(const vec4& v);
-    //  Scale matrix generators
-    mat4 scale(float x, float y, float z);
-    mat4 scale(const vec3& v);
-
-    //-------------------------------------------------------------------------
-    //  Projection transformation matrix geneartors
-    //
-    //    Note: Microsoft Windows (r) defines the keyword "far" in C/C++.  In
-    //          order to avoid any name conflicts, we use the variable names
-    //          "zNear" to reprsent "near", and "zFar" to reprsent "far".
-    // ------------------------------------------------------------------------
-    mat4 ortho(float left, float right, float bottom, float top,
-        float zNear, float zFar);
-    mat4 ortho2D(float left, float right, float bottom, float top);
-    mat4 frustum(float left, float right, float bottom, float top,
-        float zNear, float zFar);
-    mat4 perspective(float fovy, float aspect, float zNear, float zFar);
-    //  Viewing transformation matrix generation
-    mat4 lookAt(const vec4& eye, const vec4& at, const vec4& up);
-
 }  // namespace mq
