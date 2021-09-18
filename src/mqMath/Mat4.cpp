@@ -242,7 +242,7 @@ namespace mq {
     }
 
     mat4 mat4::perspective(float fovy, float aspect, float zNear, float zFar) {
-        float top = tan(fovy * DegreesToRadians / 2.f) * zNear;
+        float top = tan(fovy * internal::MQ_RADIANS_PER_DEGREE / 2.f) * zNear;
         float right = top * aspect;
         
         assert(!isZero(right));
@@ -254,7 +254,7 @@ namespace mq {
         temp[2][2] = -(zFar + zNear) / (zFar - zNear);
         temp[2][3] = -2.f * zFar * zNear / (zFar - zNear);
         temp[3][2] = -1.f;
-        return c;
+        return temp;
     }
 
     //  Viewing transformation matrix generation
