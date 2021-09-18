@@ -146,40 +146,40 @@ namespace mq {
     //  static mat4 Methods
     // ------------------------------------------------------------------------
     
-    mat4 mat4::rotateX(float theta) {
+    mat4 mat4::rotateX(float thetaRadians) {
         mat4 c;
-        c[2][2] = c[1][1] = cos(angle);
-        c[2][1] = sin(angle);
+        c[2][2] = c[1][1] = cos(thetaRadians);
+        c[2][1] = sin(thetaRadians);
         c[1][2] = -c[2][1];
         return c;
     }
 
-    mat4 mat4::rotateY(float theta) {
+    mat4 mat4::rotateY(float thetaRadians) {
         mat4 c;
-        c[2][2] = c[0][0] = cos(angle);
-        c[0][2] = sin(angle);
+        c[2][2] = c[0][0] = cos(thetaRadians);
+        c[0][2] = sin(thetaRadians);
         c[2][0] = -c[0][2];
         return c;
     }
 
-    mat4 mat4::rotateZ(float theta) {
+    mat4 mat4::rotateZ(float thetaRadians) {
         mat4 c;
-        c[0][0] = c[1][1] = cos(angle);
-        c[1][0] = sin(angle);
+        c[0][0] = c[1][1] = cos(thetaRadians);
+        c[1][0] = sin(thetaRadians);
         c[0][1] = -c[1][0];
         return c;
     }
 
-    mat4 mat4::rotateXDegrees(float theta) {
-        rotateX(internal::MQ_RADIANS_PER_DEGREE * theta);
+    mat4 mat4::rotateXDegrees(float thetaDegrees) {
+        rotateX(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
-    mat4 mat4::rotateYDegrees(float theta) {
-        rotateY(internal::MQ_RADIANS_PER_DEGREE * theta);
+    mat4 mat4::rotateYDegrees(float thetaDegrees) {
+        rotateY(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
-    mat4 mat4::rotateZDegrees(float theta) {
-        rotateZ(internal::MQ_RADIANS_PER_DEGREE * theta);
+    mat4 mat4::rotateZDegrees(float thetaDegrees) {
+        rotateZ(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
     mat4 mat4::translate(float x, float y, float z) {
