@@ -195,7 +195,7 @@ namespace mq {
     }
 
     mat4 mat4::translate(const vec4& v) {
-        return Translate(v.x, v.y, v.z);
+        return translate(v.x, v.y, v.z);
     }
 
     mat4 mat4::scale(float x, float y, float z) {
@@ -225,7 +225,7 @@ namespace mq {
     }
 
     mat4 mat4::ortho2D(float left, float right, float bottom, float top) {
-        return Ortho(left, right, bottom, top, -1.f, 1.f);
+        return ortho(left, right, bottom, top, -1.f, 1.f);
     }
 
     mat4 mat4::frustum(float left, float right, float bottom, float top,
