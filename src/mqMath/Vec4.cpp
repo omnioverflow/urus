@@ -40,6 +40,11 @@ namespace mq {
     }
 
     template <typename T>
+    vec4_t<T> vec4_t<T>::operator- () const {
+        return -(*this);
+    }
+
+    template <typename T>
     vec4_t<T>& vec4_t<T>::operator-= (const vec4_t<T>& rhs) {
         (*this) += -(*this);
         return *this;

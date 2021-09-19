@@ -29,6 +29,7 @@ namespace mq
             vec4_t<T>& operator+= (const vec4_t<T>& rhs);
             vec4_t<T> operator+ (const vec4_t<T>& rhs) const;
             vec4_t<T>& operator- ();
+            vec4_t<T> operator-() const;
             vec4_t<T>& operator-= (const vec4_t<T>& rhs);
             vec4_t<T> operator- (const vec4_t<T>& rhs) const;
             vec4_t<T>& operator*= (float scalar);
