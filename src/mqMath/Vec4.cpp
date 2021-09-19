@@ -85,4 +85,23 @@ namespace mq {
     std::istream& operator>> (const std::istream& is, vec4_t<T>& rhs) {
         return is >> rhs[0] >> rhs[1] >> rhs[2] >> rhs[3];
     }
+
+    template <typename T>
+    void normalize(vec4_t<T>& v) {
+        const auto lenSq = lengthSq(v);
+        if (!isZero(lenSq)) {
+            const auto inverseLength = 1.f / sqrtf(lenSq);
+            v.x *= inverseLength;
+            v.y *= inverseLength;
+            v.z *= inverseLength;
+            v.w *= inverseLength;
+        }
+    }
+
+    template <typename T>
+    vec4_t<T> normalized(const vec4_t<T>& v) {
+        auto temp(v);
+        return normalize(temp);
+    }
+
 } // namespace mq

@@ -259,9 +259,9 @@ namespace mq {
 
     //  Viewing transformation matrix generation
     mat4 mat4::lookAt(const vec4& eye, const vec4& at, const vec4& up) {
-        vec4 n = normalize(eye - at);
-        vec4 u = normalize(cross(up, n));
-        vec4 v = normalize(cross(n, u));
+        vec4 n = normalized(eye - at);
+        vec4 u = normalized(cross(up, n));
+        vec4 v = normalized(cross(n, u));
         vec4 t = vec4(0.f, 0.f, 0.f, 1.f);
         mat4 c = mat4(u, v, n, t);
         return c * translate(-eye);

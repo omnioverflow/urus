@@ -43,4 +43,17 @@ namespace mq
     typedef vec4_t<float> vec4;
     typedef vec4_t<int> ivec4;
     typedef vec4_t<unsigned int> uivec4;
+
+    /**
+    * Normalize non-const input vector.
+    */
+    template <typename T>
+    void normalize(vec4_t<T>& v);
+
+    /**
+    * Return normalized vector obtained from input vector.
+    */
+    template <typename T>
+    vec4_t<T> normalized(const vec4_t<T>& v);
+
 } // namespace mq
