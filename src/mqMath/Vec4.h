@@ -5,6 +5,9 @@
 namespace mq 
 {
     template <typename T>
+    struct vec3_t;
+
+    template <typename T>
         struct vec4_t
         {
             union 
@@ -23,6 +26,7 @@ namespace mq
             inline vec4_t<T>() : x((T)0), y((T)0), w((T)0) {}
             inline vec4_t<T>(T xval, T yval, T zval, T wval) : x(xval), y(yval), z(zval), w(wval) {}
             inline vec4_t<T>(const T* array) : x(array[0]), y(array[1]), z(array[2]), w(array[3]) {}
+            vec4_t<T>(const vec3_t<T>& v, T wval) : x(v[0]), y(v[1]), z(v[2]), w(wval) {}
 
             T& operator[] (int index);
             const T& operator[] (int index) const;
@@ -57,4 +61,9 @@ namespace mq
     template <typename T>
     vec4_t<T> normalized(const vec4_t<T>& v);
 
+    /**
+    * Compute cross-product. 
+    */
+    template <typename T>
+    vec4_t<T> cross(const vec4_t<T>& a, const vec4_t<T>& b);
 } // namespace mq
