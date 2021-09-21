@@ -59,7 +59,7 @@ namespace mq
     * Return normalized vector obtained from input vector.
     */
     template <typename T>
-    vec4_t<T> normalized(const vec4_t<T>& v);
+    vec4_t<T> normalize(const vec4_t<T>& v);
 
     /**
     * Compute cross-product. 

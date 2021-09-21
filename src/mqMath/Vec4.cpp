@@ -104,7 +104,7 @@ namespace mq {
     }
 
     template <typename T>
-    vec4_t<T> normalized(const vec4_t<T>& v) {
+    vec4_t<T> normalize(const vec4_t<T>& v) {
         auto temp(v);
         return normalize(temp);
     }

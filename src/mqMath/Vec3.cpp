@@ -166,7 +166,7 @@ namespace mq {
     * Return a normalized vector obtained from the input vector.
     */
     template <typename T>
-    vec3_t<T> normalized(const vec3_t<T>& v) {
+    vec3_t<T> normalize(const vec3_t<T>& v) {
         const float lenSq = lengthSq(v);
         if (isZero(lenSq))
             return v;
