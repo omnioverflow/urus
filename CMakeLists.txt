@@ -50,8 +50,8 @@ target_sources (${PROJECT_NAME}
     src/engine/geometry/BoundingBox.h
     src/engine/geometry/Mesh.h
     src/engine/geometry/Mesh.cpp
-    # engine/renderer
-    src/engine/renderer/Renderer.h
+    # engine/render
+    src/engine/render/Renderer.h
     # engine/scene
     src/engine/scene/SceneNode.h
     src/engine/scene/SceneNode.cpp
@@ -160,9 +160,9 @@ source_group (engine\\geometry
     src/engine/geometry/Mesh.cpp
     )
 
-source_group (engine\\renderer
+source_group (engine\\render
     FILES
-    src/engine/renderer/Renderer.h
+    src/engine/render/Renderer.h
     )
 
 source_group (engine\\scene
