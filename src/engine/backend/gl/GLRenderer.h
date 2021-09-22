@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/renderer/Renderer.h"
+#include "engine/render/Renderer.h"
 
 namespace urus {
     class GLRenderer : public Renderer {
