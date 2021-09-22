@@ -1,17 +1,27 @@
-#include "Vec3.h"
+#include "Vec.h"
 
 namespace mq {
+    template <typename T>
+    vec3_t<T>::vec3_t<T>() : x(0), y(0), z(0) {}
+
+    template <typename T>
+    vec3_t<T>::vec3_t<T>(T xval, T yval, T zval) : x(xval), y(yval), z(zval) {}
+
+    template <typename T>
+    vec3_t<T>::vec3_t<T>(const T* array)
+    : x(array[0]), y(array[1]), z(array[2]) {}
+
     // ------------------------------------------------------------------------
     // Member operators
     // ------------------------------------------------------------------------
 
     template <typename T>
-    inline T& vec3_t<T>::operator[] (int index) {
+    T& vec3_t<T>::operator[] (int index) {
         return data[index];
     }
 
     template <typename T>
-    inline const T& vec3_t<T>::operator[] (int index) const {
+    const T& vec3_t<T>::operator[] (int index) const {
         return data[index];
     }
 
@@ -106,6 +116,9 @@ namespace mq {
         return is >> rhs[0] >> rhs[1] >> rhs[2];
     }
 
+    template <typename T>
+    vec3_t<T> getZero() { return vec3_t(0, 0, 0); }
+
     // ------------------------------------------------------------------------
     // Helper functions
     // ------------------------------------------------------------------------
@@ -123,7 +136,7 @@ namespace mq {
     * Dot product.
     */
     template <typename T>
-    inline float dot(const vec3_t<T>& a, const vec3_t<T>& b) {
+    float dot(const vec3_t<T>& a, const vec3_t<T>& b) {
         return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 
@@ -131,7 +144,7 @@ namespace mq {
     * Squared lenght of the vector.
     */
     template <typename T>
-    inline float lengthSq(const vec3_t<T>& v) {
+    float lengthSq(const vec3_t<T>& v) {
         return dot(v, v);
     }
 

@@ -104,10 +104,8 @@ target_sources (${PROJECT_NAME}
     src/mqMath/RowMajorMat4.h
     src/mqMath/MqMath.h
     src/mqMath/Vec.h
-    src/mqMath/Vec2.h
-    src/mqMath/Vec3.h
+    src/mqMath/Vec2.cpp
     src/mqMath/Vec3.cpp
-    src/mqMath/Vec4.h
     src/mqMath/Vec4.cpp
     )
 
@@ -242,10 +240,8 @@ source_group (mqMath
     src/mqMath/RowMajorMat4.h
     src/mqMath/MqMath.h
     src/mqMath/Vec.h
-    src/mqMath/Vec2.h
-    src/mqMath/Vec3.h
+    src/mqMath/Vec2.cpp
     src/mqMath/Vec3.cpp
-    src/mqMath/Vec4.h
     src/mqMath/Vec4.cpp
     )
 
