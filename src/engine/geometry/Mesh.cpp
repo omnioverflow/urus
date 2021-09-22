@@ -13,14 +13,17 @@ namespace urus {
 
     mq::vec3 Mesh::getMinBound() const {
         // TODO: impl
+        return mq::vec3();
     }
 
     mq::vec3 Mesh::getMaxBound() const {
         // TODO: impl
+        return mq::vec3();
     }
 
     mq::vec3 Mesh::getCenter() const {
         // TODO: impl
+        return mq::vec3();
     }
 
     AxisAlignedBoundingBox Mesh::getAxisAlignedBoundingBox() const {
@@ -37,7 +40,7 @@ namespace urus {
         // TODO: impl
     }
 
-    void Mesh::translate(const mq::vec3 translation, bool relative = true) {
+    void Mesh::translate(const mq::vec3 translation, bool relative) {
         // TODO: impl
     }
 
@@ -71,7 +74,19 @@ namespace urus {
         const std::vector<mq::ivec3> triangles)
         : Mesh(vertices), mTriangles(triangles) {}
 
+    TriangleMesh& TriangleMesh::operator+= (const TriangleMesh& rhs) {
+        // TODO: provide imple - merge the two meshes.
+        return (*this);
+    }
+
+    TriangleMesh TriangleMesh::operator+ (const TriangleMesh& rhs) const {
+        auto temp(*this);
+        temp += rhs;
+        return temp;
+    }
+
     void TriangleMesh::clear() {
+        Mesh::clear();
         mTriangles.clear();
     }
 
@@ -79,23 +94,26 @@ namespace urus {
         // TODO: impl
         // Implement Qhull
         // http://www.qhull.org/
+        return nullptr;
     }
 
-    std::shared_ptr<TriangleMesh> TriangleMesh::createBox(float width,
-        float height, float depth) {
+    std::shared_ptr<TriangleMesh> TriangleMesh::createBox(
+        float width, float height, float depth) {
         // TODO: impl
         return nullptr;
     }
 
-    std::shared_ptr<TriangleMesh> TriangleMesh::createArrow(float cylinderRadius,
-        float cylinderHeight, float coneRadius, float coneHeight,
-        int resolution, int cylinderSplit, int coneSplit) {
+    std::shared_ptr<TriangleMesh> TriangleMesh::createArrow(
+        float cylinderRadius, float cylinderHeight, float coneRadius,
+        float coneHeight, int resolution, int cylinderSplit, int coneSplit) {
         // TODO: impl
+        return nullptr;
     }
 
-    std::shared_ptr<TriangleMesh> TriangleMesh::createCoordinateFrame(float size,
-        const mq::vec3& origin) {
+    std::shared_ptr<TriangleMesh> TriangleMesh::createCoordinateFrame(
+        float size, const mq::vec3& origin) {
         // TODO: impl
+        return nullptr;
     }
 
 }; // namespace urus

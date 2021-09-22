@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "mqMath/Mat.h"
-#include "mqMath/Mat4.h"
 #include "mqMath/Vec3.h"
 
 // Inspired by mesh interfaces from Open3d.
@@ -30,13 +29,7 @@ namespace urus {
         Mesh& operator=(const Mesh&) = default;
         Mesh(Mesh&&) = default;
         Mesh& operator=(Mesh&&) = default;
-
-        // TODO:
-        // check this out https://en.cppreference.com/w/cpp/language/operators
-        // regarding using friends when overloading arithmetic operators.
-        Mesh& operator+=(const Mesh& rhs);
-        const Mesh& operator+(const Mesh& rhs);        
-
+     
         bool isEmpty() const;
         bool hasVertices() const { return !mVertices.empty(); }
         bool hasNormals() const { return !mVertexNormals.empty(); }
@@ -80,6 +73,11 @@ namespace urus {
             const std::vector<mq::ivec3> triangles
         );
 
+        virtual ~TriangleMesh() = default;
+
+        TriangleMesh& operator+= (const TriangleMesh& rhs);
+        TriangleMesh operator+ (const TriangleMesh& rhs) const;
+
         virtual void clear() override;
 
         std::shared_ptr<TriangleMesh> computeConvexCull() const;
@@ -88,7 +86,8 @@ namespace urus {
         static std::shared_ptr<TriangleMesh> createBox(
             float width = 1.0f,
             float height = 1.0f,
-            float depth = 1.0f);
+            float depth = 1.0f
+        );
 
         static std::shared_ptr<TriangleMesh> createArrow(
             float cylinderRadius = 1.0f,
