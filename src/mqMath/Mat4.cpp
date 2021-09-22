@@ -171,15 +171,15 @@ namespace mq {
     }
 
     mat4 mat4::rotateXDegrees(float thetaDegrees) {
-        rotateX(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
+        return rotateX(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
     mat4 mat4::rotateYDegrees(float thetaDegrees) {
-        rotateY(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
+        return rotateY(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
     mat4 mat4::rotateZDegrees(float thetaDegrees) {
-        rotateZ(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
+        return rotateZ(internal::MQ_RADIANS_PER_DEGREE * thetaDegrees);
     }
 
     mat4 mat4::translate(float x, float y, float z) {
