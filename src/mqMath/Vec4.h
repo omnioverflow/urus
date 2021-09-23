@@ -178,7 +178,7 @@ namespace mq {
     }
 
     template <typename T>
-    std::istream& operator>> (const std::istream& is, vec4_t<T>& rhs) {
+    std::istream& operator>> (std::istream& is, vec4_t<T>& rhs) {
         return is >> rhs[0] >> rhs[1] >> rhs[2] >> rhs[3];
     }
 
