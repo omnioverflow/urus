@@ -13,7 +13,7 @@ namespace mq
         constexpr float MQ_RADIANS_PER_DEGREE = MQ_PI / 180.f;
     }
     
-    inline bool isZero(float x) {
+    bool isZero(float x) {
         return (x < internal::MQ_EPSILON) && (x > -internal::MQ_EPSILON);
     }
 } // namespace mq
