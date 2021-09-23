@@ -7,6 +7,9 @@ namespace urus {
     // Mesh
     // ------------------------------------------------------------------------
 
+    // Mesh is an abstract class, but we must provide the dtor definition.
+    Mesh::~Mesh() = default;
+
     bool Mesh::isEmpty() const {
         return hasVertices() || hasNormals() || hasVertexColors();
     }
