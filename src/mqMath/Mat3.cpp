@@ -17,13 +17,19 @@ namespace mq {
         mat3::mat3(const mat3& other)
         : mat3(other[0], other[1], other[2]) {}
 
-        vec3& mat3::operator[] (int i) { return m_[i]; }
-        const vec3& mat3::operator[] (int i) const { return m_[i]; }
+        vec3& mat3::operator[] (int index) {
+            return m_[index];
+        }
+
+        const vec3& mat3::operator[] (int index) const { 
+            return m_[index];
+        }
 
         mat3& mat3::operator+= (const mat3& rhs) {
             m_[0] += rhs[0];
             m_[1] += rhs[1];
             m_[2] += rhs[2];
+            
             return *this;
         }
 
@@ -33,10 +39,11 @@ namespace mq {
             return temp;
         }
 
-        mat3& mat3::operator-= (const mat3& rhs) {
+        mat3& mat3::operator-= (const mat3& rhs) {            
             m_[0] -= rhs[0];
             m_[1] -= rhs[1];
             m_[2] -= rhs[2];
+            
             return *this;
         }
 
@@ -63,10 +70,11 @@ namespace mq {
             return temp;
         }
 
-        mat3& mat3::operator*= (float s) {
+        mat3& mat3::operator*= (float s) {           
             m_[0] *= s;
             m_[1] *= s;
             m_[2] *= s;
+            
             return *this;
         }
 

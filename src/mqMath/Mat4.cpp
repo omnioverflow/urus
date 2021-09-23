@@ -22,8 +22,13 @@ namespace mq {
         mat4::mat4(const mat4& other)
         : m_{other[0], other[1], other[2], other[3]} {}
 
-        vec4& mat4::operator[] (int i) { return m_[i]; }
-        const vec4& mat4::operator[] (int i) const { return m_[i]; }
+        vec4& mat4::operator[] (int index) { 
+            return m_[index];
+        }
+
+        const vec4& mat4::operator[] (int index) const { 
+            return m_[index];
+        }
 
         mat4& mat4::operator+= (const mat4& rhs) {
             m_[0] += rhs[0];
@@ -124,9 +129,12 @@ namespace mq {
             );
         }
 
-        std::ostream& operator<< (std::ostream& os, const mat4& rhs) {
-            return os << std::endl << rhs[0] << std::endl << rhs[1] << std::endl << rhs[2] <<
-                   std::endl << rhs[3] << std::endl;
+        std::ostream& operator<< (std::ostream& os, const mat4& rhs) {            
+            return os << std::endl 
+                << rhs[0] << std::endl 
+                << rhs[1] << std::endl
+                << rhs[2] << std::endl
+                << rhs[3] << std::endl;
         }
 
         std::istream& operator>> (std::istream& is, mat4& rhs) {

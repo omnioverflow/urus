@@ -17,8 +17,8 @@ namespace mq
         mat2(float m00, float m10, float m01, float m11);
         mat2(const mat2& m);
 
-        vec2& operator[] (int i);
-        const vec2& operator[] (int i) const;
+        vec2& operator[] (int index);
+        const vec2& operator[] (int index) const;
 
         mat2& operator+= (const mat2& rhs);
         mat2 operator+ (const mat2& rhs) const;
@@ -43,7 +43,7 @@ namespace mq
         operator float* ();
 
         private:
-            vec2  m_[2];
+            vec2 m_[2];
     }; // class mat2
 
     /**
@@ -59,8 +59,8 @@ namespace mq
             float m02, float m12, float m22);
         mat3(const mat3& other);
 
-        vec3& operator[] (int i);
-        const vec3& operator[] (int i) const;
+        vec3& operator[] (int index);
+        const vec3& operator[] (int index) const;
 
         mat3& operator+= (const mat3& rhs);
         mat3 operator+ (const mat3& rhs) const;
@@ -85,7 +85,7 @@ namespace mq
 
         // --------------------------------------------------------------------
         private:
-            vec3  m_[3];
+            vec3 m_[3];
     }; // class mat3
 
     // ------------------------------------------------------------------------
@@ -109,8 +109,8 @@ namespace mq
             float m03, float m13, float m23, float m33);
         mat4(const mat4& other);
 
-        vec4& operator[] (int i);
-        const vec4& operator[] (int i) const;        
+        vec4& operator[] (int index);
+        const vec4& operator[] (int index) const;        
 
         mat4& operator+= (const mat4& rhs);
         mat4 operator+ (const mat4& rhs) const;

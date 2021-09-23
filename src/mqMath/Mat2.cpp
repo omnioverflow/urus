@@ -15,12 +15,12 @@ namespace mq {
     mat2::mat2(const mat2& other)
     : m_{other.m_[0], other.m_[1]} {}
 
-    vec2& mat2::operator[] (int i) { 
-        return m_[i];
+    vec2& mat2::operator[] (int index) { 
+        return m_[index];
     }
 
-    const vec2& mat2::operator[] (int i) const { 
-        return m_[i];
+    const vec2& mat2::operator[] (int index) const { 
+        return m_[index];
     }
 
     mat2& mat2::operator+= (const mat2& rhs) {
@@ -55,6 +55,7 @@ namespace mq {
                 }
             }
         }
+
         return *this;
     }
 
@@ -104,12 +105,12 @@ namespace mq {
         return temp;        
     }
 
-    std::ostream& operator<< (std::ostream& os, const mat2& m) {
-        return os << std::endl << m[0] << std::endl << m[1] << std::endl;
+    std::ostream& operator<< (std::ostream& os, const mat2& rhs) {        
+        return os << std::endl << rhs[0] << std::endl << rhs[1] << std::endl;
     }
 
-    std::istream& operator>> (std::istream& is, mat2& m) {
-        return is >> m.m_[0] >> m.m_[1];
+    std::istream& operator>> (std::istream& is, mat2& rhs) {
+        return is >> rhs.m_[0] >> rhs.m_[1];
     }
 
     // ------------------------------------------------------------------------
