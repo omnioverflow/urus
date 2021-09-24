@@ -24,28 +24,22 @@ add_executable (${PROJECT_NAME}
     main.cpp
     )
 
-target_sources (${PROJECT_NAME}
-    PRIVATE
-    # engine/base
+set (
+    ENGINE_HEADERS
+     # engine/base
     src/engine/base/OpenGLSupport.h
     src/engine/base/Core.h
     src/engine/base/Macros.h
     src/engine/base/Singleton.h
     # engine/controls
-    src/engine/controls/InputDispatcher.h
-    src/engine/controls/InputDispatcher.cpp
+    src/engine/controls/InputDispatcher.h    
     src/engine/controls/Trackball.h
     # engine/backend/opengl
     src/engine/backend/gl/Draw.h
-    src/engine/backend/gl/Draw.cpp
-    src/engine/backend/gl/GLRenderer.h
-    src/engine/backend/gl/GLRenderer.cpp
+    src/engine/backend/gl/GLRenderer.H
     src/engine/backend/gl/IndexBuffer.h
-    src/engine/backend/gl/IndexBuffer.cpp
     src/engine/backend/gl/Uniform.h
-    src/engine/backend/gl/Uniform.cpp
     src/engine/backend/gl/VertexAttribute.h
-    src/engine/backend/gl/VertexAttribute.cpp
     # engine/geometry
     src/engine/geometry/BoundingBox.h
     src/engine/geometry/Mesh.h
@@ -54,59 +48,113 @@ target_sources (${PROJECT_NAME}
     src/engine/render/Renderer.h
     # engine/scene
     src/engine/scene/SceneNode.h
-    src/engine/scene/SceneNode.cpp
     src/engine/scene/Scene.h
-    src/engine/scene/Scene.cpp
     # engine/shader
     src/engine/shader/Shader.h
-    src/engine/shader/Shader.cpp
     # engine/texture
     src/engine/texture/Texture.h
-    src/engine/texture/Texture.cpp
-    src/engine/texture/TextureLoader.h
-    src/engine/texture/TextureLoader.cpp
+    src/engine/texture/TextureLoader.H
     # engine/viewtransform
     src/engine/viewtransform/DisplayConfig.h
+    src/engine/viewtransform/ViewTransform.H
+    )
+
+set (
+    ENGINE_SOURCES
+    # engine/controls
+    src/engine/controls/InputDispatcher.cpp
+    # engine/backend/opengl
+    src/engine/backend/gl/Draw.cpp
+    src/engine/backend/gl/GLRenderer.cpp
+    src/engine/backend/gl/IndexBuffer.cpp
+    src/engine/backend/gl/Uniform.cpp
+    src/engine/backend/gl/VertexAttribute.cpp
+    # engine/geometry
+    src/engine/geometry/Mesh.cpp
+    # engine/scene    
+    src/engine/scene/SceneNode.cpp
+    src/engine/scene/Scene.cpp
+    # engine/shader
+    src/engine/shader/Shader.cpp
+    # engine/texture
+    src/engine/texture/Texture.cpp
+    src/engine/texture/TextureLoader.cpp
+    # engine/viewtransform
     src/engine/viewtransform/DisplayConfig.cpp
-    src/engine/viewtransform/ViewTransform.h
     src/engine/viewtransform/ViewTransform.cpp
+
+    )
+
+set (
+    GAME_HEADERS
     # game
     src/game/PathTracer.h
-    src/game/PathTracer.cpp
     src/game/PointCloudViewer.h
-    src/game/PointCloudViewer.cpp
     src/game/Game.h
-    src/game/Game.cpp
     # game/model
     src/game/model/GameWorld.h
-    src/game/model/GameWorld.cpp
     # game/view
     src/game/view/AnyView.h
-    src/game/view/AnyView.cpp
     src/game/view/ConsoleView.h
-    src/game/view/ConsoleView.cpp
     src/game/view/GameView.h
-    src/game/view/GameView.cpp
     src/game/view/Views.h
-    # glsl
+    )
+
+set (
+    GAME_SOURCES
+    # game
+    src/game/PathTracer.cpp
+    src/game/PointCloudViewer.cpp
+    src/game/Game.cpp
+    # game/model
+    src/game/model/GameWorld.cpp
+    # game/view
+    src/game/view/AnyView.cpp
+    src/game/view/ConsoleView.cpp
+    src/game/view/GameView.cpp
+    )
+
+set (
+    SHADER_SOURCES
     src/glsl/shader0.vert
     src/glsl/shader0.frag
     src/glsl/shader1.vert
     src/glsl/shader1.frag
     src/glsl/coord_sys.vert
     src/glsl/coord_sys.frag
-    # Macaque Math (mqMath) vector math lib
-    # TODO: extract mqMath as a library into a dedicated repo
+    )
+
+set (
+    MQ_HEADERS
     src/mqMath/Mat.h
-    src/mqMath/Mat2.cpp
-    src/mqMath/Mat3.cpp
-    src/mqMath/Mat4.cpp
     src/mqMath/RowMajorMat4.h
     src/mqMath/MqMath.h
     src/mqMath/Vec.h
     src/mqMath/Vec2.h
     src/mqMath/Vec3.h
     src/mqMath/Vec4.h
+    )
+
+set (
+    MQ_SOURCES
+    src/mqMath/Mat2.cpp
+    src/mqMath/Mat3.cpp
+    src/mqMath/Mat4.cpp
+    )
+
+target_sources (${PROJECT_NAME}
+    PRIVATE
+    ${ENGINE_HEADERS}
+    ${ENGINE_SOURCES}
+    # game
+    ${GAME_HEADERS}
+    ${GAME_SOURCES}
+    # glsl
+    ${SHADER_SOURCES}
+    # Macaque Math (mqMath) vector math lib
+    # TODO: extract mqMath as a library into a dedicated repo
+    ${MQ_HEADERS}
+    ${MQ_SOURCES}
     )
 
 # third-party sources
@@ -233,16 +281,8 @@ source_group (glsl
 # Macaque Math (mqMath)
 source_group (mqMath
     FILES
-    src/mqMath/Mat.h
-    src/mqMath/Mat2.cpp
-    src/mqMath/Mat3.cpp
-    src/mqMath/Mat4.cpp
-    src/mqMath/RowMajorMat4.h
-    src/mqMath/MqMath.h
-    src/mqMath/Vec.h
-    src/mqMath/Vec2.h
-    src/mqMath/Vec3.h
-    src/mqMath/Vec4.h
+    ${MQ_HEADERS}
+    ${MQ_SOURCES}
     )
 
 # ==============================================================================
