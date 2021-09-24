@@ -20,9 +20,27 @@ namespace urus {
 // -----------------------------------------------------------------------------
 
     class Mesh {
+    private:
+        struct MeshData {
+            constexpr auto kVerticesKey = "vertices";
+            constexpr char kVertexColorsKey[] = "vertexColros";
+            constexpr char kVertexNormalsKeys[] = "vertexNormals";
+
+            MeshData(const std::vector<mq::vec3>& vertices) : mVertices(vertices) {}
+            MeshData(const std::vector<mq::vec3>& vertices,
+                const std::vector<mq::vec3>& vertexColors)
+                : mVertices(vertices)
+                , mVertexColors(vertexColors) {}
+            std::vector<mq::vec3> mVertices;
+            std::vector<mq::vec3> mVertexColors;
+            std::vector<mq::vec3> mVertexNormals;
+        };
+        struct MeshCache {
+
+        };
     public: 
         Mesh() = default;
-        Mesh(const std::vector<mq::vec3> vertices) : mVertices(vertices) {}
+        Mesh(const std::vector<mq::vec3> vertices) : mMeshData(vertices) {}
         virtual ~Mesh() = 0;
         // Follow rule of 5 in C++11, since destructor is explicitly declared.
         Mesh(const Mesh&) = default;
@@ -31,9 +49,9 @@ namespace urus {
         Mesh& operator=(Mesh&&) = default;
      
         bool isEmpty() const;
-        bool hasVertices() const { return !mVertices.empty(); }
-        bool hasNormals() const { return !mVertexNormals.empty(); }
-        bool hasVertexColors() const { return !mVertexColors.empty(); }
+        bool hasVertices() const { return !mMeshData.mVertices.empty(); }
+        bool hasNormals() const { return !mMeshData.mVertexNormals.empty(); }
+        bool hasVertexColors() const { return !mMeshData.mVertexColors.empty(); }
 
         mq::vec3 getMinBound() const;
         mq::vec3 getMaxBound() const;
@@ -55,9 +73,8 @@ namespace urus {
         virtual void clear();
 
     protected:
-        std::vector<mq::vec3> mVertices;
-        std::vector<mq::vec3> mVertexColors;
-        std::vector<mq::vec3> mVertexNormals;
+        MeshData mMeshData;
+        MeshCache mMeshCache;
     }; // class Mesh
     
 
