@@ -160,14 +160,6 @@ namespace mq
             float zNear, float zFar);
         static mat4 perspective(float fovy, float aspect, float zNear, float zFar);
 
-        /**
-         * @brief Viewing transformation matrix generation.
-         * The view matrix is the inverse of the camera's transformation.
-         * Instead of having to create the camera's transform matrix and then
-         * invert it, the lookAt method generates this matrix directly.
-         */
-        static mat4 lookAt(const vec3& eye, const vec3& target, const vec3& up);
-
         static mat4 matrixCompMult(const mat4& A, const mat4& B);
         static mat4 transpose(const mat4& A);
 

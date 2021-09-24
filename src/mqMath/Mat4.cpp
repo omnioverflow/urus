@@ -265,16 +265,6 @@ namespace mq {
         return temp;
     }
 
-    //  Viewing transformation matrix generation
-    mat4 mat4::lookAt(const vec3& eye, const vec3& target, const vec3& up) {
-        auto forward = normalize(eye - target);
-        auto side = normalize(cross(up, forward));
-        auto up = normalize(cross(forward, side));
-        auto row3 = vec4(0.f, 0.f, 0.f, 1.f);
-        auto viewMat = mat4(vec4_t(u, 1.f), vec4_t(v, 1.f), vec4_t(n, 1.f), row3);
-        return viewMat * translate(-eye);
-    }
-
     mat4 mat4::matrixCompMult(const mat4& A, const mat4& B) {
         return mat4(
             A[0][0] * B[0][0], A[0][1] * B[0][1], A[0][2] * B[0][2], A[0][3] * B[0][3],
