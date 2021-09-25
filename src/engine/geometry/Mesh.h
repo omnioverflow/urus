@@ -39,7 +39,6 @@ namespace urus {
 
         };
     public: 
-        Mesh() = default;
         Mesh(const std::vector<mq::vec3> vertices) : mMeshData(vertices) {}
         virtual ~Mesh() = 0;
         // Follow rule of 5 in C++11, since destructor is explicitly declared.
