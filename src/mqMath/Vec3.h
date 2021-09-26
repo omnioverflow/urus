@@ -1,6 +1,9 @@
 #pragma once
 
+#include <cmath>
 #include <iostream>
+
+#include "MqMath.h"
 
 namespace mq {
 
@@ -28,45 +31,6 @@ namespace mq {
         
         T& operator[] (int index);
         const T& operator[] (int index) const;
-
-        template <typename T>
-        friend vec3_t<T>& operator+= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T> operator+ (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T>& operator-= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T> operator- (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T>& operator*= (vec3_t<T>& lhs, float scalar);
-
-        template <typename T>
-        friend vec3_t<T> operator* (const vec3_t<T>& lhs, float scalar);
-
-        template <typename T>
-        friend vec3_t<T> operator* (float scalar, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T>& operator*= (vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend vec3_t<T> operator* (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend bool operator== (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend bool operator!= (const vec3_t<T>& lhs, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend std::ostream operator<< (std::ostream& os, const vec3_t<T>& rhs);
-
-        template <typename T>
-        friend std::istream operator>> (std::istream& is, vec3_t<T>& rhs);
 
         static vec3_t<T> getZero();
     }; // struct vec3_t

@@ -53,14 +53,14 @@ namespace mq
         vec2_t<T>& operator*= (float scalar);
         vec2_t<T> operator* (float scalar) const;
 
-        template <typename T>
-        friend vec2_t<T> operator* (float scalar, const vec2_t<T>& rhs);
+        template <typename U>
+        friend vec2_t<U> operator* (float scalar, const vec2_t<U>& rhs);
 
-        template <typename T>
-        friend std::ostream& operator<< (std::ostream& os, const vec2_t<T>& rhs);
+        template <typename U>
+        friend std::ostream& operator<< (std::ostream& os, const vec2_t<U>& rhs);
 
-        template <typename T>
-        friend std::istream& operator>> (std::istream& is, vec2_t<T>& rhs);
+        template <typename U>
+        friend std::istream& operator>> (std::istream& is, vec2_t<U>& rhs);
     }; // struct base_vec2
 
     typedef vec2_t<float> vec2;

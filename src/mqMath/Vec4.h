@@ -39,17 +39,17 @@ namespace mq {
         vec4_t<T> operator- (const vec4_t<T>& rhs) const;
         vec4_t<T>& operator*= (float scalar);
 
-        template <typename T>
-        friend vec4_t<T> operator* (const vec4_t<T>& lhs, float scalar);
+        template <typename U>
+        friend vec4_t<U> operator* (const vec4_t<U>& lhs, float scalar);
 
-        template <typename T>
-        friend vec4_t<T> operator* (float scalar, const vec4_t<T>& rhs);
+        template <typename U>
+        friend vec4_t<U> operator* (float scalar, const vec4_t<U>& rhs);
 
-        template <typename T>
-        friend std::ostream& operator<< (std::ostream& os, const vec4_t<T>& rhs);
+        template <typename U>
+        friend std::ostream& operator<< (std::ostream& os, const vec4_t<U>& rhs);
 
-        template <typename T>
-        friend std::istream& operator>> (const std::istream& is, vec4_t<T>& rhs);
+        template <typename U>
+        friend std::istream& operator>> (const std::istream& is, vec4_t<U>& rhs);
     }; // struct vec4_t
 
     typedef vec4_t<float> vec4;
