@@ -6,12 +6,13 @@
 
 namespace urus
 {
-    template VertexAttribute<int>;
-    template VertexAttribute<float>;
-    template VertexAttribute<mq::vec2>;
-    template VertexAttribute<mq::vec3>;
-    template VertexAttribute<mq::vec4>;
-    template VertexAttribute<mq::ivec4>;
+    // Explicitly instantiate template classes
+    template class VertexAttribute<int>;
+    template class VertexAttribute<float>;
+    template class VertexAttribute<mq::vec2>;
+    template class VertexAttribute<mq::vec3>;
+    template class VertexAttribute<mq::vec4>;
+    template class VertexAttribute<mq::ivec4>;
 
     template <typename T>
     VertexAttribute<T>::VertexAttribute()
