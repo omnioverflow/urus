@@ -83,7 +83,6 @@ namespace urus {
 
     class TriangleMesh : public Mesh {
     public:
-        TriangleMesh() = default;
         TriangleMesh(
             const std::vector<mq::vec3>& vertices,
             const std::vector<mq::ivec3> triangles
