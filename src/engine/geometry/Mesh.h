@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "mqMath/Mat.h"
@@ -22,9 +23,9 @@ namespace urus {
     class Mesh {
     private:
         struct MeshData {
-            constexpr auto kVerticesKey = "vertices";
-            constexpr char kVertexColorsKey[] = "vertexColros";
-            constexpr char kVertexNormalsKeys[] = "vertexNormals";
+            static const std::string kVerticesKey;
+            static const std::string kVertexColorsKey;
+            static const std::string kVertexNormalsKeys;
 
             MeshData(const std::vector<mq::vec3>& vertices) : mVertices(vertices) {}
             MeshData(const std::vector<mq::vec3>& vertices,

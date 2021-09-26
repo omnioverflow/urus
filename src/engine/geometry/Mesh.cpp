@@ -8,6 +8,10 @@ namespace urus {
     // Mesh
     // ------------------------------------------------------------------------
 
+    const std::string Mesh::MeshData::kVerticesKey = "vertices";
+    const std::string Mesh::MeshData::kVertexColorsKey = "vertexColors";
+    const std::string Mesh::MeshData::kVertexNormalsKeys = "vertexNormals";
+
     // Mesh is an abstract class, but we must provide the dtor definition.
     Mesh::~Mesh() = default;
 
