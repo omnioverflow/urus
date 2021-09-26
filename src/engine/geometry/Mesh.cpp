@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+#include "engine/base/Macros.h"
 #include "BoundingBox.h"
 
 namespace urus {
@@ -64,9 +65,9 @@ namespace urus {
     }
 
     void Mesh::clear() {
-        mVertices.clear();
-        mVertexColors.clear();
-        mVertexNormals.clear();
+        mMeshData.mVertices.clear();
+        UNUSED(mMeshData.mVertexColors);
+        UNUSED(mMeshData.mVertexNormals);
     }
 
     // ------------------------------------------------------------------------
