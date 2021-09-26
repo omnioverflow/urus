@@ -10,13 +10,13 @@
 
 namespace urus
 {
-    template Uniform<int>;
-    template Uniform<float>;
-    template Uniform<mq::ivec2>;
-    template Uniform<mq::ivec4>;
-    template Uniform<mq::vec2>;
-    template Uniform<mq::vec3>;
-    template Uniform<mq::vec4>;
+    template class Uniform<int>;
+    template class Uniform<float>;
+    template class Uniform<mq::ivec2>;
+    template class Uniform<mq::ivec4>;
+    template class Uniform<mq::vec2>;
+    template class Uniform<mq::vec3>;
+    template class Uniform<mq::vec4>;
 
     // FIXME: quaternion and mat4 template specializations:
     // template Uniform<quat>;
