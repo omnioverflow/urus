@@ -28,7 +28,6 @@ set (
     ENGINE_HEADERS
      # engine/base
     src/engine/base/OpenGLSupport.h
-    src/engine/base/Core.h
     src/engine/base/Macros.h
     src/engine/base/Singleton.h
     # engine/controls
@@ -173,7 +172,6 @@ target_sources (${PROJECT_NAME}
 source_group (engine\\base
     FILES
     src/engine/base/OpenGLSupport.h
-    src/engine/base/Core.h
     src/engine/base/Macros.h
     src/engine/base/Singleton.h
     )
