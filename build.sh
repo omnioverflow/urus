@@ -2,6 +2,19 @@
 
 clear
 
+buildWithTests="${1}" 	# flag to configure gtest
+gtestRoot="${2}" 		# gtest repo which already cloned on the system
+# Check if input arguments are set;
+# (-v varname in conditional expression => true if varname is set;
+#  see 6.4 Bash Conditional Expressions 
+# https://www.gnu.org/software/bash/manual/bash.html#Positional-Parameters
+if [[ -v buildWithTests ]]; then 
+	echo "Set up with unit tests"
+fi # buildWithTests
+if [[ -v $gtestRoot ]]; then
+	echo "GTest root found: " ${gtestRoot}
+fi # gtestRoot
+
 if [ ! -d build ]
 then
 	echo "[ ******** -- Creating build directory..."
@@ -16,6 +29,15 @@ failureMessage="KO (failure)"
 if [[ $OSTYPE == "darwin"* ]]; then
 	# Mac OSX
 	echo "[ ******** -- Generating Xcode project from cmake..."
+
+	if [[ $getstRoot ]]; then
+		cmake -G Xcode .. -DGTEST_ROOT=$gtestRoot -DBUILD_TESTS=true
+	elif [[ $buildWithTests ]]; then
+		cmake -G Xcode .. -DBUILD_TESTS=true
+	else
+		cmake -G Xcode ..
+	fi # setup unit tests
+
 	cmake -G Xcode ..
 
 	result=$? # result of the most recent command
