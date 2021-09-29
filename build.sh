@@ -30,7 +30,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 	# Mac OSX
 	echo "[ ******** -- Generating Xcode project from cmake..."
 
-	if [[ $getstRoot ]]; then
+	if [[ $gtestRoot ]]; then
 		cmake -G Xcode .. -DGTEST_ROOT=$gtestRoot -DBUILD_TESTS=true
 	elif [[ $buildWithTests ]]; then
 		cmake -G Xcode .. -DBUILD_TESTS=true
