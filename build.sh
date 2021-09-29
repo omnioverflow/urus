@@ -36,7 +36,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 		cmake -G Xcode .. -DBUILD_TESTS=true
 	else
 		cmake -G Xcode ..
-	fi # setup unit tests
+	fi # run cmake
 
 	cmake -G Xcode ..
 
@@ -50,7 +50,15 @@ if [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "msys" ]]; then # for Git bash on Windows
 echo "[ ******** -- Generating Visual Studio solution from cmake..."
 	# TODO: create some support for Cygwin 
-	cmake -G "Visual Studio 16 2019" ..
+
+	if [[ $gtestRoot ]]; then
+		cmake -G "Visual Studio 16 2019" .. -DGTEST_ROOT=$gtestRoot \
+		-DBUILD_TESTS=true
+	elif [[ $buildWithTests ]]; then
+		cmake -G "Visual Studio 16 2019" .. -DBUILD_TESTS=true
+	else
+		cmake -G "Visual Studio 16 2019" ..
+	fi # run cmake	
 
 	result=$?
 	resultMessage=$failureMessage
