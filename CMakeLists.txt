@@ -348,5 +348,6 @@ add_definitions (-DFREEGLUT_STATIC -DGLEW_STATIC)
 # set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DFREEGLUT_STATIC")
 
 if (BUILD_TESTS)
+    message ("[cmake] Adding test directory.")
     add_subdirectory (test)
 endif ()
