@@ -4,14 +4,12 @@ clear
 
 buildWithTests="${1}" 	# flag to configure gtest
 gtestRoot="${2}" 		# gtest repo which already cloned on the system
-# Check if input arguments are set;
-# (-v varname in conditional expression => true if varname is set;
-#  see 6.4 Bash Conditional Expressions 
-# https://www.gnu.org/software/bash/manual/bash.html#Positional-Parameters
-if [[ -v buildWithTests ]]; then 
+
+# Check if additional input arguments are set;
+if [[ -n $buildWithTests ]]; then
 	echo "Set up with unit tests"
 fi # buildWithTests
-if [[ -v $gtestRoot ]]; then
+if [[ -n $gtestRoot ]]; then
 	echo "GTest root found: " ${gtestRoot}
 fi # gtestRoot
 
