@@ -24,7 +24,7 @@ cd build
 
 successMessage="OK"
 failureMessage="KO (failure)"
-if [[ $OSTYPE == "darwin"* ]]; then
+if [ $OSTYPE == "darwin"* ]; then
 	# Mac OSX
 	echo "[ ******** -- Generating Xcode project from cmake..."
 
@@ -45,8 +45,9 @@ if [[ $OSTYPE == "darwin"* ]]; then
     fi # check result
 
     echo "  ******** --> " $resultMessage " ]"
-elif [[ $OSTYPE == "msys" ]]; then # for Git bash on Windows
-echo "[ ******** -- Generating Visual Studio solution from cmake..."
+elif [ $OSTYPE == "msys" ] || [ $OSTYPE == "cygwin" ]; then
+	# Windows cygwin/git bash
+	echo "[ ******** -- Generating Visual Studio solution from cmake..."
 	# TODO: create some support for Cygwin 
 
 	if [[ $gtestRoot ]]; then
