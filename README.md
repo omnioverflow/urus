@@ -1,6 +1,6 @@
 ## Installation
 ### Windows
-* run build.sh
+* run setup.sh
 * run start.bat
 
 ## Requiremtns

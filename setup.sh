@@ -24,7 +24,7 @@ cd build
 
 successMessage="OK"
 failureMessage="KO (failure)"
-if [ $OSTYPE == "darwin"* ]; then
+if [[ $OSTYPE == "darwin"* ]]; then
 	# Mac OSX
 	echo "[ ******** -- Generating Xcode project from cmake..."
 
@@ -68,6 +68,7 @@ elif [ $OSTYPE == "msys" ] || [ $OSTYPE == "cygwin" ]; then
     echo "  ******** --> " $resultMessage "]"
 else 
 	echo "[ ******** /!\ Only Mac OSX and Windows x64 are supported\n"
+	echo "Current OSTYPE == " $OSTYPE
 	echo "  ******** --> " $failureMessage " ]"
 	cd ..
 	exit 1 
