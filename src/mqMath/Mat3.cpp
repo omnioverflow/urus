@@ -117,7 +117,6 @@ namespace mq {
                 m_[2][0] * v.x + m_[2][1] * v.y + m_[2][2] * v.z);
         }
 
-        template <typename T>
         std::ostream& operator<< (std::ostream& os, const mat3& rhs) {
             return os << std::endl 
                 << rhs[0] << std::endl
@@ -125,7 +124,6 @@ namespace mq {
                 << rhs[2] << std::endl;
         }
 
-        template <typename T>
         std::istream& operator>> (std::istream& is, mat3& rhs) {            
             return is >> rhs.m_[0] >> rhs.m_[1] >> rhs.m_[2];
         }
